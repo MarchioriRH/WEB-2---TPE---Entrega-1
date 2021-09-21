@@ -11,7 +11,7 @@ class TableView{
     }
 
     function viewHome(){
-        $this->smarty->assign('titulo', 'Materias 2021');
+        $this->smarty->assign('titulo', 'Catalogo de Vehiculos 2021');
         $this->smarty->display('./templates/home.tpl');
     }
 }
