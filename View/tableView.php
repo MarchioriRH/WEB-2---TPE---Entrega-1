@@ -6,7 +6,7 @@ class TableView{
     
     private $smarty;
 
-    public function __contruct(){
+    public function __construct(){
         $this->smarty = new Smarty();
     }
 
