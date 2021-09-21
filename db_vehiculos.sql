@@ -59,6 +59,28 @@ CREATE TABLE `vehiculos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Volcado de datos para la tabla `vehiculos`
+--
+
+INSERT INTO `vehiculos` (`id_vehiculo`, `marca`, `modelo`, `año`, `kilometros`, `precio`, `id_categoria`) VALUES
+(1, 'Mercedes Benz', 'Clase C', 2019, 10000, 55300, 1),
+(2, 'Mercedes Benz', 'Clase E', 2015, 44000, 42000, 1),
+(3, 'BMW', 'X5 M Sport', 2013, 112000, 23400, 1),
+(4, 'Porsche', 'Cayenne Turbo', 2017, 46000, 67000, 1),
+(5, 'Ferrari', '812 Superfast', 2021, 0, 430000, 4),
+(6, 'Lamborghini', 'Aventador', 2011, 31500, 330000, 4),
+(7, 'Porsche', '911 Turbo S', 2020, 22000, 238000, 4),
+(8, 'Chevrolet', 'Camaro ZL1', 2018, 15000, 48000, 4),
+(9, 'Dodge', 'RAM 1500 TRX', 2019, 48000, 5230000, 2),
+(10, 'Volkswagen', 'Amarok 4x4 Comfortline V6 Aut 258Cv', 2021, 0, 4550000, 2),
+(11, 'Ford', 'F-150 Raptor', 2021, 0, 6680000, 2),
+(12, 'Toyota', 'Hilux Gazoo Racing', 2019, 45000, 4897333, 2),
+(13, 'Honda', 'CBR 600', 2002, 48000, 2230000, 3),
+(14, 'Aprilia', 'RS 660', 2021, 0, 35000, 3),
+(15, 'Aprilia', 'RSV4', 2021, 0, 62000, 3),
+(16, 'Harley Davidson', 'Dina Street Bob 1600', 2019, 18000, 28000, 3);
+
+--
 -- Índices para tablas volcadas
 --
 
