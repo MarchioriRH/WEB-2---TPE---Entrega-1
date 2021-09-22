@@ -25,6 +25,13 @@ switch ($params[0]) {
     case 'detalles': 
         $table->showDetallesVehiculo($params[1]); 
         break;
+    case 'eliminar': 
+        $table->deleteVehiculo($params[1]); 
+        break;
+    
+    case 'borrarVehiculoDB': 
+        $table->borrarVehiculoDB($params[1]); 
+        break;
     default: 
         echo('404 Page not found'); 
         break;

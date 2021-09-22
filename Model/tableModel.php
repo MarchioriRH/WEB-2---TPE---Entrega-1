@@ -17,7 +17,13 @@ class TableModel {
     function getDetallesVehiculo($id_vehiculo){
         $sentencia = $this->db->prepare("SELECT * FROM vehiculos WHERE id_vehiculo = $id_vehiculo");
         $sentencia->execute();
-        $vehiculo = $sentencia->fetchAll(PDO::FETCH_OBJ);
-        return $vehiculo;
+        $detalles = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $detalles;
+    }
+
+    function borrarVehiculoDB($id_vehiculo){
+        $sentencia = $this->db->prepare("DELETE FROM vehiculos WHERE id_vehiculo = $id_vehiculo");
+        $sentencia->execute();
+        header('Location: '.BASE_URL.'verCatalogoCompleto');
     }
 }

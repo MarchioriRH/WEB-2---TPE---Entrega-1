@@ -26,12 +26,19 @@ class TableView{
     }
 
     function showDetallesVehiculo($detalles){
-        $vehiculo = [];
+        $detalle = [];
         foreach ($detalles as $car) {
-            array_push($vehiculo, $car);
+            array_push($detalle, $car);
         }
-        $this->smarty->assign('titulo','Detalles');
-        $this->smarty->assign('vehiculos',$vehiculo);
+        $this->smarty->assign('tituloDetalle','Detalles');
+        $this->smarty->assign('detalles',$detalle);
         $this->smarty->display('./templates/viewDetalles.tpl');
+    }
+
+    function deleteVehiculo($id_vehiculo){
+        $this->smarty->assign('texto1','El item sera eliminado');
+        $this->smarty->assign('texto2','¿Esta seguro?');
+        $this->smarty->assign('dato',$id_vehiculo);
+        $this->smarty->display('./templates/viewMensaje.tpl');
     }
 }

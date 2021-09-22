@@ -7,15 +7,17 @@
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Detalles</th>
+                <th>Borrar</th>
+                
                
             </tr>
-            {foreach from=$vehiculos item=$vehiculo}
+            {foreach from=$vehiculos item=$catalogo}
                 <tr>
-                    <td>{$vehiculo->Tipo}</td>
-                    <td>{$vehiculo->marca}</td>
-                    <td>{$vehiculo->modelo}</td>
-                    <td><a href="detalles/{$vehiculo->id_vehiculo}">Mas detalles</a></td>
-                    
+                    <td>{$catalogo->Tipo}</td>
+                    <td>{$catalogo->marca}</td>
+                    <td>{$catalogo->modelo}</td>
+                    <td><a href="detalles/{$catalogo->id_vehiculo}">Mas detalles</a></td>
+                    <td><a href="eliminar/{$catalogo->id_vehiculo}">Eliminar</a></td>
                 </tr>
             {/foreach}
             
