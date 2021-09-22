@@ -16,8 +16,8 @@
                     <td>{$catalogo->Tipo}</td>
                     <td>{$catalogo->marca}</td>
                     <td>{$catalogo->modelo}</td>
-                    <td><a href="detalles/{$catalogo->id_vehiculo}">Mas detalles</a></td>
-                    <td><a href="eliminar/{$catalogo->id_vehiculo}">Eliminar</a></td>
+                    <td><a href="catalogo/detalles/{$catalogo->id_vehiculo}">Mas detalles</a></td>
+                    <td><a href="catalogo/eliminar/{$catalogo->id_vehiculo}">Eliminar</a></td>
                 </tr>
             {/foreach}
             

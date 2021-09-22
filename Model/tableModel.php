@@ -24,6 +24,7 @@ class TableModel {
     function borrarVehiculoDB($id_vehiculo){
         $sentencia = $this->db->prepare("DELETE FROM vehiculos WHERE id_vehiculo = $id_vehiculo");
         $sentencia->execute();
+       
         header('Location: '.BASE_URL.'verCatalogoCompleto');
     }
 }

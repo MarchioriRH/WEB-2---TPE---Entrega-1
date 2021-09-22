@@ -5,8 +5,9 @@
         
         
         <div class="btn-detalle">
-            <a class="btn btn-danger" href="borrarVehiculoDB/{$dato}">Si</a>
-            <a class="btn btn-danger" href="verCatalogoCompleto">No</a>
+            <a class="btn btn-danger" href="catalogo/borrarVehiculoDB/{$dato}">Si</a>
+            <a class="btn btn-danger" href="catalogo/verCatalogoCompleto">No</a>
         </div>  
     </div>
+
 </section>

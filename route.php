@@ -7,7 +7,7 @@ define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] 
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 } else {
-    $action = 'catalogo'; // acción por defecto si no envían
+    $action = 'home/catalogo'; // acción por defecto si no envían
 }
 //print_r($action);
 $params = explode('/', $action);
@@ -15,7 +15,7 @@ $params = explode('/', $action);
 $table = new TableController();
 
 // determina que camino seguir según la acción
-switch ($params[0]) {
+switch ($params[1]) {
     case 'catalogo': 
         $table->showHome(); 
         break;
@@ -23,14 +23,14 @@ switch ($params[0]) {
         $table->showVehiculos(); 
         break;
     case 'detalles': 
-        $table->showDetallesVehiculo($params[1]); 
+        $table->showDetallesVehiculo($params[2]); 
         break;
     case 'eliminar': 
-        $table->deleteVehiculo($params[1]); 
+        $table->deleteVehiculo($params[2]); 
         break;
     
     case 'borrarVehiculoDB': 
-        $table->borrarVehiculoDB($params[1]); 
+        $table->borrarVehiculoDB($params[2]); 
         break;
     default: 
         echo('404 Page not found'); 
