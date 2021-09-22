@@ -21,5 +21,10 @@ class TableController{
         $vehiculos = $this->model->getVehiculos();
         $this->view->showVehiculos($vehiculos);
     }
+
+    function showDetallesVehiculo($id_vehiculo){
+        $detalles = $this->model->getDetallesVehiculo($id_vehiculo);
+        $this->view->showDetallesVehiculo($detalles);
+    }
  
 }

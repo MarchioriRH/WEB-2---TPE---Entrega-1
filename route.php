@@ -9,7 +9,7 @@ if (!empty($_GET['action'])) {
 } else {
     $action = 'catalogo'; // acción por defecto si no envían
 }
-print_r($action);
+//print_r($action);
 $params = explode('/', $action);
 
 $table = new TableController();
@@ -21,6 +21,9 @@ switch ($params[0]) {
         break;
     case 'verCatalogoCompleto': 
         $table->showVehiculos(); 
+        break;
+    case 'detalles': 
+        $table->showDetallesVehiculo($params[1]); 
         break;
     default: 
         echo('404 Page not found'); 

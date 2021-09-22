@@ -6,18 +6,16 @@
                 <th>Categoria</th>
                 <th>Marca</th>
                 <th>Modelo</th>
-                <th>Año</th>
-                <th>Kms</th>
-                <th>Precio</th>
+                <th>Detalles</th>
+               
             </tr>
             {foreach from=$vehiculos item=$vehiculo}
                 <tr>
                     <td>{$vehiculo->Tipo}</td>
                     <td>{$vehiculo->marca}</td>
                     <td>{$vehiculo->modelo}</td>
-                    <td>{$vehiculo->anio}</td>
-                    <td>{$vehiculo->kilometros}</td>
-                    <td>{$vehiculo->precio}</td>
+                    <td><a href="detalles/{$vehiculo->id_vehiculo}">Mas detalles</a></td>
+                    
                 </tr>
             {/foreach}
             

@@ -24,4 +24,14 @@ class TableView{
         $this->smarty->assign('vehiculos',$catalogo);
         $this->smarty->display('./templates/viewCatalogo.tpl');
     }
+
+    function showDetallesVehiculo($detalles){
+        $vehiculo = [];
+        foreach ($detalles as $car) {
+            array_push($vehiculo, $car);
+        }
+        $this->smarty->assign('titulo','Detalles');
+        $this->smarty->assign('vehiculos',$vehiculo);
+        $this->smarty->display('./templates/viewDetalles.tpl');
+    }
 }

@@ -13,4 +13,11 @@ class TableModel {
         $vehiculos = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $vehiculos;
     }
+
+    function getDetallesVehiculo($id_vehiculo){
+        $sentencia = $this->db->prepare("SELECT * FROM vehiculos WHERE id_vehiculo = $id_vehiculo");
+        $sentencia->execute();
+        $vehiculo = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $vehiculo;
+    }
 }

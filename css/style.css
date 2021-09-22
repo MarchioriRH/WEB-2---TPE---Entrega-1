@@ -123,7 +123,10 @@ ul.navigation {
   display: none;
   flex-direction: column;
 }
-  
+
+.btn-detalle{
+  text-align: center;
+}
 /* todos los "ul" que esten dentro de "menu" */
 
 /* si tiene tambien la clase show */
