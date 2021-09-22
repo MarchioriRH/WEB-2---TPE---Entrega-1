@@ -6,13 +6,20 @@ include_once "./Model/tableModel.php";
 class TableController{
     
     private $view;
+    private $model;
 
     function __construct(){
         $this->view = new TableView();
+        $this->model = new TableModel();
     }
 
     function showHome(){
         $this->view->viewHome();
     }
-
+   
+    function showVehiculos(){
+        $vehiculos = $this->model->getVehiculos();
+        $this->view->showVehiculos($vehiculos);
+    }
+ 
 }

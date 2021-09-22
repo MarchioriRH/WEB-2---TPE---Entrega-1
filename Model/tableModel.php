@@ -8,7 +8,7 @@ class TableModel {
     }
 
     function getVehiculos(){
-        $sentencia = $this->db->prepare("SELECT vehiculos.*, vehiculos.id_vehiculo as ID, vehiculos.marca as Marca, vehiculos.modelo as Modelo, vehiculos.kilometros as Kms, vehiculos.precio as Precio FROM categorias RIGHT JOIN vehiculos ON vehiculos.id_categoria = categorias.id_categoria");
+        $sentencia = $this->db->prepare("SELECT vehiculos.*, categorias.tipo as Tipo FROM categorias RIGHT JOIN vehiculos ON vehiculos.id_categoria = categorias.id_categoria");
         $sentencia->execute();
         $vehiculos = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $vehiculos;

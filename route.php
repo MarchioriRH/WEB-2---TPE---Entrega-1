@@ -7,19 +7,21 @@ define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] 
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 } else {
-    $action = 'home'; // acción por defecto si no envían
+    $action = 'catalogo'; // acción por defecto si no envían
 }
-
+print_r($action);
 $params = explode('/', $action);
 
 $table = new TableController();
 
 // determina que camino seguir según la acción
 switch ($params[0]) {
-    case 'home': 
+    case 'catalogo': 
         $table->showHome(); 
         break;
-    
+    case 'verCatalogoCompleto': 
+        $table->showVehiculos(); 
+        break;
     default: 
         echo('404 Page not found'); 
         break;
