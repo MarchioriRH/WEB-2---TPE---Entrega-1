@@ -42,7 +42,13 @@ class TableController{
     }
 
     function addNewVehiculo(){
-        $this->view->addNewVehiculo();
+        $categorias = $this->model->getCategorias();
+        $this->view->addNewVehiculo($categorias);
+    }
+
+    function insertNewVehiculo(){
+        $this->model->addNewVehiculo($_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
+        header('Location: '.BASE_URL.'verCatalogoCompleto');
     }
  
 }

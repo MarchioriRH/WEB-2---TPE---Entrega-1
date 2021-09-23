@@ -1,10 +1,37 @@
+{include file="home.tpl"}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <h1>{$texto1}</h1>
-        <div class="btn-detalle">
-            <a class="btn btn-danger" href="borrarVehiculoDB/{$dato}">Si</a>
-            <a class="btn btn-danger" href="verCatalogoCompleto">No</a>
-        </div>  
+        <div class="form">
+            <form action="insertNewVehiculo" method="post">
+                <div class="mb-2">  
+                <select class="form-select" aria-label="Default select example" name="tipo">
+                    <option name="seleccionar">Seleccionar</option>
+                    {foreach from=$categorias item=$categoria}
+                        <option value={$categoria->idTipo}>{$categoria->tipo}</option>
+                    {/foreach}
+                </select>
+                </div>
+                <div class="mb-2">
+                    <input type=text class="form-control" placeholder="Marca" name="marca">
+                </div>
+                <div class="mb-2">               
+                    <input type=text class="form-control" placeholder="Modelo" name="modelo">
+                </div>
+                <div class="mb-2">       
+                    <input type=number class="form-control" placeholder="Año" name="anio">
+                </div>
+                <div class="mb-2">       
+                    <input type=text class="form-control" placeholder="Kilometros" name="kms">
+                </div>
+                <div class="mb-2">       
+                    <input type=number class="form-control" placeholder="Precio" name="precio">
+                 </div>
+                 <div class="btn-detalle">
+                    <button type="submit" class="btn btn-danger" href="borrarVehiculoDB">Guardar</button>
+                    <a class="btn btn-danger" href="catalogo">Cancelar</a>
+                </div>  
+            </form>
+        </div>
     </div>
-
 </section>

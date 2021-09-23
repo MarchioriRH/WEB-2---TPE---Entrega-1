@@ -11,7 +11,7 @@ class TableView{
     }
 
     function viewHome(){
-        $this->smarty->assign('titulo', 'Catalogo de Vehiculos 2021');
+        //$this->smarty->assign('titulo', 'Catalogo de Vehiculos 2021');
         $this->smarty->display('./templates/home.tpl');
     }
 
@@ -42,8 +42,10 @@ class TableView{
         $this->smarty->display('./templates/viewMensaje.tpl');
     }
 
-    function addNewVehiculo(){
+    function addNewVehiculo($categorias){
         $this->smarty->assign('texto1','Agregar nuevo vehiculo.');
+        
+        $this->smarty->assign('categorias',$categorias);
         $this->smarty->display('./templates/addNewVehiculo.tpl');
     }
 }

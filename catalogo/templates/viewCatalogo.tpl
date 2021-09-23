@@ -8,8 +8,6 @@
                 <th>Modelo</th>
                 <th>Detalles</th>
                 <th>Borrar</th>
-                
-               
             </tr>
             {foreach from=$vehiculos item=$catalogo}
                 <tr>

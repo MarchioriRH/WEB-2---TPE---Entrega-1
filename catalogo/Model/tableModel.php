@@ -27,4 +27,19 @@ class TableModel {
        
         header('Location: '.BASE_URL.'verCatalogoCompleto');
     }
+
+    function getCategorias(){
+        $sentencia = $this->db->prepare("SELECT categorias.*, categorias.id_categoria as idTipo FROM vehiculos RIGHT JOIN categorias ON categorias.id_categoria = vehiculos.id_categoria GROUP BY categorias.id_categoria");
+        $sentencia->execute();        
+        $categorias = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $categorias;
+    }
+
+    function addNewVehiculo($tipo, $marca, $modelo, $anio, $kms, $precio){
+        $sentencia = $this->db->prepare("INSERT INTO vehiculos(marca, modelo, anio, kilometros, precio, id_categoria) VALUES(?, ?, ?, ?, ?, ?)");
+        $sentencia->execute(array($marca, $modelo, $anio, $kms, $precio,$tipo));
+    }
+
+    
+
 }

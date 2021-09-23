@@ -35,6 +35,9 @@ switch ($params[0]) {
     case 'addNewVehiculo': 
         $table->addNewVehiculo(); 
         break;
+    case 'insertNewVehiculo': 
+        $table->insertNewVehiculo(); 
+        break;
     default: 
         echo('404 Page not found'); 
         break;
