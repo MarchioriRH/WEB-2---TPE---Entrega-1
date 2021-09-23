@@ -40,5 +40,9 @@ class TableController{
         $vehiculos = $this->model->getVehiculos();
         $this->view->showVehiculos($vehiculos);
     }
+
+    function addNewVehiculo(){
+        $this->view->addNewVehiculo();
+    }
  
 }

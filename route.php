@@ -9,7 +9,7 @@ if (!empty($_GET['action'])) {
 } else {
     $action = 'home/catalogo'; // acción por defecto si no envían
 }
-//print_r($action);
+print_r($action);
 $params = explode('/', $action);
 
 $table = new TableController();
@@ -31,6 +31,9 @@ switch ($params[1]) {
     
     case 'borrarVehiculoDB': 
         $table->borrarVehiculoDB($params[2]); 
+        break;
+    case 'addNewVehiculo': 
+        $table->addNewVehiculo(); 
         break;
     default: 
         echo('404 Page not found'); 

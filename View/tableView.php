@@ -41,4 +41,9 @@ class TableView{
         $this->smarty->assign('dato',$id_vehiculo);
         $this->smarty->display('./templates/viewMensaje.tpl');
     }
+
+    function addNewVehiculo(){
+        $this->smarty->assign('texto1','Agregar nuevo vehiculo.');
+        $this->smarty->display('./templates/addNewVehiculo.tpl');
+    }
 }
