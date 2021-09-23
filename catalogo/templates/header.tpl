@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="{BASE_URL}catalogo"/>
+    <base href="{BASE_URL}"/>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,7 @@
             <div class="menu">
                 <ul class="navigation">
                     
-                    <li><a href="home/catalogo">CATÁLOGO</a></li>
+                    <li><a href="catalogo">CATÁLOGO</a></li>
                     <li><a href="servicios.html">SERVICIOS</a></li>
                     <li><a href="contacto.html">CONTACTO</a></li>
                 </ul>

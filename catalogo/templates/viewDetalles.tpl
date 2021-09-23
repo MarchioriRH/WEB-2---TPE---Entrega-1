@@ -18,7 +18,7 @@
                     {/foreach}
                 </table>
                 <div class="btn-detalle">
-                    <a class="btn btn-danger" href="catalogo/verCatalogoCompleto">Volver</a>
+                    <a class="btn btn-danger" href="verCatalogoCompleto">Volver</a>
                 </div>  
             </div>
         </section>
