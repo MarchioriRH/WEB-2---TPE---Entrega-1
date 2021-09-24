@@ -41,6 +41,14 @@ class TableController{
         $this->view->showVehiculos($vehiculos);
     }
 
+    function editVehiculo($id_vehiculo){
+        $vehiculo = $this->model->getDetallesVehiculo($id_vehiculo);
+        $categorias = $this->model->getCategorias();        
+        $this->view->editVehiculo($vehiculo,$categorias);
+        $vehiculos = $this->model->getVehiculos();
+        $this->view->showVehiculos($vehiculos);
+    }
+
     function addNewVehiculo(){
         $categorias = $this->model->getCategorias();
         $this->view->addNewVehiculo($categorias);
