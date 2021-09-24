@@ -42,9 +42,20 @@ class TableView{
         $this->smarty->display('./templates/viewMensaje.tpl');
     }
 
+    function editVehiculo($vehiculo,$categorias){
+        $vehiculo = [];
+        foreach ($vehiculo as $car) {
+            array_push($vehiculo, $car);
+        }
+        $this->smarty->assign('categorias',$categorias);
+        $this->smarty->assign('tituloEdit','Editar item');
+        $this->smarty->assign('vehiculos',$vehiculo);
+        $this->smarty->display('./templates/editVehiculo.tpl');
+    }
+
+
     function addNewVehiculo($categorias){
         $this->smarty->assign('texto1','Agregar nuevo vehiculo.');
-        
         $this->smarty->assign('categorias',$categorias);
         $this->smarty->display('./templates/addNewVehiculo.tpl');
     }

@@ -28,7 +28,12 @@ switch ($params[0]) {
     case 'eliminar': 
         $table->deleteVehiculo($params[1]); 
         break;
-    
+    case 'editar': 
+        $table->editVehiculo($params[1]); 
+        break;
+    case 'editVehiculoDB': 
+        $table->editVehiculoDB(); 
+        break;
     case 'borrarVehiculoDB':
         $table->borrarVehiculoDB($params[1]); 
         break;
