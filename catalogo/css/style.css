@@ -845,6 +845,7 @@ button {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
+  margin-top:40px;
 }
 
 .modal h1 {
@@ -865,7 +866,7 @@ button {
   
 /* PIE DE PAGINA */
 .footer {
-    
+  margin-top: 1rem;
   padding: 0.8rem 0;
   background: rgb(26, 26, 26);
   color: rgb(201, 25, 25);

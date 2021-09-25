@@ -32,16 +32,14 @@ switch ($params[0]) {
         $table->editVehiculo($params[1]); 
         break;
     case 'editVehiculoDB': 
-        $table->editVehiculoDB(); 
-        break;
-    case 'borrarVehiculoDB':
-        $table->borrarVehiculoDB($params[1]); 
+        print_r($params[1]);
+        $table->editVehiculoDB($params[1]); 
         break;
     case 'addNewVehiculo': 
         $table->addNewVehiculo(); 
         break;
-    case 'insertNewVehiculo': 
-        $table->insertNewVehiculo(); 
+    case 'insertNewVehiculoDB': 
+        $table->insertNewVehiculoDB(); 
         break;
     default: 
         echo('404 Page not found'); 

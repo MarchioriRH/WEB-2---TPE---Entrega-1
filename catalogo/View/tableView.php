@@ -35,28 +35,27 @@ class TableView{
         $this->smarty->display('./templates/viewDetalles.tpl');
     }
 
-    function deleteVehiculo($id_vehiculo){
-        $this->smarty->assign('texto1','El item sera eliminado');
-        $this->smarty->assign('texto2','¿Esta seguro?');
-        $this->smarty->assign('dato',$id_vehiculo);
-        $this->smarty->display('./templates/viewMensaje.tpl');
-    }
-
     function editVehiculo($vehiculo,$categorias){
-        $vehiculo = [];
+        $vehiculos = [];
         foreach ($vehiculo as $car) {
-            array_push($vehiculo, $car);
+            array_push($vehiculos, $car);
         }
         $this->smarty->assign('categorias',$categorias);
         $this->smarty->assign('tituloEdit','Editar item');
-        $this->smarty->assign('vehiculos',$vehiculo);
+        $this->smarty->assign('vehiculos',$vehiculos);
         $this->smarty->display('./templates/editVehiculo.tpl');
     }
 
-
-    function addNewVehiculo($categorias){
+    
+    function addNewVehiculo($vehiculos, $categorias){
         $this->smarty->assign('texto1','Agregar nuevo vehiculo.');
         $this->smarty->assign('categorias',$categorias);
         $this->smarty->display('./templates/addNewVehiculo.tpl');
+        $this->smarty->assign('vehiculos',$vehiculos);
+    }
+
+    function showErrorMsje($errorMsje){
+        $this->smarty->assign('texto1',$errorMsje);
+        $this->smarty->display('./templates/showErrorMsje.tpl');
     }
 }

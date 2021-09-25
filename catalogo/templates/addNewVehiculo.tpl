@@ -1,9 +1,9 @@
-{include file="home.tpl"}
+{*{include file="viewCatalogo.tpl"}*}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <h1>{$texto1}</h1>
         <div class="form">
-            <form action="insertNewVehiculo" method="post">
+            <form action="insertNewVehiculoDB" method="post">
                 <div class="mb-2">  
                 <select class="form-select" aria-label="Default select example" name="tipo">
                     <option name="seleccionar">Seleccionar</option>
@@ -28,8 +28,8 @@
                     <input type=number class="form-control" placeholder="Precio" name="precio">
                  </div>
                  <div class="btn-detalle">
-                    <button type="submit" class="btn btn-danger" href="borrarVehiculoDB">Guardar</button>
-                    <a class="btn btn-danger" href="catalogo">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Guardar</button>
+                    <a class="btn btn-danger" href="verCatalogoCompleto">Cancelar</a>
                 </div>  
             </form>
         </div>

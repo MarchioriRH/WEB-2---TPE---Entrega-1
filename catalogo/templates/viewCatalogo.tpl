@@ -1,6 +1,10 @@
 {include file="header.tpl"}
     <div class="container">
         <h1>{$titulo}</h1>
+        <div class="mb-2">
+            <a class="btn btn-danger" href="addNewVehiculo">Añadir nuevo Vehiculo</a>
+            <a class="btn btn-danger" href="deleteTask/'.$tarea->id_tarea.'">Añadir nueva categoria</a> 
+        </div>   
         <table class="default">
             <tr>
                 <th>Categoria</th>
