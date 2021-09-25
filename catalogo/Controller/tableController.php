@@ -7,10 +7,14 @@ class TableController{
     
     private $view;
     private $model;
+    private $categorias;
+    private $vehiculos;
 
     function __construct(){
         $this->view = new TableView();
         $this->model = new TableModel();
+        $this->categorias = $this->model->getCategoriasDB();
+        $this->vehiculos = $this->model->getVehiculosDB();
     }
 
     function showHome(){
@@ -18,15 +22,13 @@ class TableController{
     }
    
     function showVehiculos(){
-        $vehiculos = $this->model->getVehiculosDB();
-        $this->view->showVehiculos($vehiculos);
+        $this->view->showVehiculos($this->vehiculos);
     }
 
     function showDetallesVehiculo($id_vehiculo){
-        $vehiculos = $this->model->getVehiculosDB();
         $detalles = $this->model->getDetallesVehiculoDB($id_vehiculo);
         $this->view->showDetallesVehiculo($detalles);
-        $this->view->showVehiculos($vehiculos);
+        $this->view->showVehiculos($this->vehiculos);
     }
 
     function deleteVehiculo($id_vehiculo){
@@ -36,23 +38,18 @@ class TableController{
 
     function editVehiculo($id_vehiculo){
         $vehiculo = $this->model->getDetallesVehiculoDB($id_vehiculo);
-        $categorias = $this->model->getCategoriasDB();        
-        $this->view->editVehiculo($vehiculo,$categorias);
-        $vehiculos = $this->model->getVehiculosDB();
-        $this->view->showVehiculos($vehiculos);
+        $this->view->editVehiculo($vehiculo,$this->categorias);
+        $this->view->showVehiculos($this->vehiculos);
     }
 
     function editVehiculoDB($id){
-        print_r($_POST);
         $this->model->editVehiculoDB($id, $_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
         header('Location: '.BASE_URL.'verCatalogoCompleto');
     }
 
     function addNewVehiculo(){
-        $categorias = $this->model->getCategoriasDB();
-        $vehiculos = $this->model->getVehiculosDB();
-        $this->view->showVehiculos($vehiculos);
-        $this->view->addNewVehiculo($vehiculos,$categorias);
+        $this->view->showVehiculos($this->vehiculos);
+        $this->view->addNewVehiculo($this->vehiculos,$this->categorias);
     }
 
     function insertNewVehiculoDB(){
@@ -60,9 +57,8 @@ class TableController{
             $this->model->addNewVehiculoDB($_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
             header('Location: '.BASE_URL.'verCatalogoCompleto');
         } else {
-            $this->view->showErrorMsje("ERROR: los campos no pueden estar vacios");
-            $vehiculos = $this->model->getVehiculosDB();
-            $this->view->showVehiculos($vehiculos);
+            $this->view->showErrorMsje("ERROR: los campos no pueden estar vacios.");
+            $this->view->showVehiculos($this->vehiculos);
         } 
     }
  
