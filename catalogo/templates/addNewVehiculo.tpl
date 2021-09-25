@@ -1,4 +1,3 @@
-{*{include file="viewCatalogo.tpl"}*}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <h1>{$texto1}</h1>

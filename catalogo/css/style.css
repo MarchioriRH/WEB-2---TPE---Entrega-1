@@ -152,6 +152,10 @@ ul.navigation li:hover {
   background-color: #353535;;
   border-radius: 5px;
 }
+
+.catalogo{
+  text-align: center;
+}
 /* Termina CABECERA */
 
 /*------------ EMPIEZA HOME ------------ */ 
@@ -616,6 +620,7 @@ publicados */
 /* Datos de la empresa */
 .container {
   display: grid;
+  margin-bottom: 5rem;
   grid-template-rows: 4fr;
   grid-template-areas: 
   "."
@@ -867,10 +872,13 @@ button {
 /* PIE DE PAGINA */
 .footer {
   margin-top: 1rem;
-  padding: 0.8rem 0;
+  padding: 0.5rem 0;
   background: rgb(26, 26, 26);
   color: rgb(201, 25, 25);
   text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 #car2, .pie-de-pagina {

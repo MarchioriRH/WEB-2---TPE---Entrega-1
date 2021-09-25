@@ -1,4 +1,3 @@
-
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <h1>{$tituloEdit}</h1>
