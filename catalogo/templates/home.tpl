@@ -2,7 +2,7 @@
     <div class="container">
         <section class="catalogo">
             <h1>Catalogo de Vehiculos 2021</h1>
-            <div class="btn-group">
+            <div>
                 <a class="btn btn-danger" href="verCatalogoCompleto">Ver todos los items</a>
                 <a class="btn btn-danger" href="deleteTask/'.$tarea->id_tarea.'">Ver todas las categorias</a>
             </div>
