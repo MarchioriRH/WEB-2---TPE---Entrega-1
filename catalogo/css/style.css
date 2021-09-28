@@ -157,6 +157,23 @@ ul.navigation li:hover {
   text-align: center;
 }
 
+.carousel-caption, .d-none, .d-md-block{
+  opacity: .7;
+  color:#b30b0b;
+  border-radius: 5px;
+  background-color: #cfc5c5;
+  font-weight: bolder;
+}
+.carousel {
+  margin-bottom: 10rem;
+  width:640px;
+  height:360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
 /* TERMINA VEHICULOS DESTACADOS */
 
 /*------------ TERMINA HOME ------------*/ 
