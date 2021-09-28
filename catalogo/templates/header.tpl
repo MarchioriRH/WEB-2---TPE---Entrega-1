@@ -25,7 +25,6 @@
             <div class="btn_menu"><a>MENÚ</a></div>    
             <div class="menu">
                 <ul class="navigation">
-                    
                     <li><a href="catalogo">CATÁLOGO</a></li>
                     <li><a href="servicios.html">SERVICIOS</a></li>
                     <li><a href="contacto.html">CONTACTO</a></li>

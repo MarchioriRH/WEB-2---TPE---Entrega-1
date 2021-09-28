@@ -42,6 +42,6 @@ switch ($params[0]) {
         $table->insertNewVehiculoDB(); 
         break;
     default: 
-        echo('404 Page not found'); 
+        $table->errorMsje404(); 
         break;
 }

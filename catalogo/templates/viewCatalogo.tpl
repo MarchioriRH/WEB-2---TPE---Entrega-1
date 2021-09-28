@@ -21,11 +21,9 @@
                     <td>{$catalogo->modelo}</td>
                     <td><a href="detalles/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                     <td><a href="editar/{$catalogo->id_vehiculo}">Editar</a></td>
-                    <td><a href="eliminar/{$catalogo->id_vehiculo}">Eliminar</a></td>
+                    <td><a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El item {$catalogo->id_vehiculo} sera eliminado de la base de datos." href="eliminar/{$catalogo->id_vehiculo}">Eliminar</a></td>
                 </tr>
             {/foreach}
-            
         </table>
     </div>
-
 {include file="footer.tpl"}

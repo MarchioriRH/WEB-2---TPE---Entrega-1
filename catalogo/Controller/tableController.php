@@ -57,9 +57,13 @@ class TableController{
             $this->model->addNewVehiculoDB($_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
             header('Location: '.BASE_URL.'verCatalogoCompleto');
         } else {
-            $this->view->showErrorMsje("ERROR: los campos no pueden estar vacios.");
+            $this->view->showErrorMsje("ERROR - Los campos no pueden estar vacios.");
             $this->view->showVehiculos($this->vehiculos);
         } 
     }
- 
+    
+    function errorMsje404(){
+        $this->view->showErrorMsje("ERROR 404 - Page not found.");
+        $this->view->showVehiculos($this->vehiculos);
+    }
 }
