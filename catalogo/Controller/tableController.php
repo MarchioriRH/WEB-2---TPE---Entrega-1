@@ -64,12 +64,15 @@ class TableController{
     
     function errorMsje404(){
         $this->view->showErrorMsje("ERROR 404 - Page not found.");
-        $this->view->showVehiculos($this->vehiculos);
+        $this->view->showHome();
     }
 
     function login(){
         $this->view->login();
-        $this->view->viewHome();
+    }
+
+    function registro(){
+        $this->view->registro();
     }
 
     //  categorias
@@ -83,7 +86,7 @@ class TableController{
     }
 
     function editCategoria($id_categoria){
-        $this->view->editCategoria($id_categoria ,$this->categorias);
+        $this->view->editCategoria($id_categoria, $this->categorias);
         $this->view->showCategorias($this->categorias);
     }
 

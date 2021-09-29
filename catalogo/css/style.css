@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
   font-size: 1.2rem; /*tamaño de las letras*/
   line-height: 1.6em; /* interlineado */  
   margin: 0;
@@ -143,14 +143,38 @@ ul.navigation li {
 
 ul.navigation li a {
   text-decoration: none;
-  color: rgb(179, 179, 179);
+  color: #B3B3B3;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1rem;
 }
 
 ul.navigation li:hover {
-  background-color: #353535;;
+  color:#fff;
+  background-color:#5c636a;
   border-radius: 5px;
+}
+
+.btn {
+  line-height: 2.6;
+  border:none;
+  font-size: 1rem;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.btn-secondary {
+  color: #B3B3B3;
+  background: rgb(26, 26, 26);
+}
+
+.btn-check:focus+.btn-secondary,.btn-secondary:focus {
+  color: rgb(179, 179, 179);
+  background-color: #353535;
+  border-color:rgb(27,27,27);
+  box-shadow: 0 0 0 0.25rem rgb(27 27 27);
+}
+
+.dropdown-menu, .dropdown-menu-dark{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .catalogo{
@@ -165,7 +189,8 @@ ul.navigation li:hover {
   font-weight: bolder;
 }
 .carousel {
-  margin-bottom: 10rem;
+  /*margin-bottom: 10rem;*/
+  margin-top: 10rem;
   width:640px;
   height:360px;
   margin-left: auto;
@@ -282,7 +307,7 @@ legend {
   display: none;
 }
 
-.modal {
+/*.modal {
   background-color: #fff;
   width: 600px;
   max-width: 90%;
@@ -290,7 +315,7 @@ legend {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
-}
+}*/
 
 .modalPedido, .modalEdicionPedido, .modalMsge, .modalBuscarPedido {
   background-color: #fff;

@@ -25,7 +25,16 @@
             <div class="btn_menu"><a>MENÚ</a></div>    
             <div class="menu">
                 <ul class="navigation">
-                    <li><a href="catalogo">CATÁLOGO</a></li>
+                    <li><a href="catalogo">HOME</a></li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            CATALOGO
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                            <a class="dropdown-item" href="verCatalogoCompleto">Ver todos vehiculos</a>
+                            <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
+                        </ul>
+                    </div>
                     <li><a href="login">LOGIN</a></li>
                     <li><a href="registro">REGISTRO</a></li>
                 </ul>

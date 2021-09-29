@@ -43,6 +43,7 @@ class TableModel {
         $sentencia = $this->db->prepare("UPDATE vehiculos SET marca = '$marca', modelo = '$modelo', anio = '$anio', kilometros = '$kilometros', precio = '$precio', id_categoria = '$tipo' WHERE id_vehiculo=?");
         $sentencia->execute(array($id));
     }
+
     function deleteCategoriaDB($id_categoria){
         $sentencia1 = $this->db->prepare("DELETE FROM vehiculos WHERE id_categoria = $id_categoria");
         $sentencia1->execute();
@@ -50,6 +51,7 @@ class TableModel {
         $sentencia2->execute();
         header('Location: '.BASE_URL.'verCatalogoCategoria');
     }
+    
     function addNewCategoriaDB($tipo){
         $sentencia = $this->db->prepare("INSERT INTO categorias(tipo) VALUES(?)");
         $sentencia->execute(array($tipo));

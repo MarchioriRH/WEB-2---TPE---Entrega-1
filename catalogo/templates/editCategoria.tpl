@@ -2,9 +2,9 @@
     <div class="modalMsge">
         <h1>{$tituloEdit}</h1>
         <div class="form">
-            <form action="editCategoriaDB/{$categoria->id_categoria}" method="post">
+            <form action="editCategoriaDB/{$id_categoria}" method="post">
                 <div class="mb-2">
-                    <input type="text" class="form-control" name="tipo" value="{$categoria->tipo}">
+                    <input type="text" class="form-control" name="tipo" value="{$categorias->tipo}">
                 </div>
                 <div class="btn-detalle">
                     <button type="submit" class="btn btn-danger">Guardar</button>
