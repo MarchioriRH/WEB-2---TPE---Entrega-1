@@ -18,16 +18,16 @@
                     <img class="imagen" src="img/koe.ico" alt="logo">
                 </div>
                 <div class="your-car">
-                    <a href="../index.html" id="your">YOUR</a>
-                    <a href="../index.html" id="car">CAR</a>
+                    <a href="catalogo" id="your">YOUR</a>
+                    <a href="catalogo" id="car">CAR</a>
                 </div>
             </div>
             <div class="btn_menu"><a>MENÚ</a></div>    
             <div class="menu">
                 <ul class="navigation">
                     <li><a href="catalogo">CATÁLOGO</a></li>
-                    <li><a href="servicios.html">SERVICIOS</a></li>
-                    <li><a href="contacto.html">CONTACTO</a></li>
+                    <li><a href="login">LOGIN</a></li>
+                    <li><a href="registro">REGISTRO</a></li>
                 </ul>
             </div>
         </div>

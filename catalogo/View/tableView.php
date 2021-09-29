@@ -56,4 +56,8 @@ class TableView{
         $this->smarty->assign('texto1',$errorMsje);
         $this->smarty->display('./templates/showErrorMsje.tpl');
     }
+
+    function login(){
+        $this->smarty->display('./templates/login.tpl');
+    }
 }

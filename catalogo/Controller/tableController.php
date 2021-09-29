@@ -66,4 +66,9 @@ class TableController{
         $this->view->showErrorMsje("ERROR 404 - Page not found.");
         $this->view->showVehiculos($this->vehiculos);
     }
+
+    function login(){
+        $this->view->login();
+        $this->view->viewHome();
+    }
 }

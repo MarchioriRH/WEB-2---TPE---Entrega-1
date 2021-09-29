@@ -19,6 +19,9 @@ switch ($params[0]) {
     case 'catalogo': 
         $table->showHome(); 
         break;
+    case 'login': 
+        $table->login(); 
+        break;
     case 'verCatalogoCompleto': 
         $table->showVehiculos(); 
         break;
