@@ -44,6 +44,25 @@ switch ($params[0]) {
     case 'insertNewVehiculoDB': 
         $table->insertNewVehiculoDB(); 
         break;
+    case 'verCatalogoCategoria': 
+        $table->showCategorias(); 
+        break;
+    case 'eliminarCategoria': 
+        $table->deleteCategoria($params[1]); 
+        break;
+    case 'editCategoriaDB': 
+        print_r($params[1]);
+        $table->editCategoriaDB($params[1]); 
+        break;
+    case 'addNewCategoria': 
+        $table->addNewCategoria(); 
+        break;
+    case 'insertNewCategoriaDB': 
+        $table->insertNewCategoriaDB(); 
+        break;
+    case 'editarCategoria': 
+        $table->editCategoria($params[1]); 
+        break;
     default: 
         $table->errorMsje404(); 
         break;

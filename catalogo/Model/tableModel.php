@@ -43,6 +43,23 @@ class TableModel {
         $sentencia = $this->db->prepare("UPDATE vehiculos SET marca = '$marca', modelo = '$modelo', anio = '$anio', kilometros = '$kilometros', precio = '$precio', id_categoria = '$tipo' WHERE id_vehiculo=?");
         $sentencia->execute(array($id));
     }
-    
+    function deleteCategoriaDB($id_categoria){
+        $sentencia1 = $this->db->prepare("DELETE FROM vehiculos WHERE id_categoria = $id_categoria");
+        $sentencia1->execute();
+        $sentencia2 = $this->db->prepare("DELETE FROM categorias WHERE id_categoria = $id_categoria");
+        $sentencia2->execute();
+        header('Location: '.BASE_URL.'verCatalogoCategoria');
+    }
+    function addNewCategoriaDB($tipo){
+        $sentencia = $this->db->prepare("INSERT INTO categorias(tipo) VALUES(?)");
+        $sentencia->execute(array($tipo));
+    }
+
+    function editCategoriaDB($id, $tipo){
+        $sentencia1 = $this->db->prepare("UPDATE FROM vehiculos SET  WHERE id_categoria = $id");
+        $sentencia1->execute();
+        $sentencia2 = $this->db->prepare("UPDATE FROM categorias SET tipo = '$tipo' WHERE id_categoria= $id");
+        $sentencia2->execute(array($id));
+    }
 
 }
