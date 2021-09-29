@@ -37,6 +37,7 @@ p {
   padding: 1.5rem 0;
   position: fixed;
   width: 100%;
+  z-index: 9999;
 }
 
 .header a {
