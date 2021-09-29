@@ -37,7 +37,7 @@ p {
   padding: 1.5rem 0;
   position: fixed;
   width: 100%;
-  z-index: 9999;
+  z-index: 5999;
 }
 
 .header a {
@@ -178,6 +178,9 @@ ul.navigation li:hover {
   font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.dropdown-menu-dark .dropdown-divider {
+  border-color: rgba(180, 177, 177, 0.5);
+}
 .catalogo{
   text-align: center;
 }
@@ -297,6 +300,7 @@ legend {
   height: 100vh;
   width: 100vw;
   transition: opacity 0.3s ease;
+  z-index: 9999;
 }
 
 .mostrar {
