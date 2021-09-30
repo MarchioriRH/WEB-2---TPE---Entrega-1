@@ -90,17 +90,17 @@ class TableController{
         } 
     }
 
-    function registro(){
-        $this->view->registro();
+    function compararClaveUsuario($mail, $userPassword){
+        print_r($this->usuarios);
+        foreach($this->usuarios as $usuario){
+            if (($usuario->mail) == $mail)
+                if (password_verify($userPassword, ($usuario->passwrd)))    
+                    return true;
+        }return false;
     }
 
-    function compararClaveUsuario($mail, $userPassword){
-        foreach($this->usuarios as $usuario){
-            if ((($usuario->mail) == $mail) && password_verify($userPassword, ($usuario->passwrd)))
-                return true;
-            else
-                return false;
-        }
+    function registro(){
+        $this->view->registro();
     }
 
     function buscarUsuario($mail){
@@ -115,10 +115,10 @@ class TableController{
     function registroNuevoUsuarioDB(){
         $userEmail = $_POST['mail'];
         if(!empty($_POST['mail']) && !empty($_POST['password'])){
-            if ($this->buscarUsuarios($this->usuarios, $userEmail) == false){
+            if ($this->buscarUsuario($userEmail) == false){
                 $userPassword =  password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $this->model->registroNuevoUsuarioDB($_POST ['mail'], $userPassword, $_POST ['nombre'], $_POST ['apellido']);
-                $this->view->showMsje('Usuario '.$_POST['mail'].' agregado con exito.');
+                $this->view->showMsje('Usuario '.$_POST['mail'].' registrado con exito.');
                 $this->view->viewHome();
             } else {
                 $this->view->showMsje('ERROR - El usuario '.$_POST['mail'].' ya se encuentra registrado.');
