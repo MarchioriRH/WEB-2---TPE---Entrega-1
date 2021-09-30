@@ -39,9 +39,10 @@ class TableView{
         foreach ($vehiculo as $car) {
             array_push($vehiculos, $car);
         }
-        $this->smarty->assign('categorias',$categorias);
+        print_r($vehiculos);
+        $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('tituloEdit','Editar item');
-        $this->smarty->assign('vehiculos',$vehiculos);
+        $this->smarty->assign('vehiculos', $vehiculos);
         $this->smarty->display('./templates/editVehiculo.tpl');
     }
     

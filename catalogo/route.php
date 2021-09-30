@@ -25,6 +25,9 @@ switch ($params[0]) {
     case 'registro': 
         $table->registro(); 
         break;
+    case 'registroDB': 
+        $table->registroNuevoUsuarioDB(); 
+        break;
     case 'verCatalogoCompleto': 
         $table->showVehiculos(); 
         break;
@@ -37,8 +40,7 @@ switch ($params[0]) {
     case 'editar': 
         $table->editVehiculo($params[1]); 
         break;
-    case 'editVehiculoDB': 
-        print_r($params[1]);
+    case 'editVehiculoDB':
         $table->editVehiculoDB($params[1]); 
         break;
     case 'addNewVehiculo': 

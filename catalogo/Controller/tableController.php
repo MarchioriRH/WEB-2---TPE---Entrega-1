@@ -9,12 +9,14 @@ class TableController{
     private $model;
     private $categorias;
     private $vehiculos;
+    private $usuarios;
 
     function __construct(){
         $this->view = new TableView();
         $this->model = new TableModel();
         $this->categorias = $this->model->getCategoriasDB();
         $this->vehiculos = $this->model->getVehiculosDB();
+        $this->usuarios = $this->model->getUsuariosDB();
     }
 
     function showHome(){
@@ -64,7 +66,7 @@ class TableController{
     
     function errorMsje404(){
         $this->view->showErrorMsje("ERROR 404 - Page not found.");
-        $this->view->showHome();
+        $this->view->viewHome();
     }
 
     function login(){
@@ -73,6 +75,30 @@ class TableController{
 
     function registro(){
         $this->view->registro();
+    }
+
+    function compararUsuarios($usuarios, $mail){
+        foreach($usuarios as $usuario){
+            if ($usuario->mail == $mail)
+                return true;
+            else
+                return false;
+        }
+    }
+
+    function registroNuevoUsuarioDB(){
+        if(!empty($_POST['mail']) && !empty($_POST['password'])){
+            if ($this->compararUsuarios($this->usuarios, $_POST['mail']) == false){
+                $userPassword =  password_hash($_POST['password'], PASSWORD_BCRYPT);
+                $this->model->registroNuevoUsuarioDB($_POST ['mail'], $userPassword, $_POST ['nombre'], $_POST ['apellido']);
+            } else {
+                $this->view->showErrorMsje('ERROR - El usuario '.$_POST['mail'].' ya se encuentra registrado.');
+                $this->view->viewHome();
+            }
+        } else {
+            $this->view->showErrorMsje("ERROR - Los campos e-Mail y Password no pueden estar vacios.");
+            $this->view->viewHome();
+        } 
     }
 
     //  categorias

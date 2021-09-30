@@ -36,7 +36,7 @@ class TableModel {
 
     function addNewVehiculoDB($tipo, $marca, $modelo, $anio, $kms, $precio){
         $sentencia = $this->db->prepare("INSERT INTO vehiculos(marca, modelo, anio, kilometros, precio, id_categoria) VALUES(?, ?, ?, ?, ?, ?)");
-        $sentencia->execute(array($marca, $modelo, $anio, $kms, $precio,$tipo));
+        $sentencia->execute(array($marca, $modelo, $anio, $kms, $precio, $tipo));
     }
 
     function editVehiculoDB($id, $tipo, $marca, $modelo, $anio, $kilometros, $precio){       
@@ -63,5 +63,18 @@ class TableModel {
         $sentencia2 = $this->db->prepare("UPDATE FROM categorias SET tipo = '$tipo' WHERE id_categoria= $id");
         $sentencia2->execute(array($id));
     }
+
+    function registroNuevoUsuarioDB($mail, $userPassword, $nombre, $apellido){
+        $sentencia = $this->db->prepare("INSERT INTO usuarios(mail, passwrd, nombre, apellido) VALUES(?, ?, ?, ?)");
+        $sentencia->execute(array($mail, $userPassword, $nombre, $apellido));
+    }
+
+    function getUsuariosDB(){
+        $sentencia = $this->db->prepare("SELECT * FROM usuarios");
+        $sentencia->execute();
+        $usuarios = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $usuarios;
+    }
+
 
 }

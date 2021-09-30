@@ -6,9 +6,11 @@
                 <form action="editVehiculoDB/{$vehiculo->id_vehiculo}" method="post">
                     <div class="mb-2">  
                         <select class="form-select" aria-label="Default select example" name="tipo">
-                            <option selected="true" value={$vehiculo->Tipo}>{$vehiculo->Tipo}</option>
+                            <option selected="true" value={$vehiculo->id_categoria}>{$vehiculo->Tipo}</option>
                             {foreach from=$categorias item=$categoria}
-                                <option value={$categoria->idTipo}>{$categoria->tipo}</option>
+                                {if $categoria->tipo != $vehiculo->Tipo}
+                                    <option value={$categoria->idTipo}>{$categoria->tipo}</option>
+                                {/if}
                             {/foreach}
                         </select>
                     </div>
