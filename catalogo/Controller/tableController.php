@@ -59,13 +59,13 @@ class TableController{
             $this->model->addNewVehiculoDB($_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
             header('Location: '.BASE_URL.'verCatalogoCompleto');
         } else {
-            $this->view->showErrorMsje("ERROR - Los campos no pueden estar vacios.");
+            $this->view->showMsje("ERROR - Los campos no pueden estar vacios.");
             $this->view->showVehiculos($this->vehiculos);
         } 
     }
     
     function errorMsje404(){
-        $this->view->showErrorMsje("ERROR 404 - Page not found.");
+        $this->view->showMsje("ERROR 404 - Page not found.");
         $this->view->viewHome();
     }
 
@@ -73,13 +73,39 @@ class TableController{
         $this->view->login();
     }
 
+    function loginUsuarioDB(){
+        if(!empty($_POST['mail']) && !empty($_POST['password'])){
+            $userPassword = $_POST['password'];
+            $userMail = $_POST['mail'];
+            if ($this->compararClaveUsuario($userMail, $userPassword) == true){
+                $this->view->showMsje('Bienvenido '.$_POST['mail'].'.');
+                $this->view->viewHome();
+            } else {
+                $this->view->showMsje('ERROR - Usuario y/o contraseña incorrectos.');
+                $this->view->viewHome();
+            }
+        } else {
+            $this->view->showMsje("ERROR - Los campos e-Mail y Password no pueden estar vacios.");
+            $this->view->viewHome();
+        } 
+    }
+
     function registro(){
         $this->view->registro();
     }
 
-    function compararUsuarios($usuarios, $mail){
-        foreach($usuarios as $usuario){
-            if ($usuario->mail == $mail)
+    function compararClaveUsuario($mail, $userPassword){
+        foreach($this->usuarios as $usuario){
+            if ((($usuario->mail) == $mail) && password_verify($userPassword, ($usuario->passwrd)))
+                return true;
+            else
+                return false;
+        }
+    }
+
+    function buscarUsuario($mail){
+        foreach($this->usuarios as $usuario){
+            if (($usuario->mail) == $mail) 
                 return true;
             else
                 return false;
@@ -87,16 +113,19 @@ class TableController{
     }
 
     function registroNuevoUsuarioDB(){
+        $userEmail = $_POST['mail'];
         if(!empty($_POST['mail']) && !empty($_POST['password'])){
-            if ($this->compararUsuarios($this->usuarios, $_POST['mail']) == false){
+            if ($this->buscarUsuarios($this->usuarios, $userEmail) == false){
                 $userPassword =  password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $this->model->registroNuevoUsuarioDB($_POST ['mail'], $userPassword, $_POST ['nombre'], $_POST ['apellido']);
+                $this->view->showMsje('Usuario '.$_POST['mail'].' agregado con exito.');
+                $this->view->viewHome();
             } else {
-                $this->view->showErrorMsje('ERROR - El usuario '.$_POST['mail'].' ya se encuentra registrado.');
+                $this->view->showMsje('ERROR - El usuario '.$_POST['mail'].' ya se encuentra registrado.');
                 $this->view->viewHome();
             }
         } else {
-            $this->view->showErrorMsje("ERROR - Los campos e-Mail y Password no pueden estar vacios.");
+            $this->view->showMsje("ERROR - Los campos e-Mail y Password no pueden estar vacios.");
             $this->view->viewHome();
         } 
     }
@@ -131,7 +160,7 @@ class TableController{
             $this->model->addNewCategoriaDB($_POST['tipo']);
             header('Location: '.BASE_URL.'verCatalogoCategorias');
         } else {
-            $this->view->showErrorMsje("ERROR: los campos no pueden estar vacios.");
+            $this->view->showMsje("ERROR: los campos no pueden estar vacios.");
             $this->view->showCategorias($this->categoria);
         } 
     }

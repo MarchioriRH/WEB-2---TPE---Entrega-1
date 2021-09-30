@@ -3,7 +3,7 @@
     <div class="modalMsge">
         <h1>LOGIN</h1>
         <div class="form">
-                <form action="login" method="post">
+                <form action="loginUsuario" method="post">
                     <div class="mb-2">
                         <input type="text" class="form-control" name="mail" placeholder="e-Mail">
                     </div>

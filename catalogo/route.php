@@ -22,6 +22,9 @@ switch ($params[0]) {
     case 'login': 
         $table->login(); 
         break;
+    case 'loginUsuario': 
+        $table->loginUsuarioDB(); 
+        break;
     case 'registro': 
         $table->registro(); 
         break;

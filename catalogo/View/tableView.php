@@ -39,7 +39,6 @@ class TableView{
         foreach ($vehiculo as $car) {
             array_push($vehiculos, $car);
         }
-        print_r($vehiculos);
         $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('tituloEdit','Editar item');
         $this->smarty->assign('vehiculos', $vehiculos);
@@ -53,9 +52,9 @@ class TableView{
         $this->smarty->assign('vehiculos',$vehiculos);
     }
 
-    function showErrorMsje($errorMsje){
+    function showMsje($errorMsje){
         $this->smarty->assign('texto1',$errorMsje);
-        $this->smarty->display('./templates/showErrorMsje.tpl');
+        $this->smarty->display('./templates/showMsje.tpl');
     }
 
     function login(){
@@ -84,7 +83,6 @@ class TableView{
     }
 
     function editCategoria($id_categoria, $categorias){
-        print_r($categorias);
         $this->smarty->assign('categorias',$categorias);
         $this->smarty->assign('tituloEdit','Editar Categoria');
         $this->smarty->assign('categoria',$id_categoria);

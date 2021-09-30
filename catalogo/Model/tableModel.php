@@ -75,6 +75,7 @@ class TableModel {
         $usuarios = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $usuarios;
     }
-
+    
+    
 
 }
