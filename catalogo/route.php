@@ -1,5 +1,10 @@
 <?php
 require_once "./Controller/tableController.php";
+require_once "./Controller/vehiculosController.php";
+require_once "./Controller/usersController.php";
+require_once "./Controller/generalController.php";
+
+
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -13,44 +18,47 @@ if (!empty($_GET['action'])) {
 $params = explode('/', $action);
 
 $table = new TableController();
+$vehiculos = new VehiculosController();
+$users = new UsersController();
+$general = new GeneralController();
 
 // determina que camino seguir según la acción
 switch ($params[0]) {
     case 'catalogo': 
-        $table->showHome(); 
+        $general->showHome(); 
         break;
     case 'login': 
-        $table->login(); 
+        $users->login(); 
         break;
     case 'loginUsuario': 
-        $table->loginUsuarioDB(); 
+        $users->loginUsuarioDB(); 
         break;
     case 'registro': 
-        $table->registro(); 
+        $users->registro(); 
         break;
     case 'registroDB': 
-        $table->registroNuevoUsuarioDB(); 
+        $users->registroNuevoUsuarioDB(); 
         break;
     case 'verCatalogoCompleto': 
-        $table->showVehiculos(); 
+        $vehiculos->showVehiculos(); 
         break;
     case 'detalles': 
-        $table->showDetallesVehiculo($params[1]); 
+        $vehiculos->showDetallesVehiculo($params[1]); 
         break;
     case 'eliminar': 
-        $table->deleteVehiculo($params[1]); 
+        $vehiculos->deleteVehiculo($params[1]); 
         break;
     case 'editar': 
-        $table->editVehiculo($params[1]); 
+        $vehiculos->editVehiculo($params[1]); 
         break;
     case 'editVehiculoDB':
-        $table->editVehiculoDB($params[1]); 
+        $vehiculos->editVehiculoDB($params[1]); 
         break;
     case 'addNewVehiculo': 
-        $table->addNewVehiculo(); 
+        $vehiculos->addNewVehiculo(); 
         break;
     case 'insertNewVehiculoDB': 
-        $table->insertNewVehiculoDB(); 
+        $vehiculos->insertNewVehiculoDB(); 
         break;
     case 'verCatalogoCategoria': 
         $table->showCategorias(); 
@@ -72,6 +80,6 @@ switch ($params[0]) {
         $table->editCategoria($params[1]); 
         break;
     default: 
-        $table->errorMsje404(); 
+        $general->errorMsje404(); 
         break;
 }

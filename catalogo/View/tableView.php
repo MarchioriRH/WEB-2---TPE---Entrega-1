@@ -10,7 +10,7 @@ class TableView{
         $this->smarty = new Smarty();
     }
 
-    function viewHome(){
+    /*function viewHome(){
         $this->smarty->display('./templates/home.tpl');
     }
 
@@ -57,13 +57,13 @@ class TableView{
         $this->smarty->display('./templates/showMsje.tpl');
     }
 
-    function login(){
+    /* function login(){
         $this->smarty->display('./templates/login.tpl');
     }
 
     function registro(){
         $this->smarty->display('./templates/registro.tpl');
-    }
+    } */
 
     function showCategorias($categorias){
         $catalogocat = [];

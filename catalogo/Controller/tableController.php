@@ -2,28 +2,35 @@
 
 include_once "./View/tableView.php";
 include_once "./Model/tableModel.php";
+include_once "./Controller/vehiculosController.php";
+include_once "./Model/vehiculosModel.php";
+include_once "./Controller/generalController.php";
+
+
+
 
 class TableController{
     
     private $view;
     private $model;
     private $categorias;
-    private $vehiculos;
+    private $vehiculosModel;
     private $usuarios;
 
     function __construct(){
         $this->view = new TableView();
         $this->model = new TableModel();
+        $this->vehiculosModel = new VehiculosModel();
         $this->categorias = $this->model->getCategoriasDB();
-        $this->vehiculos = $this->model->getVehiculosDB();
+        $this->vehiculosModel = $this->vehiculosModel->getVehiculosDB();
         $this->usuarios = $this->model->getUsuariosDB();
     }
 
-    function showHome(){
+    /*function showHome(){
         $this->view->viewHome();
     }
    
-    function showVehiculos(){
+  /*  function showVehiculos(){
         $this->view->showVehiculos($this->vehiculos);
     }
 
@@ -69,7 +76,7 @@ class TableController{
         $this->view->viewHome();
     }
 
-    function login(){
+    /*function login(){
         $this->view->login();
     }
 
@@ -128,7 +135,7 @@ class TableController{
             $this->view->showMsje("ERROR - Los campos e-Mail y Password no pueden estar vacios.");
             $this->view->viewHome();
         } 
-    }
+    }*/
 
     //  categorias
     function showCategorias(){
