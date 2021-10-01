@@ -37,7 +37,7 @@ class TableController{
     
         function deleteCategoria($id_categoria){
             $this->model->deleteCategoriaDB($id_categoria);
-            header('Location: '.BASE_URL.'verCatalogoCategorias');
+            header('Location: '.BASE_URL.'verCatalogoCategoria');
         }
     
         function editCategoria($id_categoria){
@@ -48,7 +48,7 @@ class TableController{
     
         function editCategoriaDB($id){
             $this->model->editCategoriaDB($id, $_POST['tipo']);
-            header('Location: '.BASE_URL.'verCatalogoCategorias');
+            header('Location: '.BASE_URL.'verCatalogoCategoria');
         }
     
         function addNewCategoria(){
@@ -59,7 +59,7 @@ class TableController{
         function insertNewCategoriaDB(){
             if (!empty($_POST['tipo'])){
                 $this->model->addNewCategoriaDB($_POST['tipo']);
-                header('Location: '.BASE_URL.'verCatalogoCategorias');
+                header('Location: '.BASE_URL.'verCatalogoCategoria');
             } else {
                 $this->generalView->showMsje("ERROR: los campos no pueden estar vacios.");
                 $this->view->showCategorias($this->categoria);
