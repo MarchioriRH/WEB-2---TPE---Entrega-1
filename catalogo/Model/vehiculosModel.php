@@ -1,6 +1,5 @@
 <?php
 
-//include_once "./Model/categoriasModel.php";
 include_once "./Model/categoriasModel.php";
 
 class VehiculosModel {
