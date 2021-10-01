@@ -1,6 +1,6 @@
 <?php
 
-class TableModel {
+class CategoriasModel {
     private $db;
 
     function __construct(){
@@ -32,18 +32,6 @@ class TableModel {
     function editCategoriaDB($id, $tipo){
         $sentencia2 = $this->db->prepare("UPDATE categorias SET tipo = '$tipo' WHERE id_categoria=?");
         $sentencia2->execute(array($id));
-    }
-
-    function registroNuevoUsuarioDB($mail, $userPassword, $nombre, $apellido){
-        $sentencia = $this->db->prepare("INSERT INTO usuarios(mail, passwrd, nombre, apellido) VALUES(?, ?, ?, ?)");
-        $sentencia->execute(array($mail, $userPassword, $nombre, $apellido));
-    }
-
-    function getUsuariosDB(){
-        $sentencia = $this->db->prepare("SELECT * FROM usuarios");
-        $sentencia->execute();
-        $usuarios = $sentencia->fetchAll(PDO::FETCH_OBJ);
-        return $usuarios;
     }
     function getDetallesCategoriaDB($id_categoria){
         $sentencia = $this->db->prepare("SELECT * FROM categorias WHERE id_categoria = $id_categoria");

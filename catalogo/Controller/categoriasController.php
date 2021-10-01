@@ -1,32 +1,29 @@
 <?php
 
-include_once "./View/tableView.php";
-include_once "./Model/tableModel.php";
-include_once "./Controller/vehiculosController.php";
+include_once "./View/categoriasView.php";
+include_once "./Model/categoriasModel.php";
+include_once "vehiculosController.php";
 include_once "./Model/vehiculosModel.php";
-include_once "./Controller/generalController.php";
+include_once "generalController.php";
 include_once "./View/generalView.php";
+include_once "usersController.php";
 
 
 
 
-class TableController{
+class CategoriasController{
     
     private $view;
     private $model;
     private $categorias;
-    private $vehiculosModel;
     private $generalView;
-    private $usuarios;
 
     function __construct(){
-        $this->view = new TableView();
+        $this->view = new CategoriasView();
         $this->generalView = new GeneralView();
-        $this->model = new TableModel();
+        $this->model = new CategoriasModel();
         $this->vehiculosModel = new VehiculosModel();
         $this->categorias = $this->model->getCategoriasDB();
-        $this->vehiculosModel = $this->vehiculosModel->getVehiculosDB();
-        $this->usuarios = $this->model->getUsuariosDB();
     }
 
 

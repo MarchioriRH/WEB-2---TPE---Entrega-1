@@ -1,7 +1,7 @@
 <?php
 
-include_once "./View/tableView.php";
-include_once "./Model/tableModel.php";
+include_once "./View/categoriasView.php";
+include_once "./Model/categoriasModel.php";
 include_once "./View/vehiculosView.php";
 include_once "./Model/vehiculosModel.php";
 include_once "./View/generalView.php";

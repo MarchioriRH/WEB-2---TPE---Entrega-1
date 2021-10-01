@@ -1,5 +1,5 @@
 <?php
-require_once "./Controller/tableController.php";
+require_once "./Controller/categoriasController.php";
 require_once "./Controller/vehiculosController.php";
 require_once "./Controller/usersController.php";
 require_once "./Controller/generalController.php";
@@ -17,7 +17,7 @@ if (!empty($_GET['action'])) {
 //print_r($action);
 $params = explode('/', $action);
 
-$table = new TableController();
+$categorias = new CategoriasController();
 $vehiculos = new VehiculosController();
 $users = new UsersController();
 $general = new GeneralController();
@@ -63,23 +63,22 @@ switch ($params[0]) {
         $vehiculos->insertNewVehiculoDB(); 
         break;
     case 'verCatalogoCategoria': 
-        $table->showCategorias(); 
+        $categorias->showCategorias(); 
         break;
     case 'eliminarCategoria': 
-        $table->deleteCategoria($params[1]); 
+        $categorias->deleteCategoria($params[1]); 
         break;
     case 'editCategoriaDB': 
-        print_r($params[1]);
-        $table->editCategoriaDB($params[1]); 
+        $categorias->editCategoriaDB($params[1]); 
         break;
     case 'addNewCategoria': 
-        $table->addNewCategoria(); 
+        $categorias->addNewCategoria(); 
         break;
     case 'insertNewCategoriaDB': 
-        $table->insertNewCategoriaDB(); 
+        $categorias->insertNewCategoriaDB(); 
         break;
     case 'editarCategoria': 
-        $table->editCategoria($params[1]); 
+        $categorias->editCategoria($params[1]); 
         break;
     default: 
         $general->errorMsje404(); 
