@@ -27,10 +27,13 @@ class TableView{
         $this->smarty->display('./templates/viewMensaje.tpl');
     }
 
-    function editCategoria($id_categoria, $categorias){
-        $this->smarty->assign('categorias',$categorias);
+    function editCategoria($categoria){
+        $categorias = [];
+        foreach ($categoria as $car) {
+            array_push($categorias, $car);
+        }
         $this->smarty->assign('tituloEdit','Editar Categoria');
-        $this->smarty->assign('categoria',$id_categoria);
+        $this->smarty->assign('categorias',$categorias);
         $this->smarty->display('./templates/editCategoria.tpl');
     }
 

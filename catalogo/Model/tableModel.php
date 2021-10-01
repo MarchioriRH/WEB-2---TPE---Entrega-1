@@ -30,9 +30,7 @@ class TableModel {
     }
 
     function editCategoriaDB($id, $tipo){
-        $sentencia1 = $this->db->prepare("UPDATE FROM vehiculos SET  WHERE id_categoria = $id");
-        $sentencia1->execute();
-        $sentencia2 = $this->db->prepare("UPDATE FROM categorias SET tipo = '$tipo' WHERE id_categoria= $id");
+        $sentencia2 = $this->db->prepare("UPDATE categorias SET tipo = '$tipo' WHERE id_categoria=?");
         $sentencia2->execute(array($id));
     }
 
@@ -47,7 +45,12 @@ class TableModel {
         $usuarios = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $usuarios;
     }
-    
+    function getDetallesCategoriaDB($id_categoria){
+        $sentencia = $this->db->prepare("SELECT * FROM categorias WHERE id_categoria = $id_categoria");
+        $sentencia->execute();
+        $detalles = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $detalles;
+    }
     
 
 }

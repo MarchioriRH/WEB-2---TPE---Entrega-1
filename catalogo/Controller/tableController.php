@@ -30,38 +30,39 @@ class TableController{
     }
 
 
-    //  categorias
-    function showCategorias(){
-        $this->view->showCategorias($this->categorias);
-    }
-
-    function deleteCategoria($id_categoria){
-        $this->model->deleteCategoriaDB($id_categoria);
-        header('Location: '.BASE_URL.'verCatalogoCategorias');
-    }
-
-    function editCategoria($id_categoria){
-        $this->view->editCategoria($id_categoria, $this->categorias);
-        $this->view->showCategorias($this->categorias);
-    }
-
-    function editCategoriaDB($id){
-        $this->model->editCategoriaDB($id, $_POST['tipo']);
-        header('Location: '.BASE_URL.'verCatalogoCategorias');
-    }
-
-    function addNewCategoria(){
-        $this->view->showCategorias($this->categorias);
-        $this->view->addNewCategoria($this->categorias);
-    }
-
-    function insertNewCategoriaDB(){
-        if (!empty($_POST['tipo'])){
-            $this->model->addNewCategoriaDB($_POST['tipo']);
+        //  categorias
+        function showCategorias(){
+            $this->view->showCategorias($this->categorias);
+        }
+    
+        function deleteCategoria($id_categoria){
+            $this->model->deleteCategoriaDB($id_categoria);
             header('Location: '.BASE_URL.'verCatalogoCategorias');
-        } else {
-            $this->generalView->showMsje("ERROR: los campos no pueden estar vacios.");
-            $this->view->showCategorias($this->categoria);
-        } 
-    }
+        }
+    
+        function editCategoria($id_categoria){
+            $categoria = $this->model->getDetallesCategoriaDB($id_categoria);
+            $this->view->editCategoria($categoria);
+            $this->view->showCategorias($this->categorias);
+        }
+    
+        function editCategoriaDB($id){
+            $this->model->editCategoriaDB($id, $_POST['tipo']);
+            header('Location: '.BASE_URL.'verCatalogoCategorias');
+        }
+    
+        function addNewCategoria(){
+            $this->view->showCategorias($this->categorias);
+            $this->view->addNewCategoria($this->categorias);
+        }
+    
+        function insertNewCategoriaDB(){
+            if (!empty($_POST['tipo'])){
+                $this->model->addNewCategoriaDB($_POST['tipo']);
+                header('Location: '.BASE_URL.'verCatalogoCategorias');
+            } else {
+                $this->generalView->showMsje("ERROR: los campos no pueden estar vacios.");
+                $this->view->showCategorias($this->categoria);
+            } 
+        }
 }
