@@ -8,9 +8,9 @@ class UsersModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_vehiculos;charset=utf8', 'root', '');
     }
 
-    function registroNuevoUsuarioDB($mail, $userPassword, $nombre, $apellido){
-        $sentencia = $this->db->prepare("INSERT INTO usuarios(mail, passwrd, nombre, apellido) VALUES(?, ?, ?, ?)");
-        $sentencia->execute(array($mail, $userPassword, $nombre, $apellido));
+    function registroNuevoUsuarioDB($mail, $userPassword, $nombre, $apellido, $rol){
+        $sentencia = $this->db->prepare("INSERT INTO usuarios(mail, passwrd, nombre, apellido, rol) VALUES(?, ?, ?, ?, ?)");
+        $sentencia->execute(array($mail, $userPassword, $nombre, $apellido, $rol));
     }
 
     function getUsuariosDB(){

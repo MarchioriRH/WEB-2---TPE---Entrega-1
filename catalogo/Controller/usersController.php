@@ -12,6 +12,7 @@ class UsersController {
     private $view;
     private $model;
     private $loginHelper;
+    const KEYWORD = "yourcar";
 
     function __construct(){
         $this->usersView = new UsersView();
@@ -60,7 +61,13 @@ class UsersController {
             $user = $this->model->getUsuarioByMail($userMail);
             if (empty($user)){
                 $userPassword =  password_hash($_POST['password'], PASSWORD_BCRYPT);
-                $this->model->registroNuevoUsuarioDB($_POST ['mail'], $userPassword, $_POST ['nombre'], $_POST ['apellido']);
+                print_r(KEYWORD);
+                print_r($_POST['keyword']);
+                if ($_POST['keyword'] == KEYWORD)
+                    $rol = 1;
+                else
+                    $rol = 0;
+                $this->model->registroNuevoUsuarioDB($_POST ['mail'], $userPassword, $_POST ['nombre'], $_POST ['apellido'], $rol);
                 $this->view->showMsje('Usuario '.$_POST['mail'].' registrado con exito.');
                 $this->view->viewHome($this->loginHelper->sessionStarted());
             } else {

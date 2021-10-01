@@ -40,7 +40,7 @@
                         {else}    
                             <li><a href="login">LOGIN</a></li>
                         {/if}
-                        {*<li><a href="registro">REGISTRO</a></li>*}
+                        <li><a href="registro">REGISTRO</a></li>
                     </ul>
             </div>
             <div class="btn_menu"> 

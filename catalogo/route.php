@@ -5,7 +5,7 @@ require_once "./Controller/usersController.php";
 require_once "./Controller/generalController.php";
 
 
-
+// se define URL base.
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
 // lee la acción
@@ -14,9 +14,10 @@ if (!empty($_GET['action'])) {
 } else {
     $action = 'catalogo'; // acción por defecto si no envían
 }
-//print_r($action);
+// realiza el explo de la accion 
 $params = explode('/', $action);
 
+// se instancian las distintas categorias.
 $categorias = new CategoriasController();
 $vehiculos = new VehiculosController();
 $users = new UsersController();
