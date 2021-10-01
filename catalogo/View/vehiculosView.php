@@ -1,14 +1,17 @@
 <?php
 
 include_once "libs/smarty-3.1.39/libs/Smarty.class.php";
+include_once "./Helpers/loginHelpers.php";
 
 
 class VehiculosView{
     
     private $smarty;
+    private $sessionInitiated;
 
     public function __construct(){
         $this->smarty = new Smarty();
+        $this->sessionInitiated = new LoginHelpers();
     }
 
     function showVehiculos($vehiculos){
@@ -18,6 +21,7 @@ class VehiculosView{
         }
         $this->smarty->assign('titulo','Vehiculos disponibles');
         $this->smarty->assign('vehiculos',$catalogo);
+        $this->smarty->assign('session', $this->sessionInitiated->sessionStarted());
         $this->smarty->display('./templates/viewCatalogo.tpl');
     }
 

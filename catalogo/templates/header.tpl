@@ -35,7 +35,11 @@
                                 <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
                             </ul>
                         </div>
-                        <li><a href="login">LOGIN</a></li>
+                        {if $session}
+                            <li><a href="logout">LOGOUT</a></li>
+                        {else}    
+                            <li><a href="login">LOGIN</a></li>
+                        {/if}
                         <li><a href="registro">REGISTRO</a></li>
                     </ul>
             </div>

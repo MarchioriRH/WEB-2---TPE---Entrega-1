@@ -11,11 +11,13 @@ class UsersView {
         $this->smarty = new Smarty();
     }
 
-    function login(){
+    function login($session){
+        $this->smarty->assign('session', $session);
         $this->smarty->display('./templates/login.tpl');
     }
 
-    function registro(){
+    function registro($session){
+        $this->smarty->assign('session', $session);
         $this->smarty->display('./templates/registro.tpl');
     }
 }

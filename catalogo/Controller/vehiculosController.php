@@ -11,13 +11,17 @@ class VehiculosController{
     private $view;
     private $model;
     private $vehiculos;
+    private $categorias;
     private $generalView;
+    private $getCategoriasDB;
     
 
     function __construct(){
         $this->view = new VehiculosView();
         $this->model = new VehiculosModel();
         $this->generalView = new GeneralView();
+        $this->categoriasModel = new TableModel();
+        $this->categorias = $this->categoriasModel->getCategoriasDB();
         $this->vehiculos = $this->model->getVehiculosDB();
         
     }

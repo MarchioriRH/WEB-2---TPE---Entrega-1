@@ -30,6 +30,8 @@ switch ($params[0]) {
     case 'login': 
         $users->login(); 
         break;
+    case 'logout':
+        $users->logOut();
     case 'loginUsuario': 
         $users->loginUsuarioDB(); 
         break;
