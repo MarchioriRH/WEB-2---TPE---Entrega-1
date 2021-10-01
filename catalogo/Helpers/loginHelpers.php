@@ -22,6 +22,6 @@ class LoginHelpers {
     function logOut() {
         session_start();
         session_destroy();
-        $this->view->viewHome($this->sessionStarted());
+        $this->view->viewHome("false");
     }
 }

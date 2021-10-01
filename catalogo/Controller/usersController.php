@@ -6,13 +6,15 @@ include_once "./View/categoriasView.php";
 include_once "./View/generalView.php";
 include_once "./Helpers/loginHelpers.php";
 
+const KEYWORD = 'yourcar';
+
 class UsersController {   
 
     private $usersView;
     private $view;
     private $model;
     private $loginHelper;
-    const KEYWORD = "yourcar";
+   
 
     function __construct(){
         $this->usersView = new UsersView();
@@ -34,11 +36,12 @@ class UsersController {
             $userPassword = $_POST['password'];
             $userMail = $_POST['mail'];
             $user = $this->model->getUsuarioByMail($userMail);
+            print_r($user);
             if (!empty($user) && password_verify($userPassword, $user->passwrd)){
                 session_start();
                 $_SESSION['EMAIL'] = $user->mail;
                 $_SESSION['NOMBRE'] = $user->nombre;
-                $_SEEEION['ROL'] = $user->rol;
+                $_SESSION['ROL'] = $user->rol;
                 $this->view->showMsje('Bienvenido '.$user->nombre.' '.$user->apellido.'.');
                 $this->view->viewHome($this->loginHelper->sessionStarted());
             } else {
@@ -46,7 +49,7 @@ class UsersController {
                 $this->view->viewHome($this->loginHelper->sessionStarted());
             }
         } else {
-            $this->view->showMsje("ERROR LOG - Los campos e-Mail y Password no pueden estar vacios.");
+            $this->view->showMsje("ERROR - Los campos e-Mail y Password no pueden estar vacios.");
             $this->view->viewHome($this->loginHelper->sessionStarted());
         } 
     }
@@ -61,8 +64,6 @@ class UsersController {
             $user = $this->model->getUsuarioByMail($userMail);
             if (empty($user)){
                 $userPassword =  password_hash($_POST['password'], PASSWORD_BCRYPT);
-                print_r(KEYWORD);
-                print_r($_POST['keyword']);
                 if ($_POST['keyword'] == KEYWORD)
                     $rol = 1;
                 else

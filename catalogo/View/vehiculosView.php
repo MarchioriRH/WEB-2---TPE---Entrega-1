@@ -22,6 +22,10 @@ class VehiculosView{
         $this->smarty->assign('titulo','Vehiculos disponibles');
         $this->smarty->assign('vehiculos',$catalogo);
         $this->smarty->assign('session', $this->sessionInitiated->sessionStarted());
+        if (isset($_SESSION['EMAIL']))
+            $this->smarty->assign('rol', $_SESSION['ROL']);
+        else
+            $this->smarty->assign('rol', 0);
         $this->smarty->display('./templates/viewCatalogo.tpl');
     }
 
