@@ -2,7 +2,7 @@
     
 include_once "./Model/usersModel.php";
 include_once "./View/usersView.php";
-include_once "./View/tableView.php";
+include_once "./View/categoriasView.php";
 include_once "./View/generalView.php";
 
 class UsersController {   
