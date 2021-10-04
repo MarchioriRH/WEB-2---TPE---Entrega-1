@@ -25,7 +25,7 @@
                 </div>
                 <div class="btn-detalle">
                     <button type="submit" class="btn btn-danger">Registrar</button>
-                    <a class="btn btn-danger" href="catalogo">Cancelar</a>
+                    <a class="btn btn-danger" href="homeCatalogo">Cancelar</a>
                 </div>  
             </form>            
         </div>

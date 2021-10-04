@@ -4,13 +4,13 @@ include_once "./View/generalView.php";
 
 class LoginHelpers {
 
-    private $view;
+    private $generalView;
 
-    function __construct() {
-        $this->view = new GeneralView();
+    public function __construct() {
+        $this->generalView = new GeneralView();
     }
 
-    function sessionStarted(){
+    public function sessionStarted(){
         if (!isset($_SESSION))
             session_start();
         if (isset($_SESSION['EMAIL']))
@@ -19,9 +19,9 @@ class LoginHelpers {
             return false;
     }
 
-    function logOut() {
+    public function logOut() {
         session_start();
         session_destroy();
-        $this->view->viewHome("false");
+        $this->generalView->viewHome(0);
     }
 }

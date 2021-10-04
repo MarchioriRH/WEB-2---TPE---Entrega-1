@@ -5,22 +5,24 @@ include_once "./Helpers/loginHelpers.php";
 
 class GeneralController{
     
-    private $view;
+    // se declaran las variables que se utilizan en la clase
+    private $generalView;
     private $loginHelper;
 
-    
-    function __construct(){
-        $this->view = new GeneralView();    
+    // se instancian las clases
+    public function __construct(){
+        $this->generalView = new GeneralView();    
         $this->loginHelper = new LoginHelpers();    
     }
 
-    function showHome(){
-        $this->view->viewHome($this->loginHelper->sessionStarted());
+    // funcion encargada de solicitar al view la renderizacion del home
+    public function showHome(){
+        $this->generalView->viewHome($this->loginHelper->sessionStarted());
     }
 
-    function errorMsje404(){
-        $this->view->showMsje("ERROR 404 - Page not found.");
-        $this->view->viewHome($this->loginHelper->sessionStarted());
+    // si la pagina solicitada no existe, se muestra el error 404
+    public function errorMsje404(){
+        $this->generalView->showMsje("ERROR 404 - Page not found.");
     }
 
 }
