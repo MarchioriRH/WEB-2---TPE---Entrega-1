@@ -2,9 +2,6 @@
     
 include_once "./Model/usersModel.php";
 include_once "./View/usersView.php";
-include_once "./View/categoriasView.php";
-include_once "./View/generalView.php";
-include_once "./Helpers/loginHelpers.php";
 
 const KEYWORD = 'yourcar';
 
@@ -36,7 +33,6 @@ class UsersController {
             $userPassword = $_POST['password'];
             $userMail = $_POST['mail'];
             $user = $this->model->getUsuarioByMail($userMail);
-            print_r($user);
             if (!empty($user) && password_verify($userPassword, $user->passwrd)){
                 session_start();
                 $_SESSION['EMAIL'] = $user->mail;

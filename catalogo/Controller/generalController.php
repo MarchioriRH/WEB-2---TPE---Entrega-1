@@ -2,6 +2,10 @@
 
 include_once "./View/generalView.php";
 include_once "./Helpers/loginHelpers.php";
+include_once "vehiculosController.php";
+include_once "./View/generalView.php";
+include_once "usersController.php";
+include_once "categoriasController.php";
 
 class GeneralController{
     

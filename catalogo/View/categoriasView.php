@@ -1,13 +1,16 @@
 <?php
 
 include_once "libs/smarty-3.1.39/libs/Smarty.class.php";
+include_once "./Helpers/loginHelpers.php";
 
 class CategoriasView{
     
     private $smarty;
+    private $sessionInitiated;
 
     public function __construct(){
         $this->smarty = new Smarty();
+        $this->sessionInitiated = new LoginHelpers();
     }
 
     function showCategorias($categorias){
@@ -17,6 +20,11 @@ class CategoriasView{
         }
         $this->smarty->assign('titulo','Categorias disponibles');
         $this->smarty->assign('categorias',$catalogocat);
+        $this->smarty->assign('session', $this->sessionInitiated->sessionStarted());
+        if (isset($_SESSION['EMAIL']))
+            $this->smarty->assign('rol', $_SESSION['ROL']);
+        else
+            $this->smarty->assign('rol', 0);
         $this->smarty->display('./templates/viewCategorias.tpl');
     }
 

@@ -2,11 +2,7 @@
 
 include_once "./View/categoriasView.php";
 include_once "./Model/categoriasModel.php";
-include_once "vehiculosController.php";
-include_once "./Model/vehiculosModel.php";
 include_once "generalController.php";
-include_once "./View/generalView.php";
-include_once "usersController.php";
 
 
 
@@ -22,7 +18,6 @@ class CategoriasController{
         $this->view = new CategoriasView();
         $this->generalView = new GeneralView();
         $this->model = new CategoriasModel();
-        $this->vehiculosModel = new VehiculosModel();
         $this->categorias = $this->model->getCategoriasDB();
     }
 
