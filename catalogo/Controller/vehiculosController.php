@@ -3,6 +3,7 @@
 include_once "./View/vehiculosView.php";
 include_once "./Model/vehiculosModel.php";
 include_once "generalController.php";
+
 class VehiculosController{
     
     // se crean las variables que se van a usar en la clase
@@ -20,8 +21,7 @@ class VehiculosController{
         $this->generalView = new GeneralView();
         $this->categoriasModel = new CategoriasModel();
         $this->categorias = $this->categoriasModel->getCategoriasDB();
-        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
-        
+        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();        
     }
    
     // funcion encargada de mostar el listado de items disponibles
@@ -38,7 +38,6 @@ class VehiculosController{
         // se carga como fondo el listado de vehiculos
         $this->vehiculosView->showVehiculos($this->vehiculos);
     }
-
 
     // funcion encargada de hacer el llamado para eliminar un item de la BBDD
     public function deleteVehiculo($id_vehiculo){

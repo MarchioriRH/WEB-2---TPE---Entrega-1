@@ -16,12 +16,10 @@
                 <div class="mb-2"> 
                     <span>Ingrese una clave</span>
                     <input type="password" name="password" class="form-control password" value="clave" placeholder="Clave">
-                    {*<span class="fa fa-fw fa-eye password-icon show-password"></span>*}
                 </div>
                 <div class="mb-2"> 
                     <span>Para registrarse como administrador, ingrese la palabra clave</span>
                     <input type="password" name="keyword" class="form-control keyword" value="" placeholder="">
-                    {*<span class="fa fa-fw fa-eye password-icon show-keyword"></span>*}
                 </div>
                 <div class="btn-detalle">
                     <button type="submit" class="btn btn-danger">Registrar</button>
