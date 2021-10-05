@@ -12,12 +12,12 @@ class GeneralView {
         $this->smarty = new Smarty();
     }
 
-    function viewHome($session = null){
+    public function viewHome($session){
         $this->smarty->assign('session', $session);
         $this->smarty->display('./templates/home.tpl');
     }
 
-    function showMsje($errorMsje){
+    public function showMsje($errorMsje){
         $this->smarty->assign('texto1',$errorMsje);
         $this->smarty->display('./templates/showMsje.tpl');
     }

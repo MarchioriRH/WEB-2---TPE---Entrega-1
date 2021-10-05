@@ -12,7 +12,7 @@ define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] 
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 } else {
-    $action = 'catalogo'; // acción por defecto si no envían
+    $action = 'homeCatalogo'; // acción por defecto si no envían
 }
 // realiza el explo de la accion 
 $params = explode('/', $action);
@@ -25,7 +25,7 @@ $general = new GeneralController();
 
 // determina que camino seguir según la acción
 switch ($params[0]) {
-    case 'catalogo': 
+    case 'homeCatalogo': 
         $general->showHome(); 
         break;
     case 'login': 
@@ -37,22 +37,22 @@ switch ($params[0]) {
     case 'loginUsuario': 
         $users->loginUsuarioDB(); 
         break;
-    case 'registro': 
+    case 'registroNuevoUsuario': 
         $users->registro(); 
         break;
     case 'registroDB': 
         $users->registroNuevoUsuarioDB(); 
         break;
-    case 'verCatalogoCompleto': 
+    case 'verCatalogoVehiculos': 
         $vehiculos->showVehiculos(); 
         break;
-    case 'detalles': 
+    case 'detallesVehiculo': 
         $vehiculos->showDetallesVehiculo($params[1]); 
         break;
-    case 'eliminar': 
+    case 'eliminarVehiculo': 
         $vehiculos->deleteVehiculo($params[1]); 
         break;
-    case 'editar': 
+    case 'editarVehiculo': 
         $vehiculos->editVehiculo($params[1]); 
         break;
     case 'editVehiculoDB':

@@ -13,7 +13,7 @@ class CategoriasView{
         $this->sessionInitiated = new LoginHelpers();
     }
 
-    function showCategorias($categorias){
+    public function showCategorias($categorias){
         $catalogocat = [];
         foreach ($categorias as $categoria) {
             array_push($catalogocat, $categoria);
@@ -28,14 +28,14 @@ class CategoriasView{
         $this->smarty->display('./templates/viewCategorias.tpl');
     }
 
-    function deleteCategoria($id_categoria){
+    public function deleteCategoria($id_categoria){
         $this->smarty->assign('texto1','El item sera eliminado');
         $this->smarty->assign('texto2','¿Esta seguro?');
         $this->smarty->assign('dato',$id_categoria);
         $this->smarty->display('./templates/viewMensaje.tpl');
     }
 
-    function editCategoria($categoria){
+    public function editCategoria($categoria){
         $categorias = [];
         foreach ($categoria as $car) {
             array_push($categorias, $car);
@@ -45,7 +45,7 @@ class CategoriasView{
         $this->smarty->display('./templates/editCategoria.tpl');
     }
 
-    function addNewCategoria($categorias){
+    public function addNewCategoria($categorias){
         $this->smarty->assign('texto1','Agregar nueva categoria.');
         $this->smarty->assign('categorias',$categorias);
         $this->smarty->display('./templates/addNewCategoria.tpl');

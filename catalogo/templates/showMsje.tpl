@@ -2,7 +2,7 @@
     <div class="modalMsge">
         <h1>{$texto1}</h1>
         <div class="mb-2">
-            <a class="btn btn-danger" href="catalogo">Aceptar</a>
+            <a class="btn btn-danger" href="homeCatalogo">Aceptar</a>
         </div>
     </div>
 </section>

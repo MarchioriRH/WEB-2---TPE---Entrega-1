@@ -14,7 +14,7 @@ class VehiculosView{
         $this->sessionInitiated = new LoginHelpers();
     }
 
-    function showVehiculos($vehiculos){
+    public function showVehiculos($vehiculos){
         $catalogo = [];
         foreach ($vehiculos as $vehiculo) {
             array_push($catalogo, $vehiculo);
@@ -29,7 +29,7 @@ class VehiculosView{
         $this->smarty->display('./templates/viewCatalogo.tpl');
     }
 
-    function showDetallesVehiculo($detalles){
+    public function showDetallesVehiculo($detalles){
         $detalle = [];
         foreach ($detalles as $car) {
             array_push($detalle, $car);
@@ -39,7 +39,7 @@ class VehiculosView{
         $this->smarty->display('./templates/viewDetalles.tpl');
     }
 
-    function editVehiculo($vehiculo,$categorias){
+    public function editVehiculo($vehiculo,$categorias){
         $vehiculos = [];
         foreach ($vehiculo as $car) {
             array_push($vehiculos, $car);
@@ -50,7 +50,7 @@ class VehiculosView{
         $this->smarty->display('./templates/editVehiculo.tpl');
     }
     
-    function addNewVehiculo($vehiculos, $categorias){
+    public function addNewVehiculo($vehiculos, $categorias){
         $this->smarty->assign('texto1','Agregar nuevo vehiculo.');
         $this->smarty->assign('categorias',$categorias);
         $this->smarty->display('./templates/addNewVehiculo.tpl');

@@ -19,19 +19,19 @@
                     <img class="imagen" src="img/koe.ico" alt="logo">
                 </div>
                 <div class="your-car">
-                    <a href="catalogo" id="your">YOUR</a>
-                    <a href="catalogo" id="car">CAR</a>
+                    <a href="homeCatalogo" id="your">YOUR</a>
+                    <a href="homeCatalogo" id="car">CAR</a>
                 </div>
             </div>
             <div class="menu">
                 <ul class="navigation">
-                        <li><a href="catalogo">HOME</a></li>
+                        <li><a href="homeCatalogo">HOME</a></li>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 CATALOGO
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                                <a class="dropdown-item" href="verCatalogoCompleto">Ver todos los vehiculos</a>
+                                <a class="dropdown-item" href="verCatalogoVehiculos">Ver todos los vehiculos</a>
                                 <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
                             </ul>
                         </div>
@@ -40,7 +40,7 @@
                         {else}    
                             <li><a href="login">LOGIN</a></li>
                         {/if}
-                        <li><a href="registro">REGISTRO</a></li>
+                        <li><a href="registroNuevoUsuario">REGISTRO</a></li>
                     </ul>
             </div>
             <div class="btn_menu"> 
@@ -50,15 +50,15 @@
                                 MENU
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                                <a class="dropdown-item" href="catalogo">HOME</a>
+                                <a class="dropdown-item" href="homeCatalogo">HOME</a>
                                 <div class="dropdown-divider"></div>
                                 <h6 class="dropdown-header">CATALOGO</h6>
-                                <a class="dropdown-item" href="verCatalogoCompleto">Ver todos los vehiculos</a>
+                                <a class="dropdown-item" href="verCatalogoVehiculos">Ver todos los vehiculos</a>
                                 <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
                                 <div class="dropdown-divider"></div>
                                 <h6 class="dropdown-header"></h6>
                                 <a class="dropdown-item" href="login">LOGIN</a>
-                                <a class="dropdown-item" href="registro">REGISTRO</a>
+                                <a class="dropdown-item" href="registroNuevoUsuario">REGISTRO</a>
                             </ul>
                         </div>
                     </div>
