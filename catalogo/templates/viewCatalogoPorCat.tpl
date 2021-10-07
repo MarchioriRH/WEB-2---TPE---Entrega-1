@@ -3,12 +3,6 @@
 {include file="header.tpl"}
     <div class="container">
         <h1>{$titulo}</h1>
-        {* si el usuario es nivel 1 (admin) se muestra el boton agregar item *}
-        {if $session && ($rol == 1)}
-            <div class="mb-2">
-                <a class="btn btn-danger" href="addNewVehiculo">Añadir nuevo Vehiculo</a>
-            </div> 
-        {/if} 
         <table class="default">
             <tr>
                 <th>Categoria</th>

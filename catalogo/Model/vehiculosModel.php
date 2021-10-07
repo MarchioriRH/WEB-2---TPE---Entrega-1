@@ -22,6 +22,13 @@ class VehiculosModel {
         return $vehiculos;
     }
 
+    public function getVehiculosPorCatDB($id_cat){
+        $sentencia = $this->db->prepare("SELECT vehiculos.*, categorias.tipo as Tipo FROM categorias RIGHT JOIN vehiculos ON vehiculos.id_categoria = categorias.id_categoria WHERE vehiculos.id_categoria=$id_cat");
+        $sentencia->execute();
+        $vehiculos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $vehiculos;
+    }
+
     // esta funcion obtiene los datos de un determinado item de la BBDD
     public function getDetallesVehiculoDB($id_vehiculo){
         $sentencia = $this->db->prepare("SELECT vehiculos.*, categorias.tipo as Tipo FROM categorias JOIN vehiculos ON vehiculos.id_categoria = categorias.id_categoria WHERE vehiculos.id_vehiculo = $id_vehiculo");

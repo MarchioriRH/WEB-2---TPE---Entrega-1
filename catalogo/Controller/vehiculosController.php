@@ -13,7 +13,8 @@ class VehiculosController{
     private $categorias;
     private $generalView;
     private $categoriasModel;
-    
+    private $id_cat;
+
     // se instancian las clases a utilizar y se cargan los arreglos de vehiculos y categorias
     public function __construct(){
         $this->vehiculosView = new VehiculosView();
@@ -21,12 +22,18 @@ class VehiculosController{
         $this->generalView = new GeneralView();
         $this->categoriasModel = new CategoriasModel();
         $this->categorias = $this->categoriasModel->getCategoriasDB();
-        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();        
+        $this->vehiculos = $this->vehiculosModel->getVehiculosDB(); 
+     
     }
    
     // funcion encargada de mostar el listado de items disponibles
     public function showVehiculos(){
         $this->vehiculosView->showVehiculos($this->vehiculos);
+    }
+
+    public function showVehiculosPorCategoria($id_cat){
+        $vehiculosporcat = $this->vehiculosModel->getVehiculosPorCatDB($id_cat);
+        $this->vehiculosView->showVehiculos($vehiculosporcat);
     }
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal

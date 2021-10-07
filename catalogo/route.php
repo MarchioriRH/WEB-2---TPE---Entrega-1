@@ -82,6 +82,9 @@ switch ($params[0]) {
     case 'editarCategoria': 
         $categorias->editCategoria($params[1]); 
         break;
+    case 'verCatalogoPorCategorias': 
+        $vehiculos->showVehiculosPorCategoria($params[1]); 
+        break;
     default: 
         $general->errorMsje404(); 
         break;
