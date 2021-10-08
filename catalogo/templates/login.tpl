@@ -1,3 +1,4 @@
+{* template encargada de renderizar el modal de login *}
 {include file="header.tpl"}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">

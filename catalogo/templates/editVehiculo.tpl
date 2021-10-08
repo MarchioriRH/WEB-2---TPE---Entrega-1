@@ -1,3 +1,4 @@
+{* template encargado de la vista del modal para editar un item de la BBDD *}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <h1>{$tituloEdit}</h1>
@@ -29,11 +30,15 @@
                     <div class="mb-2">       
                         <input type="number" class="form-control"  name="precio" value="{$vehiculo->precio}">
                     </div>
+                    {* si se viene de la vista de categoria, este input hidden se envia en el POST para indicar en el
+                    controller que se debe renderizar la tabla de items con la seleccion por categoria aplicada *}
                     {if ($id_categoria != null)}
                         <input type="hidden" class="form-control"  name="id_categoria" value="{$id_categoria}">
                     {/if}
                     <div class="btn-detalle">
                         <button type="submit" class="btn btn-danger">Guardar</button>
+                        {* si se viene de la vista de categoria se muestra el catalogo con la seleccion por categoria aplicada,
+                        si no es asi, se muestra el catalogo general de vehiculos *}
                         {if ($id_categoria != null)}
                             <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_categoria}">Cancelar</a>
                         {else}

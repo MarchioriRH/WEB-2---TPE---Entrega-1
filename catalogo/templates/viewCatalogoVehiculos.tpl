@@ -3,12 +3,14 @@
 {include file="header.tpl"}
     <div class="container">
         <h1>{$titulo}</h1>
-        {* si el usuario es nivel 1 (admin) se muestra el boton agregar item *}
+        {* si el usuario es nivel 1 (admin) y NO se viene desde la vista por categoria 
+        se muestra el boton agregar item *}
         {if ($session && ($rol == 1) && $id_cat == null)}
             <div class="mb-2">
                 <a class="btn btn-danger" href="addNewVehiculo">Añadir nuevo Vehiculo</a>
             </div> 
         {/if} 
+        {* si se viene desde la vista por categoria, el boton volver muestra el listado por categoria *}
         {if $id_cat != null}
             <div class="mb-2">
                 <a class="btn btn-danger" href="verCatalogoCategoria">Volver</a>
@@ -20,6 +22,8 @@
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Detalles</th>
+                {* si esta la sesion iniciada y el rol de usuario es 1 (admin) se muestran los enlaces a 
+                las opciones de Editar o Borrar *}
                 {if ($session && ($rol == 1))}
                     <th>Editar</th>
                     <th>Borrar</th>
@@ -30,13 +34,19 @@
                     <td>{$catalogo->Tipo}</td>
                     <td>{$catalogo->marca}</td>
                     <td>{$catalogo->modelo}</td>
+                    {* si NO esta la sesion iniciada y NO se viene de la vista por categoria, se muestra el enlace
+                    por defecto para ver los detalles *}
                     {if !$session && ($id_cat == null)}
                         <td><a href="detallesVehiculo/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                     {elseif (!$session && ($id_cat != null))}
+                        {* si NO esta la sesion inciada, pero SI se viene de la vista por categoria, el link cambia al de vista
+                        de detalles en categoria *}
                         <td><a href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                     {/if}                   
                     {* si el usuario es nivel 1 (admin) se muestralos links para editar o elimar un item *}
                     {if ($session && ($rol == 1))}
+                        {* si se viene de la vista por categoria, se muestran los liks para editar desde esa vista, sino se muestran los de 
+                        la vista general *}
                         {if ($id_cat != null)}
                             <td><a href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                             <td><a href="editarVehiculoEnCategoria/{$catalogo->id_vehiculo}">Editar</a></td>

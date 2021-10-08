@@ -3,7 +3,6 @@
 include_once "libs/smarty-3.1.39/libs/Smarty.class.php";
 include_once "./Helpers/loginHelpers.php";
 
-// clase encargada de renderizar la pagina.
 class VehiculosView{
     
     // se declaran la variables de clase
@@ -30,8 +29,9 @@ class VehiculosView{
         $this->smarty->assign('vehiculos',$catalogo);
         // se asigna el nombre session a la variable que indicara si la sesion esta iniciada
         $this->smarty->assign('session', $this->sessionInitiated->sessionStarted());
-        // si la sesion esta iniciada, se asigna el nombre rol al valor de rol de usuario
+        // se asigna como parametro el id de categoria para realizar comparaciones
         $this->smarty->assign('id_cat', $id_cat);
+        // si la sesion esta iniciada, se asigna el nombre rol al valor de rol de usuario
         if ($this->sessionInitiated->sessionStarted())//(isset($_SESSION['EMAIL']))
             $this->smarty->assign('rol', $_SESSION['ROL']);
         else

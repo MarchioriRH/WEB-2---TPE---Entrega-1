@@ -1,3 +1,4 @@
+{* template para renderizar el modal para agregar un nuevo item a la BBDD *}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <h1>{$texto1}</h1>

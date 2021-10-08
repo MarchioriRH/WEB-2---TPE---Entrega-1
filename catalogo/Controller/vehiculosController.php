@@ -13,7 +13,6 @@ class VehiculosController{
     private $categorias;
     private $generalView;
     private $categoriasModel;
-    private $id_cat;
 
     // se instancian las clases a utilizar y se cargan los arreglos de vehiculos y categorias
     public function __construct(){
@@ -22,8 +21,7 @@ class VehiculosController{
         $this->generalView = new GeneralView();
         $this->categoriasModel = new CategoriasModel();
         $this->categorias = $this->categoriasModel->getCategoriasDB();
-        $this->vehiculos = $this->vehiculosModel->getVehiculosDB(); 
-     
+        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
     }
    
     // funcion encargada de mostar el listado de items disponibles
@@ -31,6 +29,8 @@ class VehiculosController{
         $this->vehiculosView->showVehiculos($this->vehiculos);
     }
 
+    // dada una categoria esta funcion envia a renderizar el listado de los items
+    // que cumplen con esa condicion
     public function showVehiculosPorCategoria($id_cat){
         $vehiculosporcat = $this->vehiculosModel->getVehiculosPorCatDB($id_cat);
         $this->vehiculosView->showVehiculos($vehiculosporcat, $id_cat);
@@ -57,7 +57,6 @@ class VehiculosController{
         $this->showVehiculosPorCategoria($id_categoria);
     }
 
-
     // funcion encargada de hacer el llamado para eliminar un item de la BBDD
     public function deleteVehiculo($id_vehiculo){
         $this->vehiculosModel->deleteVehiculoDB($id_vehiculo);
@@ -65,6 +64,7 @@ class VehiculosController{
     }
 
     // funcion encargada de hacer el llamado para eliminar un item de la BBDD
+    // desde la vista por categoria
     public function deleteVehiculoDesdeCategoria($id_vehiculo){
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
         $id_categoria = $detalles[0]->id_categoria;
@@ -82,15 +82,15 @@ class VehiculosController{
         $this->vehiculosView->showVehiculos($this->vehiculos);
     }
 
-    // funcion para editar un item
+    // funcion para editar un item desde la vista por Categoria
     public function editarVehiculoEnCategoria($id_vehiculo){
         // se selecciona de la BBDD el item a editar
-        
         $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
+        // se obtiene el valor de la categoria a la que pertenece el item
         $id_categoria = $vehiculo[0]->id_categoria;
         // se renderizan los datos en un modal para su edicion
         $this->vehiculosView->editVehiculo($vehiculo, $this->categorias, $id_categoria);
-        // se carga como fondo el listado de vehiculos
+        // se carga como fondo el listado de vehiculos filtrados por categoria
         $this->showVehiculosPorCategoria($id_categoria);
     }
 
