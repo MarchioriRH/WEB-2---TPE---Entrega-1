@@ -29,9 +29,16 @@
                     <div class="mb-2">       
                         <input type="number" class="form-control"  name="precio" value="{$vehiculo->precio}">
                     </div>
+                    {if ($id_categoria != null)}
+                        <input type="hidden" class="form-control"  name="id_categoria" value="{$id_categoria}">
+                    {/if}
                     <div class="btn-detalle">
                         <button type="submit" class="btn btn-danger">Guardar</button>
-                        <a class="btn btn-danger" href="verCatalogoVehiculos">Cancelar</a>
+                        {if ($id_categoria != null)}
+                            <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_categoria}">Cancelar</a>
+                        {else}
+                            <a class="btn btn-danger" href="verCatalogoVehiculos">Cancelar</a>
+                        {/if}
                     </div>  
                 </form>
             {/foreach}

@@ -17,7 +17,11 @@
             {/foreach}
         </table>
         <div class="btn-detalle">
-            <a class="btn btn-danger" href="verCatalogoVehiculos">Volver</a>
+            {if ($id_cat != null)}
+                <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_cat}">Volver</a>
+            {else}
+                <a class="btn btn-danger" href="verCatalogoVehiculos">Volver</a>
+            {/if}
         </div>  
     </div>
 </section>

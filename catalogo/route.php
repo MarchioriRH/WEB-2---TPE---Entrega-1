@@ -14,7 +14,7 @@ if (!empty($_GET['action'])) {
 } else {
     $action = 'homeCatalogo'; // acción por defecto si no envían
 }
-// realiza el explo de la accion 
+// realiza el explode de la accion 
 $params = explode('/', $action);
 
 // se instancian las distintas categorias.
@@ -49,14 +49,23 @@ switch ($params[0]) {
     case 'detallesVehiculo': 
         $vehiculos->showDetallesVehiculo($params[1]); 
         break;
+    case 'detallesVehiculoEnCategoria': 
+        $vehiculos->showDetallesVehiculoCat($params[1]); 
+        break;
     case 'eliminarVehiculo': 
         $vehiculos->deleteVehiculo($params[1]); 
+        break;
+    case 'eliminarVehiculoDesdeCategoria': 
+        $vehiculos->deleteVehiculoDesdeCategoria($params[1]); 
         break;
     case 'editarVehiculo': 
         $vehiculos->editVehiculo($params[1]); 
         break;
     case 'editVehiculoDB':
         $vehiculos->editVehiculoDB($params[1]); 
+        break;
+    case 'editarVehiculoEnCategoria':
+        $vehiculos->editarVehiculoEnCategoria($params[1]); 
         break;
     case 'addNewVehiculo': 
         $vehiculos->addNewVehiculo(); 

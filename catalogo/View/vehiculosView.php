@@ -17,7 +17,7 @@ class VehiculosView{
     }
 
     // funcion encargada de renderizar el listado de vehiculos
-    public function showVehiculos($vehiculos){
+    public function showVehiculos($vehiculos, $id_cat = null){
         // se crea vacio el arreglo catalodo donde se almacenaran los datos traidos
         // desde la BBDD
         $catalogo = [];
@@ -31,6 +31,7 @@ class VehiculosView{
         // se asigna el nombre session a la variable que indicara si la sesion esta iniciada
         $this->smarty->assign('session', $this->sessionInitiated->sessionStarted());
         // si la sesion esta iniciada, se asigna el nombre rol al valor de rol de usuario
+        $this->smarty->assign('id_cat', $id_cat);
         if ($this->sessionInitiated->sessionStarted())//(isset($_SESSION['EMAIL']))
             $this->smarty->assign('rol', $_SESSION['ROL']);
         else
@@ -41,7 +42,7 @@ class VehiculosView{
     }
 
     // funcion encargada de renderizar los detalles de un item especifico
-    public function showDetallesVehiculo($detalles){
+    public function showDetallesVehiculo($detalles, $id_cat = null){
         // se declara el array vacio que contendra los datos del item
         $detalle = [];
         foreach ($detalles as $car) {
@@ -51,12 +52,13 @@ class VehiculosView{
         $this->smarty->assign('tituloDetalle','Detalles');
         // se asigna al nombre detalles al array que contine los datos del item
         $this->smarty->assign('detalles',$detalle);
+        $this->smarty->assign('id_cat', $id_cat);
         // se renderiza la ventana modal donde se muestran los detalles de un item
         $this->smarty->display('./templates/viewDetalles.tpl');
     }
 
     // funcion que renderiza la ventana modal de edicion de un item
-    public function editVehiculo($vehiculo,$categorias){
+    public function editVehiculo($vehiculo, $categorias, $id_categoria = null){
         $vehiculos = [];
         foreach ($vehiculo as $car) {
             array_push($vehiculos, $car);
@@ -64,6 +66,7 @@ class VehiculosView{
         $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('tituloEdit','Editar item');
         $this->smarty->assign('vehiculos', $vehiculos);
+        $this->smarty->assign('id_categoria', $id_categoria);
         $this->smarty->display('./templates/editVehiculo.tpl');
     }
     
