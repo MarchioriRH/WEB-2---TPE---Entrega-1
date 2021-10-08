@@ -1,3 +1,4 @@
+{* template que renderiza un cuadro de dialogo tipo modal para mensajes de error y generales *}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <h1>{$texto1}</h1>

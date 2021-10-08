@@ -1,3 +1,4 @@
+{* template encargado de renderizar el footer de la pagina, ademas de cargar los distintos archivos JS*}
     <footer class="footer" class="navbar navbar-fixed-bottom">  
         <a class="pie-de-pagina">Your </a><a id="car2">Car</a><a class="pie-de-pagina"> - 2021 - Grupo TPE 025 - Copyright &copy 2021 Automovil Your Car. Todos los derechos reservados.</a>
     </footer>

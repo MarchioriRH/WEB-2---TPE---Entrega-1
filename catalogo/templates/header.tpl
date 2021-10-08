@@ -1,3 +1,4 @@
+{* template encargado de renderizar el head y header de la pagina, se cargan los links, la base URL, etc. *}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +36,7 @@
                                 <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
                             </ul>
                         </div>
+                        {* si la sesion esta iniciada se cambia el texto del boton de LOGIN a LOGOUT *}
                         {if $session}
                             <li><a href="logout">LOGOUT</a></li>
                         {else}    
@@ -43,6 +45,7 @@
                         <li><a href="registroNuevoUsuario">REGISTRO</a></li>
                     </ul>
             </div>
+            {* menu de vista responsive *}
             <div class="btn_menu"> 
                     <div class="menu">
                         <div class="dropdown">

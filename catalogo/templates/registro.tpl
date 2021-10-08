@@ -1,3 +1,4 @@
+{* template encargada de renderizar el formulario de registro de un nuevo usuario *}
 {include file="header.tpl"}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">

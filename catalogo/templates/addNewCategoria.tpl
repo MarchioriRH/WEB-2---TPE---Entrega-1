@@ -1,3 +1,4 @@
+{* template encargado de renderizar el modal para agregar una nueva categoria *}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <h1>{$texto1}</h1>

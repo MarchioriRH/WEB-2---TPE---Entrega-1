@@ -10,6 +10,7 @@ class LoginHelpers {
         $this->generalView = new GeneralView();
     }
 
+    // funcion que se encarga de iniciar la sesion cuando se loguea algun usuario
     public function sessionStarted(){
         if (!isset($_SESSION))
             session_start();
@@ -19,6 +20,7 @@ class LoginHelpers {
             return false;
     }
 
+    // funcion para terminar la sesion iniciada.
     public function logOut() {
         session_start();
         session_destroy();

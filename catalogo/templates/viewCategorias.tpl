@@ -1,3 +1,4 @@
+{* template encargado de renderizar la tabla de Categorias *}
 {include file="header.tpl"}
     <div class="container">
         <h1>{$titulo}</h1>

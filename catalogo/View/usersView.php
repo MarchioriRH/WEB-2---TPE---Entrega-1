@@ -2,7 +2,6 @@
 
 include_once "libs/smarty-3.1.39/libs/Smarty.class.php";
 
-
 class UsersView {
 
     private $smarty;
@@ -11,11 +10,13 @@ class UsersView {
         $this->smarty = new Smarty();
     }
 
+    // se manda a visualizar el formulario de login
     public function login($session){
         $this->smarty->assign('session', $session);
         $this->smarty->display('./templates/login.tpl');
     }
 
+    // se manda a vizulizar el formulario de registro
     public function registro($session){
         $this->smarty->assign('session', $session);
         $this->smarty->display('./templates/registro.tpl');
