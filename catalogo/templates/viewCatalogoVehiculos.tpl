@@ -40,11 +40,11 @@
                         {if ($id_cat != null)}
                             <td><a href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                             <td><a href="editarVehiculoEnCategoria/{$catalogo->id_vehiculo}">Editar</a></td>
-                            <td><a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El item {$catalogo->id_vehiculo} sera eliminado de la base de datos." href="eliminarVehiculoDesdeCategoria/{$catalogo->id_vehiculo}">Eliminar</a></td>
+                            <td><a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo} sera eliminado de la base de datos." href="eliminarVehiculoDesdeCategoria/{$catalogo->id_vehiculo}">Eliminar</a></td>
                         {else}
                             <td><a href="detallesVehiculo/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                             <td><a href="editarVehiculo/{$catalogo->id_vehiculo}">Editar</a></td>
-                            <td><a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El item {$catalogo->id_vehiculo} sera eliminado de la base de datos." href="eliminarVehiculo/{$catalogo->id_vehiculo}">Eliminar</a></td>
+                            <td><a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo}  sera eliminado de la base de datos." href="eliminarVehiculo/{$catalogo->id_vehiculo}">Eliminar</a></td>
                         {/if}
                        
                     {/if}

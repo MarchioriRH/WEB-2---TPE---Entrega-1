@@ -1,3 +1,5 @@
+"use strict"
+
 window.addEventListener("load", function() {
     // icono para mostrar contraseña
     showPassword = document.querySelector('.show-password');

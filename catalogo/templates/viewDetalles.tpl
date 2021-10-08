@@ -1,21 +1,21 @@
 {* template encargado de renderizar el modal con los detalle de un item seleccionado *}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
-        <h1>{$tituloDetalle}</h1>
-        <table class="default">
-            <tr>
-                <th>Año</th>
-                <th>Kilometros</th>
-                <th>Precio</th>                        
-            </tr>
-            {foreach from=$detalles item=$detalle}
+        {foreach from=$detalles item=$detalle}
+            <h1>{$tituloDetalle}: {$detalle->marca}, {$detalle->modelo}</h1>
+            <table class="default">
+                <tr>
+                    <th>Año</th>
+                    <th>Kilometros</th>
+                    <th>Precio</th>                        
+                </tr>
                 <tr>
                     <td>{$detalle->anio}</td>
                     <td>{$detalle->kilometros}</td>
                     <td>{$detalle->precio}</td>
                 </tr>
-            {/foreach}
-        </table>
+            </table>
+        {/foreach}
         <div class="btn-detalle">
             {if ($id_cat != null)}
                 <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_cat}">Volver</a>
