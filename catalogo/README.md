@@ -4,16 +4,16 @@ Trabajo realizado por: Ruben Marchiori y Agustín Morales
 Esta página incluye:
 
 # HEADER:
-* Botón HOME que te devuelve a el inicio de la página.
+* Botón HOME que te devuelve a la pagina de inicio.
 
 * Botón CATALOGO que genera un menú de dos links a las ventanas Catalogo Vehículos y Catalogo Categorías.
 
 * Botón LOGIN / LOGOUT que funcionan como forma de logueo o deslogueo para el usuario.
 
-* Botón REGISTRO que genera un formulario para registrarse como usuario o administrador si se utiliza una clave especial.
+* Botón REGISTRO que genera un formulario para registrarse como usuario o administrador si se utiliza una clave especial ("yourcar"). En el registro se realiza el control para evitar que un usuario se registre dos veces.
 
 # VENTANAS:
-* Una ventana home donde se muestra un carrilete de imágenes con algunas marcas de automóviles que trabaja la agencia.
+* Una ventana home donde se muestra un carrusel de imágenes con algunos de los automóviles disponibles y con que trabaja la agencia.
 
 * Una ventana Catalogo Vehículos que muestra todos los vehículos disponibles para su venta.
   - Todo usuario podrá ver dentro de esta ventana una tabla que muestra una lista de los vehículos con sus respectivas categorías, marcas, modelos y detalles (año, km y precio).
