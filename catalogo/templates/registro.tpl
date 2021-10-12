@@ -15,12 +15,13 @@
                     <input type="text" class="form-control" name="mail" placeholder="e-Mail">
                 </div>
                 <div class="mb-2"> 
-                    <span>Ingrese una clave</span>
-                    <input type="password" name="password" class="form-control password" value="clave" placeholder="Clave">
+                    <label for="password" class="form-label">Ingrese una clave</label>
+                    <input type="password" name="password" id="password" class="form-control password" value="clave" placeholder="">
+                    <span class="fa fa-fw fa-eye password-icon show-password"></span>
                 </div>
                 <div class="mb-2"> 
-                    <span>Para registrarse como administrador, ingrese la palabra clave</span>
-                    <input type="password" name="keyword" class="form-control keyword" value="" placeholder="">
+                    <label for="keyword" class="form-label">Para registrarse como administrador, ingrese la palabra clave</label>
+                    <input type="password" name="keyword" id="keyword" class="form-control password" value="clave" placeholder="">
                 </div>
                 <div class="btn-detalle">
                     <button type="submit" class="btn btn-danger">Registrar</button>

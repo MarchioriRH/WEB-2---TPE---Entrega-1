@@ -22,7 +22,7 @@
                     <input type=number class="form-control" placeholder="Año" name="anio">
                 </div>
                 <div class="mb-2">       
-                    <input type=text class="form-control" placeholder="Kilometros" name="kms">
+                    <input type=text class="form-control" placeholder="Kilometros/Horas" name="kms">
                 </div>
                 <div class="mb-2">       
                     <input type=number class="form-control" placeholder="Precio" name="precio">

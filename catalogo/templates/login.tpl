@@ -9,7 +9,7 @@
                         <input type="text" class="form-control" name="mail" placeholder="e-Mail">
                     </div>
                     <div class="mb-2"> 
-                        <input type="password" name="password" class="form-control password1" value="clave" placeholder="">
+                        <input type="password" name="password" class="form-control password" value="clave" placeholder="">
                         <span class="fa fa-fw fa-eye password-icon show-password"></span>
                     </div>
                     <div class="btn-detalle">

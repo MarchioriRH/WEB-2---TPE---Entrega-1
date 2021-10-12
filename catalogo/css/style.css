@@ -181,6 +181,7 @@ ul.navigation li:hover {
 .dropdown-menu-dark .dropdown-divider {
   border-color: rgba(180, 177, 177, 0.5);
 }
+
 .catalogo{
   text-align: center;
 }
@@ -192,6 +193,7 @@ ul.navigation li:hover {
   background-color: #cfc5c5;
   font-weight: bolder;
 }
+
 .carousel {
   /*margin-bottom: 10rem;*/
   margin-top: 10rem;
@@ -207,6 +209,9 @@ ul.navigation li:hover {
   margin: -25px 10px 0 0;
   cursor: pointer;
 }
+
+
+
 
 /* TERMINA VEHICULOS DESTACADOS */
 
