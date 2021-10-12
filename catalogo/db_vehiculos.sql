@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2021 a las 23:42:18
--- Versión del servidor: 10.4.19-MariaDB
--- Versión de PHP: 8.0.6
+-- Tiempo de generación: 12-10-2021 a las 19:10:35
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 7.3.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,8 @@ INSERT INTO `categorias` (`id_categoria`, `tipo`) VALUES
 (3, 'Motocicleta'),
 (4, 'Deportivo'),
 (6, 'Camion'),
-(7, 'Avion');
+(7, 'Avion'),
+(8, 'Helicoptero');
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,13 @@ INSERT INTO `vehiculos` (`id_vehiculo`, `marca`, `modelo`, `anio`, `kilometros`,
 (38, 'Ford', 'Mustang', 1976, 45678, 3456721, 4),
 (39, 'Chevrolet', 'Camaro Z3', 2018, 25000, 5000000, 4),
 (41, 'Ford', 'F150 Raptor', 2021, 0, 12000000, 2),
-(42, 'Porsche', '911', 2019, 22365, 53336333, 4);
+(42, 'Porsche', '911', 2019, 22365, 53336333, 4),
+(43, 'Toyota', 'Gazoo Racing', 2020, 21000, 8000000, 2),
+(44, 'Mercedes Benz', 'Clase E', 2021, 0, 9000000, 1),
+(45, 'Mercedes Benz', 'L1620', 2019, 125000, 8000000, 6),
+(46, 'Cessna', '400 Corvalis TTx', 2017, 8900, 32000000, 7),
+(47, 'VOLVO', 'FH16', 2020, 59000, 12000000, 6),
+(48, 'BELL', '407', 1989, 45000, 35000000, 8);
 
 --
 -- Índices para tablas volcadas
@@ -139,7 +146,7 @@ ALTER TABLE `vehiculos`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -151,7 +158,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
-  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Restricciones para tablas volcadas
