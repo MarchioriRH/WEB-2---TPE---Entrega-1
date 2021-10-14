@@ -4,15 +4,17 @@ include_once "libs/smarty-3.1.39/libs/Smarty.class.php";
 include_once "./Helpers/loginHelpers.php";
 
 class CategoriasView{
-    
+    // se declaran la variables de clase 
     private $smarty;
     private $sessionInitiated;
 
+    // se instancian las clases incluidas
     public function __construct(){
         $this->smarty = new Smarty();
         $this->sessionInitiated = new LoginHelpers();
     }
 
+    // funcion encargada de renderizar el listado de categorias
     public function showCategorias($categorias){
         $catalogocat = [];
         foreach ($categorias as $categoria) {
@@ -28,13 +30,7 @@ class CategoriasView{
         $this->smarty->display('./templates/viewCategorias.tpl');
     }
 
-    public function deleteCategoria($id_categoria){
-        $this->smarty->assign('texto1','El item sera eliminado');
-        $this->smarty->assign('texto2','¿Esta seguro?');
-        $this->smarty->assign('dato',$id_categoria);
-        $this->smarty->display('./templates/viewMensaje.tpl');
-    }
-
+    // funcion encargada de el modal editCategoria
     public function editCategoria($categoria){
         $categorias = [];
         foreach ($categoria as $car) {
@@ -45,6 +41,7 @@ class CategoriasView{
         $this->smarty->display('./templates/editCategoria.tpl');
     }
 
+    // funcion encargada de el modal addCategoria
     public function addNewCategoria($categorias){
         $this->smarty->assign('texto1','Agregar nueva categoria.');
         $this->smarty->assign('categorias',$categorias);
