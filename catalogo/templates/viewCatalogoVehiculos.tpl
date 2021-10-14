@@ -43,9 +43,9 @@
                         de detalles en categoria *}
                         <td><a href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                     {/if}                   
-                    {* si el usuario es nivel 1 (admin) se muestralos links para editar o elimar un item *}
+                    {* si el usuario es nivel 1 (admin) se muestran los links para editar o elimar un item *}
                     {if ($session && ($rol == 1))}
-                        {* si se viene de la vista por categoria, se muestran los liks para editar desde esa vista, sino se muestran los de 
+                        {* si se viene de la vista por categoria, se muestran los links para editar desde esa vista, sino se muestran los de 
                         la vista general *}
                         {if ($id_cat != null)}
                             <td><a href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>

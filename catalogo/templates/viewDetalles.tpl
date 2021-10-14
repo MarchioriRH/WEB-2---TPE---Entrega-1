@@ -17,6 +17,8 @@
             </table>
         {/foreach}
         <div class="btn-detalle">
+            {* si se viene desde la vista por categorias, el boton volver muestra nuevamente el catalo por categorias, 
+               caso contrario, se muestra el catalogo general por vehiculos *}
             {if ($id_cat != null)}
                 <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_cat}">Volver</a>
             {else}
