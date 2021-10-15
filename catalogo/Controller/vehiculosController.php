@@ -115,13 +115,13 @@ class VehiculosController{
     // funcion encargada de insertar un nuevo item en la BBDD
     public function insertNewVehiculoDB(){
         // si el formulario NO esta vacio envia los datos al Model para cargarlos en la BBDD
-        if (!empty($_POST['marca']) || !empty($_POST['modelo']) || !empty($_POST['anio']) || !empty($_POST['kms']) || !empty($_POST['precio'])){
+        if (!empty($_POST['tipo']) && !empty($_POST['marca']) && !empty($_POST['modelo']) && !empty($_POST['anio']) && !empty($_POST['kms']) && !empty($_POST['precio'])){
             $this->vehiculosModel->addNewVehiculoDB($_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
             header('Location: '.BASE_URL.'verCatalogoVehiculos');
         } else {
             // si el formulario esta vacio o incompleto muestra un mensaje de error y vuelve al
             // listado de items
-            $this->generalView->showMsje("ERROR - Los campos no pueden estar vacios.");
+            $this->vehiculosView->showMsjeCampVaciosVehi("ERROR - Los campos no pueden estar vacios.");
             $this->vehiculosView->showVehiculos($this->vehiculos);
         } 
     }

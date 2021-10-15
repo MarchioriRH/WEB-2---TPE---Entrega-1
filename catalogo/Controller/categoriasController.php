@@ -58,7 +58,7 @@ class CategoriasController{
             $this->model->addNewCategoriaDB($_POST['tipo']);
             header('Location: '.BASE_URL.'verCatalogoCategoria');
         } else {
-            $this->generalView->showMsje("ERROR: los campos no pueden estar vacios.");
+            $this->view->showMsjeCampVaciosCat("ERROR: los campos no pueden estar vacios.");
             $this->view->showCategorias($this->categorias);
         } 
     }

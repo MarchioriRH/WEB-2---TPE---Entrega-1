@@ -48,4 +48,10 @@ class CategoriasView{
         $this->smarty->display('./templates/addNewCategoria.tpl');
         $this->smarty->assign('categorias',$categorias);
     }
+
+    // funcion encargada de mostrar los mensajes de error
+    public function showMsjeCampVaciosCat($errorMsje){
+        $this->smarty->assign('texto1',$errorMsje);
+        $this->smarty->display('./templates/showMsjeCampVacioCat.tpl');
+    }
 }
