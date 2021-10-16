@@ -33,6 +33,7 @@ switch ($params[0]) {
         $users->login(); 
         break;
     case 'logout':
+        header('Location: '.BASE_URL.'homeCatalogo');
         $users->logOut();
         break;
     case 'loginUsuario': 

@@ -15,8 +15,6 @@ class GeneralView {
     // funcion que se encarga de mostrar el home del sitio
     public function viewHome($session){
         $this->smarty->assign('session', $session);
-        /*if ($session == 0)
-            header('Location: '.BASE_URL.'homeCatalogo');*/
         $this->smarty->display('templates/tplGeneral/home.tpl');
        
     }
