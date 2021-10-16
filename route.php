@@ -13,6 +13,7 @@ if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 } else {
     $action = 'homeCatalogo'; // acción por defecto si no envían
+    header('Location: '.BASE_URL.'homeCatalogo');
 }
 // realiza el explode de la accion 
 $params = explode('/', $action);

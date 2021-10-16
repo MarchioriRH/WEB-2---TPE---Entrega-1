@@ -15,12 +15,15 @@ class GeneralView {
     // funcion que se encarga de mostrar el home del sitio
     public function viewHome($session){
         $this->smarty->assign('session', $session);
-        $this->smarty->display('./templates/home.tpl');
+        if ($session == 0)
+            header('Location: '.BASE_URL.'homeCatalogo');
+        $this->smarty->display('templates/tplGeneral/home.tpl');
+       
     }
 
     // funcion encargada de mostrar los mensajes de error y generales
     public function showMsje($errorMsje){
         $this->smarty->assign('texto1',$errorMsje);
-        $this->smarty->display('./templates/showMsje.tpl');
+        $this->smarty->display('templates/tplGeneral/showMsje.tpl');
     }
 }

@@ -1,6 +1,6 @@
 {* template encargado de rendeziar la tabla de items, de acuerdo al tipo de usuario logueado
     muestra distintos elementos, se incluyen los templates header y footer *}
-{include file="header.tpl"}
+{include file="templates/tplGeneral/header.tpl"}
     <div class="container">
         <h1>{$titulo}</h1>
         {* si el usuario es nivel 1 (admin) y NO se viene desde la vista por categoria 
@@ -62,4 +62,4 @@
             {/foreach}
         </table>
     </div>
-{include file="footer.tpl"}
+{include file="templates/tplGeneral/footer.tpl"}

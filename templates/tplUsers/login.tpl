@@ -1,5 +1,5 @@
 {* template encargada de renderizar el modal de login *}
-{include file="header.tpl"}
+{include file="templates/tplGeneral/header.tpl"}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <h1>LOGIN</h1>
@@ -20,4 +20,4 @@
         </div>
     </div>
 </section>
-{include file="footer.tpl"}
+{include file="templates/tplGeneral/footer.tpl"}

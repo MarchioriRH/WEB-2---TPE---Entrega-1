@@ -1,5 +1,5 @@
 {* template encargada de renderizar el formulario de registro de un nuevo usuario *}
-{include file="header.tpl"}
+{include file="templates/tplGeneral/header.tpl"}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <h1>REGISTRO</h1>
@@ -31,4 +31,4 @@
         </div>
     </div>
 </section>
-{include file="footer.tpl"}
+{include file="templates/tplGeneral/footer.tpl"}

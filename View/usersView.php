@@ -13,12 +13,12 @@ class UsersView {
     // se manda a visualizar el formulario de login
     public function login($session){
         $this->smarty->assign('session', $session);
-        $this->smarty->display('./templates/login.tpl');
+        $this->smarty->display('templates/tplUsers/login.tpl');
     }
 
     // se manda a vizulizar el formulario de registro
     public function registro($session){
         $this->smarty->assign('session', $session);
-        $this->smarty->display('./templates/registro.tpl');
+        $this->smarty->display('templates/tplUsers/registro.tpl');
     }
 }

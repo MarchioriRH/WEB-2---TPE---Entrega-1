@@ -1,5 +1,5 @@
 {* template encargado de renderizar la tabla de Categorias *}
-{include file="header.tpl"}
+{include file="templates/tplGeneral/header.tpl"}
     <div class="container">
         <h1>{$titulo}</h1>
         {* si esta la sesion iniciada y el rol de usuadio logueado es 1 (admin), se muestra el boton para agregar
@@ -32,4 +32,4 @@
             {/foreach}
         </table>
     </div>
-{include file="footer.tpl"}
+{include file="templates/tplGeneral/footer.tpl"}

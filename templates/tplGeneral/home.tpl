@@ -1,5 +1,5 @@
 {* template creado para mostrar el carrusel de imagenes del home *}
-{include file="header.tpl"}
+{include file="templates/tplGeneral/header.tpl"}
     <div class="container">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -49,4 +49,4 @@
             </button>
         </div>
     </div>
-{include file="footer.tpl"}
+{include file="templates/tplGeneral/footer.tpl"}
