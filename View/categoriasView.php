@@ -50,8 +50,9 @@ class CategoriasView{
     }
 
     // funcion encargada de mostrar los mensajes de error
-    public function showMsjeCampVaciosCat($errorMsje){
+    public function showMsje($rama, $errorMsje){
+        $this->smarty->assign('rama', $rama);
         $this->smarty->assign('texto1',$errorMsje);
-        $this->smarty->display('templates/tplGeneral/showMsjeCampVacioCat.tpl');
+        $this->smarty->display('templates/tplGeneral/showMsje.tpl');
     }
 }

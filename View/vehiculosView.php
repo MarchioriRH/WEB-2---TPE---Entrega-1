@@ -79,8 +79,9 @@ class VehiculosView{
     }
     
     // funcion encargada de mostrar los mensajes de error
-    public function showMsjeCampVaciosVehi($errorMsje){
+    public function showMsje($rama, $errorMsje){
+        $this->smarty->assign('rama', $rama);
         $this->smarty->assign('texto1',$errorMsje);
-        $this->smarty->display('templates/tplGeneral/showMsjeCampVacioVehi.tpl');
+        $this->smarty->display('templates/tplGeneral/showMsje.tpl');
     }
 }
