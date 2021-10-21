@@ -25,7 +25,7 @@
                         <input type="number" class="form-control"  name="anio" value="{$vehiculo->anio}">
                     </div>
                     <div class="mb-2">       
-                        <input type="text" class="form-control"  name="kms" value="{$vehiculo->kilometros}">
+                        <input type="number" class="form-control"  name="kms" value="{$vehiculo->kilometros}">
                     </div>
                     <div class="mb-2">       
                         <input type="number" class="form-control"  name="precio" value="{$vehiculo->precio}">

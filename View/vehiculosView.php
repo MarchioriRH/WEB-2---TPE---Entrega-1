@@ -77,6 +77,10 @@ class VehiculosView{
         $this->smarty->display('templates/tplVehiculos/addNewVehiculo.tpl');
         $this->smarty->assign('vehiculos',$vehiculos);
     }
-
     
+    // funcion encargada de mostrar los mensajes de error
+    public function showMsjeCampVaciosVehi($errorMsje){
+        $this->smarty->assign('texto1',$errorMsje);
+        $this->smarty->display('templates/tplGeneral/showMsjeCampVacioVehi.tpl');
+    }
 }

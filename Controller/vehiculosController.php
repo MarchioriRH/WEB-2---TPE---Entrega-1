@@ -3,6 +3,8 @@
 include_once "./View/vehiculosView.php";
 include_once "./Model/vehiculosModel.php";
 include_once "generalController.php";
+const RAMAVE = "vehiculos";
+
 
 class VehiculosController{
     
@@ -14,6 +16,7 @@ class VehiculosController{
     private $generalView;
     private $categoriasModel;
     private $loginHelper;
+    
 
     // se instancian las clases a utilizar y se cargan los arreglos de vehiculos y categorias
     public function __construct(){
@@ -130,13 +133,14 @@ class VehiculosController{
         $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
         // si el formulario NO esta vacio envia los datos al Model para cargarlos en la BBDD
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
-            if (!empty($_POST['marca']) || !empty($_POST['modelo']) || !empty($_POST['anio']) || !empty($_POST['kms']) || !empty($_POST['precio'])){
+            print_r($_POST);
+            if (!empty($_POST['tipo']) && !empty($_POST['marca']) && !empty($_POST['modelo']) && !empty($_POST['anio']) && !empty($_POST['kms']) && !empty($_POST['precio'])){
                 $this->vehiculosModel->addNewVehiculoDB($_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
                 header('Location: '.BASE_URL.'verCatalogoVehiculos');
             } else {
                 // si el formulario esta vacio o incompleto muestra un mensaje de error y vuelve al
                 // listado de items
-                $this->generalView->showMsje("ERROR - Los campos no pueden estar vacios.");
+                $this->generalView->showMsje(RAMAVE, "ERROR: algun campo no fue completado.");
                 $this->vehiculosView->showVehiculos($this->vehiculos);
             } 
         } else {

@@ -3,29 +3,29 @@
     <div class="modalMsge">
         <h1>{$texto1}</h1>
         <div class="form">
-            <form action="insertNewVehiculoDB" method="post">
+            <form action="insertNewVehiculoDB" method="POST">
                 <div class="mb-2">  
                 <select class="form-select" aria-label="Default select example" name="tipo">
-                    <option name="seleccionar">Seleccionar</option>
+                    <option disabled selected  required>Selecciona una opción</option>
                     {foreach from=$categorias item=$categoria}
                         <option value={$categoria->idTipo}>{$categoria->tipo}</option>
                     {/foreach}
                 </select>
                 </div>
                 <div class="mb-2">
-                    <input type=text class="form-control" placeholder="Marca" name="marca">
+                    <input type=text class="form-control" placeholder="Marca" name="marca" required>
                 </div>
                 <div class="mb-2">               
-                    <input type=text class="form-control" placeholder="Modelo" name="modelo">
+                    <input type=text class="form-control" placeholder="Modelo" name="modelo" required>
                 </div>
                 <div class="mb-2">       
-                    <input type=number class="form-control" placeholder="Año" name="anio">
+                    <input type=number class="form-control" placeholder="Año" name="anio" required>
                 </div>
                 <div class="mb-2">       
-                    <input type=text class="form-control" placeholder="Kilometros/Horas" name="kms">
+                    <input type=number class="form-control" placeholder="Kilometros/Horas" name="kms" required>
                 </div>
                 <div class="mb-2">       
-                    <input type=number class="form-control" placeholder="Precio" name="precio">
+                    <input type=number class="form-control" placeholder="Precio" name="precio" required>
                  </div>
                  <div class="btn-detalle">
                     <button type="submit" class="btn btn-danger">Guardar</button>

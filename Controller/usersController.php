@@ -1,9 +1,13 @@
 <?php   
     
-include_once "./Model/usersModel.php";
-include_once "./View/usersView.php";
-include_once "generalController.php";
+include_once './Model/usersModel.php';
+include_once './View/usersView.php';
+include_once 'generalController.php';
 const KEYWORD = 'yourcar';
+const RAMALOG = 'login';
+const RAMALOGOK = 'loginOk';
+const RAMAREG = 'registro';
+const RAMAREGOK = 'registroOk';
 
 class UsersController {   
 
@@ -43,14 +47,14 @@ class UsersController {
                 session_start();
                 $_SESSION['EMAIL'] = $user->mail;
                 $_SESSION['ROL'] = $user->rol;
-                $this->generalView->showMsje('Bienvenido '.$user->nombre.' '.$user->apellido.'.');
+                $this->generalView->showMsje(RAMALOGOK,'Bienvenido '.$user->nombre.' '.$user->apellido.'.');
             } else {
                 // si los datos son incorrectos se muestra mensaje de error
-                $this->generalView->showMsje('ERROR - Usuario y/o contraseña incorrectos.');
+                $this->generalView->showMsje(RAMALOG, 'ERROR: Usuario y/o contraseña incorrectos.');
             }
         } else {
             // si los campos del input de login estan vacios, se muestra el mensaje de error
-            $this->generalView->showMsje("ERROR - Los campos e-Mail y Password no pueden estar vacios.");
+            $this->generalView->showMsje(RAMALOG, 'ERROR: Los campos no pueden estar vacios.');
         } 
         // una vez iniciada la sesion o no, se muestra el home
         $this->generalView->viewHome($this->loginHelper->sessionStarted());
@@ -79,14 +83,14 @@ class UsersController {
                 // se envian los datos al model para registrarlos en la BBDD
                 $this->userModel->registroNuevoUsuarioDB($_POST ['mail'], $userPassword, $_POST ['nombre'], $_POST ['apellido'], $rol);
                 // se muestra mensaje de exito en el registro
-                $this->generalView->showMsje('Usuario '.$_POST['mail'].' registrado con exito.');               
+                $this->generalView->showMsje(RAMAREGOK, 'Usuario '.$_POST['mail'].' registrado con exito.');               
             } else {
                 // si el mail se encuentra en la BBDD se muestra mensaje de usuario registrado
-                $this->generalView->showMsje('ERROR - El mail '.$_POST['mail'].' ya se encuentra registrado.');
+                $this->generalView->showMsje(RAMAREG, 'ERROR: El mail '.$_POST['mail'].' ya se encuentra registrado.');
             }
         } else {
             // si los campos mail y/o password estan vacios se muestra un mensaje de error
-            $this->generalView->showMsje("ERROR - Los campos e-Mail y Password no pueden estar vacios.");
+            $this->generalView->showMsje(RAMAREG, 'ERROR: Los campos e-Mail y Password no pueden estar vacios.');
         } 
         // se muestra el home, con sesion iniciada o no
         $this->generalView->viewHome($this->loginHelper->sessionStarted());

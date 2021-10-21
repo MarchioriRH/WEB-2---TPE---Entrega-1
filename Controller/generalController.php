@@ -11,6 +11,7 @@ class GeneralController{
     // se declaran las variables que se utilizan en la clase
     private $generalView;
     private $loginHelper;
+    const RAMA = "404";
 
     // se instancian las clases
     public function __construct(){
@@ -25,7 +26,7 @@ class GeneralController{
 
     // si la pagina solicitada no existe, se muestra el error 404
     public function errorMsje404(){
-        $this->generalView->showMsje("ERROR 404 - Page not found.");
+        $this->generalView->showMsje(RAMA, "ERROR 404 - Page not found.");
     }
 
 }
