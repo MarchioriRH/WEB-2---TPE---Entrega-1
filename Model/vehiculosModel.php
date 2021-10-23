@@ -33,7 +33,7 @@ class VehiculosModel {
     public function getDetallesVehiculoDB($id_vehiculo){
         $sentencia = $this->db->prepare("SELECT vehiculos.*, categorias.tipo as Tipo FROM categorias JOIN vehiculos ON vehiculos.id_categoria = categorias.id_categoria WHERE vehiculos.id_vehiculo = $id_vehiculo");
         $sentencia->execute();
-        $detalles = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        $detalles = $sentencia->fetch(PDO::FETCH_OBJ);
         return $detalles;
     }
 

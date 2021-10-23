@@ -56,7 +56,7 @@ class VehiculosController{
     public function showDetallesVehiculoCat($id_vehiculo){
         // se obtiene el item seleccionado del listado de vehiculos de la BBDD
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
-        $id_categoria = $detalles[0]->id_categoria;
+        $id_categoria = $detalles->id_categoria;
         // se renderiza el modal de detalles
         $this->vehiculosView->showDetallesVehiculo($detalles, $id_categoria);
         // se carga como fondo el listado de vehiculos
@@ -65,8 +65,8 @@ class VehiculosController{
 
     public function deleteVehiculo($id_Vehiculo){
         $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_Vehiculo);
-        $marca = $vehiculo[0]->marca;
-        $modelo = $vehiculo[0]->modelo;
+        $marca = $vehiculo->marca;
+        $modelo = $vehiculo->modelo;
         $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->generalView->showMsje(RAMADELVE, "El vehiculo $marca, $modelo, sera eliminado de la base de datos.\r\n ¿Esta seguro?", $id_Vehiculo);
@@ -82,13 +82,13 @@ class VehiculosController{
 
     public function deleteVehiculoDesdeCategoria($id_vehiculo){
         $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
-        $marca = $vehiculo[0]->marca;
-        $modelo = $vehiculo[0]->modelo;
-        $id_categoria = $vehiculo[0]->id_categoria;
+        $marca = $vehiculo->marca;
+        $modelo = $vehiculo->modelo;
+        $id_categoria = $vehiculo->id_categoria;
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->generalView->showMsje(RAMADELVECAT, "El vehiculo $marca, $modelo, sera eliminado de la base de datos. \n ¿Esta seguro?", $id_vehiculo, $id_categoria);
 
-        $id_categoria = $vehiculo[0]->id_categoria;
+        $id_categoria = $vehiculo->id_categoria;
         $this->showVehiculosPorCategoria($id_categoria);
     }
 
@@ -122,7 +122,7 @@ class VehiculosController{
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
         // se obtiene el valor de la categoria a la que pertenece el item
-        $id_categoria = $vehiculo[0]->id_categoria;
+        $id_categoria = $vehiculo->id_categoria;
         // se renderizan los datos en un modal para su edicion
         $this->vehiculosView->editVehiculo($vehiculo, $this->categorias, $id_categoria);
         // se carga como fondo el listado de vehiculos filtrados por categoria

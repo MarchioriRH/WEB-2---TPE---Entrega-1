@@ -43,15 +43,10 @@ class VehiculosView{
 
     // funcion encargada de renderizar los detalles de un item especifico
     public function showDetallesVehiculo($detalles, $id_cat = null){
-        // se declara el array vacio que contendra los datos del item
-        $detalle = [];
-        foreach ($detalles as $car) {
-            array_push($detalle, $car);
-        }
         // se asigna el nombre tituloDetalle al titulo para mostar
         $this->smarty->assign('tituloDetalle','Detalles');
         // se asigna al nombre detalles al array que contine los datos del item
-        $this->smarty->assign('detalles',$detalle);
+        $this->smarty->assign('detalles',$detalles);
         $this->smarty->assign('id_cat', $id_cat);
         // se renderiza la ventana modal donde se muestran los detalles de un item
         $this->smarty->display('templates/tplVehiculos/viewDetalles.tpl');
@@ -59,13 +54,9 @@ class VehiculosView{
 
     // funcion que renderiza la ventana modal de edicion de un item
     public function editVehiculo($vehiculo, $categorias, $id_categoria = null){
-        $vehiculos = [];
-        foreach ($vehiculo as $car) {
-            array_push($vehiculos, $car);
-        }
         $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('tituloEdit','Editar item');
-        $this->smarty->assign('vehiculos', $vehiculos);
+        $this->smarty->assign('vehiculo', $vehiculo);
         $this->smarty->assign('id_categoria', $id_categoria);
         $this->smarty->display('templates/tplVehiculos/editVehiculo.tpl');
     }
