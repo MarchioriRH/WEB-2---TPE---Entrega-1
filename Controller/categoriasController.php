@@ -4,6 +4,7 @@ include_once "./View/categoriasView.php";
 include_once "./Model/categoriasModel.php";
 include_once "generalController.php";
 const RAMACAT = "categorias";
+const RAMADELCAT = "eliminarCategoria";
 
 
 class CategoriasController{
@@ -30,8 +31,19 @@ class CategoriasController{
         $this->view->showCategorias($this->categorias);
     }
 
+    // funcion creada para mostrar el modal de advertencia antes de borrar una categoria
+    public function deleteCategoria($idCategoria){
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
+            $categoria = $this->model->getDetallesCategoriaDB($idCategoria);
+            $tipo = $categoria[0]->tipo;
+            $this->categorias = $this->model->getCategoriasDB();
+            $this->generalView->showMsje(RAMADELCAT, "La categoria $tipo, y todos los items asociados, seran eliminados de la base de datos.\n ¿Esta Seguro?", $idCategoria);
+        }
+        $this->view->showCategorias($this->categorias);
+    }
+
     // funcion encargada de solicitar al model la funcion deletecategoriaDB
-    public function deleteCategoria($id_categoria){
+    public function deleteCategoriaDB($id_categoria){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->model->deleteCategoriaDB($id_categoria);
         header('Location: '.BASE_URL.'verCatalogoCategoria');
@@ -70,7 +82,7 @@ class CategoriasController{
                 $this->model->addNewCategoriaDB($_POST['tipo']);
                 header('Location: '.BASE_URL.'verCatalogoCategoria');
             } else {
-                $this->view->showMsje(RAMACAT, "ERROR: algun campo no fue completado.");
+                $this->generalView->showMsje(RAMACAT, "ERROR: faltan datos.");
                 $this->view->showCategorias($this->categorias);
             } 
         } else {

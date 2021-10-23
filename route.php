@@ -57,8 +57,14 @@ switch ($params[0]) {
     case 'eliminarVehiculo': 
         $vehiculos->deleteVehiculo($params[1]); 
         break;
+    case 'eliminarVehiculoDB':
+        $vehiculos->deleteVehiculoDB($params[1]); 
+        break;
     case 'eliminarVehiculoDesdeCategoria': 
         $vehiculos->deleteVehiculoDesdeCategoria($params[1]); 
+        break;
+    case 'eliminarVehiculoDesdeCategoriaDB': 
+        $vehiculos->deleteVehiculoDesdeCategoriaDB($params[1]); 
         break;
     case 'editarVehiculo': 
         $vehiculos->editVehiculo($params[1]); 
@@ -80,6 +86,9 @@ switch ($params[0]) {
         break;
     case 'eliminarCategoria': 
         $categorias->deleteCategoria($params[1]); 
+        break;
+    case 'eliminarCategoriaDB': 
+        $categorias->deleteCategoriaDB($params[1]); 
         break;
     case 'editCategoriaDB': 
         $categorias->editCategoriaDB($params[1]); 

@@ -210,6 +210,18 @@ ul.navigation li:hover {
   cursor: pointer;
 }
 
+fieldset{
+  border: 1px solid;
+}
+
+.lgnd-danger {
+  font-size: 140%;
+  float: unset;
+  width: auto;
+  color:#e40a0a;
+  font-weight:bolder;
+}
+
 /* TERMINA VEHICULOS DESTACADOS */
 
 /*------------ TERMINA HOME ------------*/ 
@@ -245,10 +257,6 @@ table {
   margin: 0px auto;
   background-color: rgb(179, 179, 179);
   font: icon;
-}
-
-legend {
-  font-size: 85%;
 }
 
 .tooltip-inner {
@@ -332,6 +340,11 @@ legend {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
   margin-top:40px;
+}
+
+.modalMsge h2{
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .modal h1 {

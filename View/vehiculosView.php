@@ -77,11 +77,5 @@ class VehiculosView{
         $this->smarty->display('templates/tplVehiculos/addNewVehiculo.tpl');
         $this->smarty->assign('vehiculos',$vehiculos);
     }
-    
-    // funcion encargada de mostrar los mensajes de error
-    public function showMsje($rama, $errorMsje){
-        $this->smarty->assign('rama', $rama);
-        $this->smarty->assign('texto1',$errorMsje);
-        $this->smarty->display('templates/tplGeneral/showMsje.tpl');
-    }
+   
 }

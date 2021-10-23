@@ -5,7 +5,7 @@
         <div class="form">
             <form action="insertNewCategoriaDB" method="post">
                 <div class="mb-2">
-                    <input type=text class="form-control" placeholder="Categoria" name="tipo">
+                    <input type=text class="form-control" placeholder="Categoria" name="tipo" required>
                 </div>
                 <div class="btn-detalle">
                     <button type="submit" class="btn btn-danger">Guardar</button>

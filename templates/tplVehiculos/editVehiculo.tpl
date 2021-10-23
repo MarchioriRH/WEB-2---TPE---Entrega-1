@@ -7,7 +7,7 @@
                 <form action="editVehiculoDB/{$vehiculo->id_vehiculo}" method="post">
                     <div class="mb-2">  
                         <select class="form-select" aria-label="Default select example" name="tipo">
-                            <option selected="true" value={$vehiculo->id_categoria}>{$vehiculo->Tipo}</option>
+                            <option selected="true" value={$vehiculo->id_categoria} required>{$vehiculo->Tipo}</option>
                             {foreach from=$categorias item=$categoria}
                                 {if $categoria->tipo != $vehiculo->Tipo}
                                     <option value={$categoria->idTipo}>{$categoria->tipo}</option>
@@ -16,19 +16,19 @@
                         </select>
                     </div>
                     <div class="mb-2">
-                        <input type="text" class="form-control" name="marca" value="{$vehiculo->marca}">
+                        <input type="text" class="form-control" name="marca" value="{$vehiculo->marca}" required>
                     </div>
                     <div class="mb-2">               
-                        <input type="text" class="form-control" name="modelo" value="{$vehiculo->modelo}">
+                        <input type="text" class="form-control" name="modelo" value="{$vehiculo->modelo}" required>
                     </div>
                     <div class="mb-2">       
-                        <input type="number" class="form-control"  name="anio" value="{$vehiculo->anio}">
+                        <input type="number" class="form-control"  name="anio" value="{$vehiculo->anio}" required>
                     </div>
                     <div class="mb-2">       
-                        <input type="number" class="form-control"  name="kms" value="{$vehiculo->kilometros}">
+                        <input type="number" class="form-control"  name="kms" value="{$vehiculo->kilometros}" required>
                     </div>
                     <div class="mb-2">       
-                        <input type="number" class="form-control"  name="precio" value="{$vehiculo->precio}">
+                        <input type="number" class="form-control"  name="precio" value="{$vehiculo->precio}" required>
                     </div>
                     {* si se viene de la vista de categoria, este input hidden se envia en el POST para indicar en el
                     controller que se debe renderizar la tabla de items con la seleccion por categoria aplicada *}

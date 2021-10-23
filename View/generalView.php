@@ -20,9 +20,11 @@ class GeneralView {
     }
 
     // funcion encargada de mostrar los mensajes de error y generales
-    public function showMsje($rama, $errorMsje){
+    public function showMsje($rama, $errorMsje, $id = null, $id_cat = null){
         $this->smarty->assign('texto1',$errorMsje);
         $this->smarty->assign('rama', $rama);
+        $this->smarty->assign('id', $id);
+        $this->smarty->assign('id_cat', $id_cat);
         $this->smarty->display('templates/tplGeneral/showMsje.tpl');
     }
 }

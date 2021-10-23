@@ -4,7 +4,8 @@ include_once "./View/vehiculosView.php";
 include_once "./Model/vehiculosModel.php";
 include_once "generalController.php";
 const RAMAVE = "vehiculos";
-
+const RAMADELVE = "eliminarVehiculo";
+const RAMADELVECAT = "eliminarVehiculoCat";
 
 class VehiculosController{
     
@@ -62,16 +63,38 @@ class VehiculosController{
         $this->showVehiculosPorCategoria($id_categoria);
     }
 
+    public function deleteVehiculo($id_Vehiculo){
+        $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_Vehiculo);
+        $marca = $vehiculo[0]->marca;
+        $modelo = $vehiculo[0]->modelo;
+        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
+            $this->generalView->showMsje(RAMADELVE, "El vehiculo $marca, $modelo, sera eliminado de la base de datos.\r\n ¿Esta seguro?", $id_Vehiculo);
+        $this->vehiculosView->showVehiculos($this->vehiculos);   
+    }
+
     // funcion encargada de hacer el llamado para eliminar un item de la BBDD
-    public function deleteVehiculo($id_vehiculo){
+    public function deleteVehiculoDB($id_vehiculo){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->vehiculosModel->deleteVehiculoDB($id_vehiculo);
         header('Location: '.BASE_URL.'verCatalogoVehiculos');
     }
 
+    public function deleteVehiculoDesdeCategoria($id_vehiculo){
+        $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
+        $marca = $vehiculo[0]->marca;
+        $modelo = $vehiculo[0]->modelo;
+        $id_categoria = $vehiculo[0]->id_categoria;
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
+            $this->generalView->showMsje(RAMADELVECAT, "El vehiculo $marca, $modelo, sera eliminado de la base de datos. \n ¿Esta seguro?", $id_vehiculo, $id_categoria);
+
+        $id_categoria = $vehiculo[0]->id_categoria;
+        $this->showVehiculosPorCategoria($id_categoria);
+    }
+
     // funcion encargada de hacer el llamado para eliminar un item de la BBDD
     // desde la vista por categoria
-    public function deleteVehiculoDesdeCategoria($id_vehiculo){
+    public function deleteVehiculoDesdeCategoriaDB($id_vehiculo){
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->vehiculosModel->deleteVehiculoDB($id_vehiculo);
@@ -133,7 +156,6 @@ class VehiculosController{
         $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
         // si el formulario NO esta vacio envia los datos al Model para cargarlos en la BBDD
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
-            print_r($_POST);
             if (!empty($_POST['tipo']) && !empty($_POST['marca']) && !empty($_POST['modelo']) && !empty($_POST['anio']) && !empty($_POST['kms']) && !empty($_POST['precio'])){
                 $this->vehiculosModel->addNewVehiculoDB($_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
                 header('Location: '.BASE_URL.'verCatalogoVehiculos');

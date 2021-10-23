@@ -38,7 +38,7 @@ class CategoriasView{
         }
         $this->smarty->assign('tituloEdit','Editar Categoria');
         $this->smarty->assign('categorias',$categorias);
-        $this->smarty->display('templates/tplCatergorias/editCategoria.tpl');
+        $this->smarty->display('templates/tplCategorias/editCategoria.tpl');
     }
 
     // funcion encargada de el modal addCategoria
@@ -49,10 +49,4 @@ class CategoriasView{
         $this->smarty->assign('categorias',$categorias);
     }
 
-    // funcion encargada de mostrar los mensajes de error
-    public function showMsje($rama, $errorMsje){
-        $this->smarty->assign('rama', $rama);
-        $this->smarty->assign('texto1',$errorMsje);
-        $this->smarty->display('templates/tplGeneral/showMsje.tpl');
-    }
 }
