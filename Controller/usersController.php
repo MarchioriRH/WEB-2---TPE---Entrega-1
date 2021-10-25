@@ -82,8 +82,15 @@ class UsersController {
                     $rol = 0;
                 // se envian los datos al model para registrarlos en la BBDD
                 $this->userModel->registroNuevoUsuarioDB($_POST ['mail'], $userPassword, $_POST ['nombre'], $_POST ['apellido'], $rol);
+                if (!isset($_SESSION['mail'])){ 
+                    if(!isset($_SESSION)) 
+                        session_start();
+                    $_SESSION['EMAIL'] = $_POST['mail'];
+                    $_SESSION['ROL'] = $rol;   
+                }
                 // se muestra mensaje de exito en el registro
-                $this->generalView->showMsje(RAMAREGOK, 'Usuario '.$_POST['mail'].' registrado con exito.');               
+                $this->generalView->showMsje(RAMAREGOK, 'Usuario '.$_POST['mail'].' registrado con exito.'); 
+                          
             } else {
                 // si el mail se encuentra en la BBDD se muestra mensaje de usuario registrado
                 $this->generalView->showMsje(RAMAREG, 'ERROR: El mail '.$_POST['mail'].' ya se encuentra registrado.');

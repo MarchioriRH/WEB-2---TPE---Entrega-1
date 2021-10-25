@@ -1,13 +1,10 @@
 {* template que renderiza un cuadro de dialogo tipo modal para mensajes de error y generales *}
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
-        
         <div class="mb-2">
         <legend class="lgnd-danger">YourCar dice:</legend>
-        
-        <h2>{$texto1}</h2>
+            <h2>{$texto1}</h2>
         </div>
-       
         <div class="mb-2">
             {if $rama == "vehiculos"}
                 <a class="btn btn-danger" href="addNewVehiculo">Aceptar</a>
@@ -30,7 +27,5 @@
                 <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_cat}">Cancelar</a>     
             {/if}
         </div>
-        
-        
     </div>
 </section>
