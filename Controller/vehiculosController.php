@@ -63,6 +63,8 @@ class VehiculosController{
         $this->showVehiculosPorCategoria($id_categoria);
     }
 
+    // funcion encargada de hacer el llamado a la vista para mostrar la confirmacion de la eliminacion
+    // de un item desde la vista por vehiculos.
     public function deleteVehiculo($id_Vehiculo){
         $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_Vehiculo);
         $marca = $vehiculo->marca;
@@ -80,6 +82,8 @@ class VehiculosController{
         header('Location: '.BASE_URL.'verCatalogoVehiculos');
     }
 
+    // funcion encargada de hacer el llamado a la vista para mostrar la confirmacion de la eliminacion
+    // de un item desde la vista por categorias.
     public function deleteVehiculoDesdeCategoria($id_vehiculo){
         $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
         $marca = $vehiculo->marca;
@@ -87,7 +91,6 @@ class VehiculosController{
         $id_categoria = $vehiculo->id_categoria;
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->generalView->showMsje(RAMADELVECAT, "El vehiculo $marca, $modelo, sera eliminado de la base de datos. \n ¿Esta seguro?", $id_vehiculo, $id_categoria);
-
         $id_categoria = $vehiculo->id_categoria;
         $this->showVehiculosPorCategoria($id_categoria);
     }
