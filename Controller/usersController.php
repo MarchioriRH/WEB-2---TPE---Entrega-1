@@ -8,6 +8,7 @@ const RAMALOG = 'login';
 const RAMALOGOK = 'loginOk';
 const RAMAREG = 'registro';
 const RAMAREGOK = 'registroOk';
+const RAMADELUSER = 'delUser';
 
 class UsersController {   
 
@@ -16,6 +17,7 @@ class UsersController {
     private $generalView;
     private $userModel;
     private $loginHelper;
+    
    
     // se istancian las distintas clases
     public function __construct(){
@@ -35,6 +37,47 @@ class UsersController {
         $this->loginHelper->logOut();
     }
 
+    public function showUsuarios(){
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
+            $usuarios = $this->userModel->getUsuariosDB();
+            $this->usersView->showUsuarios($usuarios, $this->loginHelper->sessionStarted());
+        }    
+    }
+
+    public function editarRolUsuario($idUsuario){
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
+            $usuarios = $this->userModel->getUsuariosDB();
+            $roles = $this->userModel->getRolesUsuario();
+            $user = $this->userModel->getUsuario($idUsuario);
+            $this->usersView->editarRolUsuario($idUsuario, $roles, $user);
+            $this->usersView->showUsuarios($usuarios, $this->loginHelper->sessionStarted());
+        }
+    }
+
+    public function editRolUsuarioDB($idUsuario){
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
+            $rol = $_POST['rol'];
+            $this->userModel->editRolUsuarioDB($idUsuario, $rol);
+            $usuarios = $this->userModel->getUsuariosDB();
+            $this->usersView->showUsuarios($usuarios, $this->loginHelper->sessionStarted());
+        }
+    }
+
+    public function eliminarUsuario($idUsuario){
+        $usuarios = $this->userModel->getUsuariosDB();
+        $user = $this->userModel->getUsuario($idUsuario);
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
+            $this->generalView->showMsje(RAMADELUSER, 'El usuario '.$user->nombre.' '.$user->apellido.' sera eliminado. ¿Esta seguro?', $user->id_usuario);
+        $this->usersView->showUsuarios($usuarios, $this->loginHelper->sessionStarted());
+    }
+
+    public function eliminarUsuarioDB($idUsuario){
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
+            $this->userModel->eliminarUsuarioDB($idUsuario);
+        $usuarios = $this->userModel->getUsuariosDB();
+        $this->usersView->showUsuarios($usuarios, $this->loginHelper->sessionStarted());
+    }
+
     // funcion que encargada del login
     public function loginUsuarioDB(){
         // si los datos traidos por los inputs que se cargan en el modal de loguin, realiza
@@ -44,7 +87,8 @@ class UsersController {
             $userMail = $_POST['mail'];
             $user = $this->userModel->getUsuarioByMail($userMail);
             if (!empty($user) && password_verify($userPassword, $user->passwrd)){
-                session_start();
+                if (!isset($_SESSION))
+                    session_start();
                 $_SESSION['EMAIL'] = $user->mail;
                 $_SESSION['ROL'] = $user->rol;
                 $this->generalView->showMsje(RAMALOGOK,'Bienvenido '.$user->nombre.' '.$user->apellido.'.');

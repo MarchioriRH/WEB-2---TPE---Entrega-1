@@ -14,6 +14,10 @@ class GeneralView {
 
     // funcion que se encarga de mostrar el home del sitio
     public function viewHome($session){
+        if ($session){
+            $sessionRol = $_SESSION['ROL'];
+            $this->smarty->assign('sessionRol', $sessionRol);
+        }
         $this->smarty->assign('session', $session);
         $this->smarty->display('templates/tplGeneral/home.tpl');
        

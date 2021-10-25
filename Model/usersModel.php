@@ -31,4 +31,28 @@ class UsersModel {
         $usuario = $sentencia->fetch(PDO::FETCH_OBJ);
         return $usuario;
     }
+
+    public function getRolesUsuario(){
+        $sentencia = $this->db->prepare("SELECT rol as rolUsuario FROM usuarios GROUP BY rol");
+        $sentencia->execute();        
+        $roles = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $roles;
+    }
+
+    public function getUsuario($idUsuario){
+        $sentencia = $this->db->prepare("SELECT * FROM usuarios WHERE id_usuario=?");
+        $sentencia->execute(array($idUsuario));
+        $usuario = $sentencia->fetch(PDO::FETCH_OBJ);
+        return $usuario;
+    }
+
+    public function editRolUsuarioDB($idUsuario, $rol){
+        $sentencia2 = $this->db->prepare("UPDATE usuarios SET rol = '$rol' WHERE id_usuario=?");
+        $sentencia2->execute(array($idUsuario));
+    }
+
+    public function eliminarUsuarioDB($idUsuario){
+        $sentencia = $this->db->prepare("DELETE FROM usuarios WHERE id_usuario = $idUsuario");
+        $sentencia->execute();
+    }
 }   

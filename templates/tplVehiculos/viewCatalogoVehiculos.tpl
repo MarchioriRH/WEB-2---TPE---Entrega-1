@@ -36,9 +36,9 @@
                     <td>{$catalogo->modelo}</td>
                     {* si NO esta la sesion iniciada y NO se viene de la vista por categoria, se muestra el enlace
                     por defecto para ver los detalles *}
-                    {if !$session && ($id_cat == null)}
+                    {if ($id_cat == null)}
                         <td><a href="detallesVehiculo/{$catalogo->id_vehiculo}">Mas detalles</a></td>
-                    {elseif (!$session && ($id_cat != null))}
+                    {else}
                         {* si NO esta la sesion inciada, pero SI se viene de la vista por categoria, el link cambia al de vista
                         de detalles en categoria *}
                         <td><a href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>
@@ -48,11 +48,9 @@
                         {* si se viene de la vista por categoria, se muestran los links para editar desde esa vista, sino se muestran los de 
                         la vista general *}
                         {if ($id_cat != null)}
-                            <td><a href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                             <td><a href="editarVehiculoEnCategoria/{$catalogo->id_vehiculo}">Editar</a></td>
                             <td><a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo} sera eliminado de la base de datos." href="eliminarVehiculoDesdeCategoria/{$catalogo->id_vehiculo}">Eliminar</a></td>
                         {else}
-                            <td><a href="detallesVehiculo/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                             <td><a href="editarVehiculo/{$catalogo->id_vehiculo}">Editar</a></td>
                             <td><a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo}  sera eliminado de la base de datos." href="eliminarVehiculo/{$catalogo->id_vehiculo}">Eliminar</a></td>
                         {/if}

@@ -27,7 +27,10 @@
                 <a class="btn btn-danger" href="verCatalogoVehiculos">Cancelar</a> 
             {elseif $rama == "eliminarVehiculoCat"}
                 <a class="btn btn-danger" href="eliminarVehiculoDesdeCategoriaDB/{$id}">Aceptar</a>
-                <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_cat}">Cancelar</a>     
+                <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_cat}">Cancelar</a> 
+            {elseif $rama == "delUser"}
+                <a class="btn btn-danger" href="eliminarUsuarioDB/{$id}">Aceptar</a>
+                <a class="btn btn-danger" href="adminUsers">Cancelar</a>         
             {/if}
         </div>
         

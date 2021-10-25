@@ -42,6 +42,21 @@ switch ($params[0]) {
     case 'registroNuevoUsuario': 
         $users->registro(); 
         break;
+    case 'adminUsers': 
+        $users->showUsuarios(); 
+        break;
+    case 'editarRolUsuario': 
+        $users->editarRolUsuario($params[1]); 
+        break;
+    case 'editRolUsuarioDB': 
+        $users->editRolUsuarioDB($params[1]); 
+        break;
+    case 'eliminarUsuario': 
+        $users->eliminarUsuario($params[1]); 
+        break;
+    case 'eliminarUsuarioDB': 
+        $users->eliminarUsuarioDB($params[1]); 
+        break;
     case 'registroDB': 
         $users->registroNuevoUsuarioDB(); 
         break;

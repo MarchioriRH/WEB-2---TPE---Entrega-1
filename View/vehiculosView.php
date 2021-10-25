@@ -8,15 +8,21 @@ class VehiculosView{
     // se declaran la variables de clase
     private $smarty;
     private $sessionInitiated;
+    private $session;
 
     // se instancian las clases incluidas
     public function __construct(){
         $this->smarty = new Smarty();
         $this->sessionInitiated = new LoginHelpers();
+        $this->session = $this->sessionInitiated->sessionStarted();
     }
 
     // funcion encargada de renderizar el listado de vehiculos
     public function showVehiculos($vehiculos, $id_cat = null){
+        if ($this->session){
+            $sessionRol = $_SESSION['ROL'];
+            $this->smarty->assign('sessionRol', $sessionRol);
+        }
         // se crea vacio el arreglo catalodo donde se almacenaran los datos traidos
         // desde la BBDD
         $catalogo = [];
@@ -28,11 +34,11 @@ class VehiculosView{
         // se asigna el nombre vehiculos al arreglo que contendra los datos a mostrar
         $this->smarty->assign('vehiculos',$catalogo);
         // se asigna el nombre session a la variable que indicara si la sesion esta iniciada
-        $this->smarty->assign('session', $this->sessionInitiated->sessionStarted());
+        $this->smarty->assign('session', $this->session);
         // se asigna como parametro el id de categoria para realizar comparaciones
         $this->smarty->assign('id_cat', $id_cat);
         // si la sesion esta iniciada, se asigna el nombre rol al valor de rol de usuario
-        if ($this->sessionInitiated->sessionStarted())//(isset($_SESSION['EMAIL']))
+        if ($this->session)//(isset($_SESSION['EMAIL']))
             $this->smarty->assign('rol', $_SESSION['ROL']);
         else
             // si no, por defecto el rol de usuario es 0.
@@ -43,6 +49,10 @@ class VehiculosView{
 
     // funcion encargada de renderizar los detalles de un item especifico
     public function showDetallesVehiculo($detalles, $id_cat = null){
+        if ($this->session){
+            $sessionRol = $_SESSION['ROL'];
+            $this->smarty->assign('sessionRol', $sessionRol);
+        }
         // se asigna el nombre tituloDetalle al titulo para mostar
         $this->smarty->assign('tituloDetalle','Detalles');
         // se asigna al nombre detalles al array que contine los datos del item
@@ -54,6 +64,10 @@ class VehiculosView{
 
     // funcion que renderiza la ventana modal de edicion de un item
     public function editVehiculo($vehiculo, $categorias, $id_categoria = null){
+        if ($this->session){
+            $sessionRol = $_SESSION['ROL'];
+            $this->smarty->assign('sessionRol', $sessionRol);
+        }
         $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('tituloEdit','Editar item');
         $this->smarty->assign('vehiculo', $vehiculo);
@@ -63,6 +77,10 @@ class VehiculosView{
     
     // funcion engargada de renderizar la ventana modal para agregar un nuevo item
     public function addNewVehiculo($vehiculos, $categorias){
+        if ($this->session){
+            $sessionRol = $_SESSION['ROL'];
+            $this->smarty->assign('sessionRol', $sessionRol);
+        }
         $this->smarty->assign('texto1','Agregar nuevo vehiculo.');
         $this->smarty->assign('categorias',$categorias);
         $this->smarty->display('templates/tplVehiculos/addNewVehiculo.tpl');

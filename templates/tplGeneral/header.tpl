@@ -36,6 +36,9 @@
                                 <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
                             </ul>
                         </div>
+                        {if $session && ($sessionRol == 1)} 
+                            <li><a href="adminUsers">USUARIOS</a></li>
+                        {/if}
                         {* si la sesion esta iniciada se cambia el texto del boton de LOGIN a LOGOUT *}
                         {if $session}
                             <li><a href="logout">LOGOUT</a></li>
