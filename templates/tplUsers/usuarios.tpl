@@ -20,8 +20,8 @@
                     {else}
                         <td>User</td>
                     {/if}
-                    <td><a href="editarRolUsuario/{$usuario->id_usuario}">Cambiar rol</a></td>                    
-                    <td><a href="eliminarUsuario/{$usuario->id_usuario}">Eliminar</a></td>
+                    <td><a class="btn btn-success btn-sm" role="button" href="editarRolUsuario/{$usuario->id_usuario}">Cambiar rol</a></td>                    
+                    <td><a class="btn btn-danger btn-sm" role="button" href="eliminarUsuario/{$usuario->id_usuario}">Eliminar</a></td>
                 </tr>
             {/foreach}
         </table>

@@ -64,16 +64,23 @@ class UsersController {
     }
 
     public function eliminarUsuario($idUsuario){
-        $usuarios = $this->userModel->getUsuariosDB();
-        $user = $this->userModel->getUsuario($idUsuario);
-        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
+        $usuarios = $this->userModel->getUsuariosDB();        
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
+            $user = $this->userModel->getUsuario($idUsuario);
             $this->generalView->showMsje(RAMADELUSER, 'El usuario '.$user->nombre.' '.$user->apellido.' sera eliminado. ¿Esta seguro?', $user->id_usuario);
+        }
         $this->usersView->showUsuarios($usuarios, $this->loginHelper->sessionStarted());
     }
 
     public function eliminarUsuarioDB($idUsuario){
-        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
-            $this->userModel->eliminarUsuarioDB($idUsuario);
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
+            $usuario = $this->userModel->getUsuario($idUsuario);
+            if ($usuario->mail == $_SESSION['EMAIL']){
+                // TODO: hay que eliminar antes los comentarios asociados al usuario
+                $this->loginHelper->logOut();
+                $this->userModel->eliminarUsuarioDB($idUsuario);
+            }
+        }
         $usuarios = $this->userModel->getUsuariosDB();
         $this->usersView->showUsuarios($usuarios, $this->loginHelper->sessionStarted());
     }
@@ -110,8 +117,8 @@ class UsersController {
     }
 
     // funcion que registra un nuevo usuario en la BBDD de usuarios
-    public function registroNuevoUsuarioDB(){
-        // se verifica que los datos del input no esten vacios, por lo menos email y clave tienen que estar
+    public function registroNuevoUsuarioDB(){        
+         // se verifica que los datos del input no esten vacios, por lo menos email y clave tienen que estar
         if(!empty($_POST['mail']) && !empty($_POST['password'])){
             $userMail = $_POST['mail'];
             // se busca el email ingresado en la BBDD
@@ -126,15 +133,14 @@ class UsersController {
                     $rol = 0;
                 // se envian los datos al model para registrarlos en la BBDD
                 $this->userModel->registroNuevoUsuarioDB($_POST ['mail'], $userPassword, $_POST ['nombre'], $_POST ['apellido'], $rol);
-                if (!isset($_SESSION['mail'])){ 
+                // se muestra mensaje de exito en el registro
+                $this->generalView->showMsje(RAMAREGOK, 'Usuario '.$_POST['mail'].' registrado con exito.');
+                if (!isset($_SESSION['EMAIL'])){ 
                     if(!isset($_SESSION)) 
                         session_start();
                     $_SESSION['EMAIL'] = $_POST['mail'];
                     $_SESSION['ROL'] = $rol;   
-                }
-                // se muestra mensaje de exito en el registro
-                $this->generalView->showMsje(RAMAREGOK, 'Usuario '.$_POST['mail'].' registrado con exito.'); 
-                          
+                }           
             } else {
                 // si el mail se encuentra en la BBDD se muestra mensaje de usuario registrado
                 $this->generalView->showMsje(RAMAREG, 'ERROR: El mail '.$_POST['mail'].' ya se encuentra registrado.');
@@ -142,7 +148,7 @@ class UsersController {
         } else {
             // si los campos mail y/o password estan vacios se muestra un mensaje de error
             $this->generalView->showMsje(RAMAREG, 'ERROR: Los campos e-Mail y Password no pueden estar vacios.');
-        } 
+        }
         // se muestra el home, con sesion iniciada o no
         $this->generalView->viewHome($this->loginHelper->sessionStarted());
     }

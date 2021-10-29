@@ -428,6 +428,7 @@ table {
     th, td {
       font-size: 1.3em;
       height: 30px;
+      font-weight: bolder;
     }
 
     .modalPedido, .modalEdicionPedido {
