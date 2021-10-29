@@ -9,6 +9,7 @@ $router = new Router();
 // define la tabla de ruteo
 $router->addRoute('comments', 'GET', 'apiCommentsController', 'getAllComments');
 $router->addRoute('comments/:ID', 'GET', 'apiCommentsController', 'getCommentsByUserID');
+$router->addRoute('comments/:ID?vehiculo=true', 'GET', 'apiCommentsController', 'getCommentsByVehiculoID');
 
 // rutea
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

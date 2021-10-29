@@ -12,7 +12,7 @@ class ApiCommentsModel{
     public function getAllComments(){
         $sentencia = $this->db->prepare("SELECT * FROM comments");
         $sentencia->execute();
-        $comments = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        $comments = $sentencia->fetchAll(PDO::FETCH_ASSOC);
         return $comments;
     }
     
@@ -44,7 +44,7 @@ class ApiCommentsModel{
         $sentencia->execute([$comment, $id]);
     }
 
-    public function getCommentsByVehicle($id){
+    public function getCommentsByVehiculo($id){
         $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_vehiculo = ?");
         $sentencia->execute([$id]);
         return $sentencia->fetchAll(PDO::FETCH_ASSOC);
