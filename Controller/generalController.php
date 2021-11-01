@@ -1,10 +1,10 @@
 <?php
 
-include_once "./View/generalView.php";
-include_once "./Helpers/loginHelpers.php";
-include_once "vehiculosController.php";
-include_once "usersController.php";
-include_once "categoriasController.php";
+include_once "./View/GeneralView.php";
+include_once "./Helpers/LoginHelpers.php";
+include_once "VehiculosController.php";
+include_once "UsersController.php";
+include_once "CategoriasController.php";
 const RAMA = "404";
 
 class GeneralController{

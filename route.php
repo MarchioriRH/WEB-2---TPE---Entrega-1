@@ -1,8 +1,9 @@
 <?php
-require_once "./Controller/categoriasController.php";
-require_once "./Controller/vehiculosController.php";
-require_once "./Controller/usersController.php";
-require_once "./Controller/generalController.php";
+require_once "./Controller/CategoriasController.php";
+require_once "./Controller/VehiculosController.php";
+require_once "./Controller/UsersController.php";
+require_once "./Controller/GeneralController.php";
+include_once "./Controller/CommentsController.php";
 
 
 // se define URL base.
@@ -23,6 +24,7 @@ $categorias = new CategoriasController();
 $vehiculos = new VehiculosController();
 $users = new UsersController();
 $general = new GeneralController();
+$comments = new CommentsController();
 
 // determina que camino seguir según la acción
 switch ($params[0]) {
@@ -95,6 +97,15 @@ switch ($params[0]) {
         break;
     case 'insertNewVehiculoDB': 
         $vehiculos->insertNewVehiculoDB(); 
+        break;
+    case 'showAllComments': 
+        $comments->showAllComments(); 
+        break;
+    case 'showComments': 
+        $comments->showComments($params[1]); 
+        break;   
+    case 'addComment': 
+        $comments->addComment($params[1]); 
         break;
     case 'verCatalogoCategoria': 
         $categorias->showCategorias(); 

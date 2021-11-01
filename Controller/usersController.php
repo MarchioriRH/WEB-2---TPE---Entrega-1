@@ -1,8 +1,8 @@
 <?php   
     
-include_once './Model/usersModel.php';
-include_once './View/usersView.php';
-include_once 'generalController.php';
+include_once './Model/UsersModel.php';
+include_once './View/UsersView.php';
+include_once 'GeneralController.php';
 const KEYWORD = 'yourcar';
 const RAMALOG = 'login';
 const RAMALOGOK = 'loginOk';
@@ -98,6 +98,9 @@ class UsersController {
                     session_start();
                 $_SESSION['EMAIL'] = $user->mail;
                 $_SESSION['ROL'] = $user->rol;
+                $_SESSION['NOMBRE'] = $user->nombre;
+                $_SESSION['APELLIDO'] = $user->apellido;
+                $_SESSION['ID_USUARIO'] = $user->id_usuario;
                 $this->generalView->showMsje(RAMALOGOK,'Bienvenido '.$user->nombre.' '.$user->apellido.'.');
             } else {
                 // si los datos son incorrectos se muestra mensaje de error

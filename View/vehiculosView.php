@@ -1,7 +1,7 @@
 <?php
 
 include_once "libs/smarty-3.1.39/libs/Smarty.class.php";
-include_once "./Helpers/loginHelpers.php";
+include_once "./Helpers/LoginHelpers.php";
 
 class VehiculosView{
     
@@ -86,5 +86,5 @@ class VehiculosView{
         $this->smarty->display('templates/tplVehiculos/addNewVehiculo.tpl');
         $this->smarty->assign('vehiculos',$vehiculos);
     }
-   
+
 }

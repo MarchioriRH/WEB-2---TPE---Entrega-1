@@ -26,4 +26,5 @@
             {/foreach}
         </table>
     </div>
+    <script type="text/javascript" src="./js/clave.js"></script>
 {include file="templates/tplGeneral/footer.tpl"}

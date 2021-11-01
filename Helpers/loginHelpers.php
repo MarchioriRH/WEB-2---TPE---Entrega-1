@@ -1,6 +1,6 @@
 <?php
 
-include_once "./View/generalView.php";
+include_once "./View/GeneralView.php";
 
 class LoginHelpers {
 

@@ -1,8 +1,8 @@
 <?php
 
-include_once "./View/categoriasView.php";
-include_once "./Model/categoriasModel.php";
-include_once "generalController.php";
+include_once "./View/CategoriasView.php";
+include_once "./Model/CategoriasModel.php";
+include_once "GeneralController.php";
 const RAMACAT = "categorias";
 const RAMADELCAT = "eliminarCategoria";
 

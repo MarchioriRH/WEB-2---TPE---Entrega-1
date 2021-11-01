@@ -1,8 +1,8 @@
 <?php
 
-include_once "./View/vehiculosView.php";
-include_once "./Model/vehiculosModel.php";
-include_once "generalController.php";
+include_once "./View/VehiculosView.php";
+include_once "./Model/VehiculosModel.php";
+include_once "GeneralController.php";
 const RAMAVE = "vehiculos";
 const RAMADELVE = "eliminarVehiculo";
 const RAMADELVECAT = "eliminarVehiculoCat";
@@ -172,4 +172,6 @@ class VehiculosController{
             header('Location: '.BASE_URL.'verCatalogoVehiculos');
         }
     }
+
+    
 }
