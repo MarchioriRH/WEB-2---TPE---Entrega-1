@@ -1,6 +1,6 @@
 'use strict'
 
-const API_URL = "api/comment";
+const API_URL = "api/comment/";
 
 let apiResponse = new Vue({
     el: "#apiResponse",
@@ -42,24 +42,27 @@ async function getAllComments() {
     }
 }
 
-async function addComment(){
+async function addComment(e){
+    e.preventDefault();
     let url = API_URL;
+    console.log(url);
     var f = new Date();
     let fecha = (f.getFullYear() + "/" + (f.getMonth() +1) + "/" + f.getDate());
-    data = {
-        "id_vehiculo": documemt.querySelector("#id_vehiculo").value,
-        "id_usuario": documemt.querySelector("#id_usuario").value,
+    let data = {
+        "id_vehiculo": documemt.querySelector("input[name=id_vehiculo]").value,
+        "id_usuario": documemt.querySelector("input[name=id_usuario]").value,
         "fecha" : fecha,
-        "comment": documemt.querySelector("#comment").value,
-        "score" : documemt.querySelector("#score").value,       
+        "comment": documemt.querySelector("input[name=comment]").value,
+        "score" : documemt.querySelector("input[name=score]").value,       
     };
     console.log(data);
     try {
-    let comment = ({url, 
-        "method": "POST",
-        "headers": { "Content-type": "application/json" },
-        "body": JSON.stringify(data),
-        });
+        let response = await fetch (url, { 
+            "method": "POST",
+            "headers": { "Content-type": "application/json" },
+            "body": JSON.stringify(data),
+            });
+
 
     
     } catch (error) {
@@ -78,10 +81,7 @@ function main(){
             getAllComments();
             break; 
         case "Add":   
-            document.querySelector("#addComment").addEventListener("click", (e) => {
-                    e.preventDefault();
-                    addComment();
-                });
+            document.querySelector("#form-comment").addEventListener('submit', addComment);
             break;
     }
 }

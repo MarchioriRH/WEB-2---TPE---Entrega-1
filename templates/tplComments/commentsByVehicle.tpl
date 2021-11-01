@@ -4,6 +4,6 @@
     <div class="container">       
         <h1>{$titulo}</h1>
         {include file='templates/vue/comments.tpl'}
-    </div>
+    </div>    
     <script type="text/javascript" src="js/comments.js"></script>
 {include file="templates/tplGeneral/footer.tpl"}
