@@ -33,11 +33,12 @@ class CommentsController {
 
     public function addComment($id){
         $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
+        
         // se muestra el listado de items de fondo
         if ($this->session->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->view->addComment($id);
         //se llama renderiza el modal que contiene el formulario de carga de un nuevo item
-        $this->vehiculosView->showVehiculos($this->vehiculos);
+        //$this->vehiculosView->showVehiculos($this->vehiculos);
         
     }
 

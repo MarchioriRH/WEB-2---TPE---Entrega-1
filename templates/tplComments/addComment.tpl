@@ -1,12 +1,13 @@
 {* Modal para carga de nuevo comentario *}
+{include file="templates/tplGeneral/header.tpl"}
 
-<section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
+<div id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <span class="title" id=flag hidden="hidden">{$flag}</span>
         <span class="title" id=id hidden="hidden">{$id}</span>
         <h1>Dejenos su comentario</h1>
         <div class="form">
-            <form id="form-comment"> 
+            <form id="form-comment" method="POST"> 
                 <div class="mb-2">
                     <input type="hidden" name="id_vehiculo" value="{$id}">
                 </div>
@@ -21,11 +22,12 @@
                     <input type="range" name="score" class="form-range" min="1" max="5" id="customRange2">
                 </div>
                  <div class="btn-detalle">
-                    <button type="submit" id="addComment" class="btn btn-danger">Guardar</button>
+                    <button type="submit" class="btn btn-danger">Guardar</button>
                     <a class="btn btn-danger" href="verCatalogoVehiculos">Cancelar</a>
                 </div>  
             </form>
         </div>
     </div>
-</section>
-<script type="text/javascript" src="js/comments.js"></script>
+</div>
+<script type="text/javascript" src="js/comments/addComment.js"></script>
+{include file="templates/tplGeneral/footer.tpl"}

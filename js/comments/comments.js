@@ -48,13 +48,8 @@ async function addComment(e){
     console.log(url);
     var f = new Date();
     let fecha = (f.getFullYear() + "/" + (f.getMonth() +1) + "/" + f.getDate());
-    let data = {
-        "id_vehiculo": documemt.querySelector("input[name=id_vehiculo]").value,
-        "id_usuario": documemt.querySelector("input[name=id_usuario]").value,
-        "fecha" : fecha,
-        "comment": documemt.querySelector("input[name=comment]").value,
-        "score" : documemt.querySelector("input[name=score]").value,       
-    };
+    let data = new URLSearchParams(new FormData(this));
+
     console.log(data);
     try {
         let response = await fetch (url, { 
@@ -86,4 +81,4 @@ function main(){
     }
 }
 
-main()
+main();

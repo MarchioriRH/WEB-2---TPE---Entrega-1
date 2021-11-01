@@ -3,7 +3,8 @@ require_once "./Controller/CategoriasController.php";
 require_once "./Controller/VehiculosController.php";
 require_once "./Controller/UsersController.php";
 require_once "./Controller/GeneralController.php";
-include_once "./Controller/CommentsController.php";
+require_once "./Controller/CommentsController.php";
+require_once "./Controller/ApiCommentsController.php";
 
 
 // se define URL base.
