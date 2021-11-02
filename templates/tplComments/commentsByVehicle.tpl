@@ -6,4 +6,5 @@
         {include file='templates/vue/comments.tpl'}
     </div>    
     <script type="text/javascript" src="js/comments/comments.js"></script>
+    <script type="text/javascript" src="js/comments/deleteComment.js"></script>
 {include file="templates/tplGeneral/footer.tpl"}

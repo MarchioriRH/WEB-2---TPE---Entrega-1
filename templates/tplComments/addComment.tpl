@@ -1,13 +1,13 @@
 {* Modal para carga de nuevo comentario *}
 {include file="templates/tplGeneral/header.tpl"}
 
-<div id="modalContainerMensaje" class="modalContainerMensaje mostrar">
+<section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <span class="title" id=flag hidden="hidden">{$flag}</span>
         <span class="title" id=id hidden="hidden">{$id}</span>
         <h1>Dejenos su comentario</h1>
         <div class="form">
-            <form id="form-comment" method="POST"> 
+            <form action="verCatalogoVehiculos" enctype="multipart/form-data" id="form-comment" method="POST"> 
                 <div class="mb-2">
                     <input type="hidden" name="id_vehiculo" value="{$id}">
                 </div>
@@ -15,7 +15,7 @@
                     <input type="hidden" name="id_usuario" value="{$idUsuario}">
                 </div>
                 <div class="mb-3">
-                    <textarea class="form-control" name="comment" rows="3"></textarea>
+                    <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                 </div>
                 <div class="mb-2">
                     <label for="customRange2" class="form-label">¿Que tanto le gusta este vehiculo?</label>
@@ -28,6 +28,6 @@
             </form>
         </div>
     </div>
-</div>
+</section>
 <script type="text/javascript" src="js/comments/addComment.js"></script>
 {include file="templates/tplGeneral/footer.tpl"}
