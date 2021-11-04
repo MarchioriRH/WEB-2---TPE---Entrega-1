@@ -2,26 +2,53 @@
 
 const API_URL = "api/comment/";
 
-let apiResponse = new Vue({
-    el: "#apiResponse",
-    data: {
-        comments: [], 
-    },
-}); 
+function renderizarComentarios(comments){
+    if (comments.length > 0) {
+        let tabla = document.querySelector('#divTabla');
+        tabla.innerHTML = "";
+       /* tabla.innerHTML += "<table class='default'>" +
+            "<thead>" +
+                "<tr>" +
+                    "<th>Usuario</th>" +
+                    "<th>Fecha</th>" +
+                    "<th>Comentario</th>" +            
+                    "<th>Accion</th>" +
+                "</tr>" +
+            "</thead>" +
+            "<tbody>";*/
+        comments.forEach(comment => {
+            tabla.innerHTML += "<tr>" +
+                        "<td>" + comment.id_usuario + "</td>" +
+                        "<td>" + comment.fecha + "</td>" +
+                        "<td>" + comment.comment + "</td>" +
+                        "<td hidden='hidden'>" + comment.id_vehiculo + "</td>" +
+                        "<td>" +
+                        "<button type='button' class='btn btn-danger' onclick='deleteComment(" + comment.id_comment + ")'>Eliminar</button>" +
+                        "</td>" +
+                    "</tr>";
+        });
+       /* tabla.innerHTML += "</tbody>" + "</table>";*/
+    }
+
+
+}
 
 async function getComments(id) {
     let url = API_URL + "/ByVehicle/" + id;
+    let comments = [];
     try {
         let response = await fetch(url);
         if (response.ok) {
-            let comments = await response.json();
-            apiResponse.comments = comments;
+            comments = await response.json();
+           
         } else {
-            apiResponse.comments = [];
+            comments = [];
         }
     } catch (e) {
         console.log(e);
-    }
+    } 
+    console.log(comments);
+    renderizarComentarios(comments);
 }
 
 async function getAllComments() {
@@ -33,13 +60,13 @@ async function getAllComments() {
         if (response.ok) {
             let comments = await response.json();
             console.log(comments);
-            apiResponse.comments = comments;
+           
         } else {
-            apiResponse.comments = [];
+            comments = [];
         }
     } catch (e) {
         console.log(e);
-    }
+    } renderizarComentarios(comments);
 }
 
 

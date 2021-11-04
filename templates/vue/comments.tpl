@@ -18,10 +18,12 @@
                 <td>{{comment.comment}}</td>
                 <td>{{comment.score}}</td>
                 <td hidden="hidden" id="idComment">{{comment.id_comment}}</td>
-                
-                <td><button type="submit" id="delComment" class="btn btn-danger btn-sm" >Eliminar</button></td>
+                <td>
+                    <a class="btn btn-danger" type="submit">Eliminar</a>
+                <td>
             </tr>   
 
         </table>
+        
     </div>
 {/literal}

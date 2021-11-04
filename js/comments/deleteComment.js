@@ -1,8 +1,10 @@
-'use strict'
+
+'use strict';
 
 //const API_URL = "api/comment/";
 
-document.querySelector('#delComment').addEventListener('click', async function(event){
+//let btnsEliminar = document.querySelectorAll('#delComment');
+async function deleteComment(event){
     event.preventDefault();
     let id = document.querySelector('#idComment').value;
     let url = API_URL + id;
@@ -22,6 +24,7 @@ document.querySelector('#delComment').addEventListener('click', async function(e
     } catch (e) {
         console.log(e);
     }
-});
+}
+deleteComment();
 
 
