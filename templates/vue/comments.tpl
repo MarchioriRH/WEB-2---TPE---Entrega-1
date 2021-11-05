@@ -1,9 +1,6 @@
 {literal}
     <div id="apiResponse">
-        <div class="mb-2">
-                <a class="btn btn-danger" href="verCatalogoVehiculos">Volver</a>
-        </div> 
-        
+       
         <table v-if="comments != []" id="comments-table" class="default">
             <tr>
                 <th>Usuario</th>
@@ -19,8 +16,8 @@
                 <td>{{comment.score}}</td>
                 <td hidden="hidden" id="idComment">{{comment.id_comment}}</td>
                 <td>
-                    <a class="btn btn-danger" type="submit">Eliminar</a>
-                <td>
+                    <button class="btn btn-danger" :onclick="`deleteComment(${comment.id_comment}, ${comment.id_vehiculo})`">Eliminar</button>
+                </td>
             </tr>   
 
         </table>

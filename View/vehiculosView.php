@@ -52,6 +52,8 @@ class VehiculosView{
         if ($this->session){
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
+        } else {
+            $this->smarty->assign('sessionRol', -1);
         }
         // se asigna el nombre tituloDetalle al titulo para mostar
         $this->smarty->assign('tituloDetalle','Detalles');

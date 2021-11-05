@@ -21,7 +21,9 @@
                 <th>Categoria</th>
                 <th>Marca</th>
                 <th>Modelo</th>
-                <th colspan="2">Comentarios</th>
+                {if ($session)}
+                    <th colspan="2">Comentarios</th>
+                {/if}
                 <th>Detalles</th>
                 {* si esta la sesion iniciada y el rol de usuario es 1 (admin) se muestran los enlaces a 
                 las opciones de Editar o Borrar*} 
@@ -38,14 +40,18 @@
                     {* si NO esta la sesion iniciada y NO se viene de la vista por categoria, se muestra el enlace
                     por defecto para ver los detalles *}
                     {if (($rol == 0) && ($id_cat == null))}
-                        <td><a class="btn btn-secondary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
-                        <td><a class="btn btn-secondary btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td>
+                        {if $session}
+                            <td><a class="btn btn-secondary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
+                            <td><a class="btn btn-secondary btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td>
+                        {/if}
                         <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculo/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                     {elseif (($rol == 0) && ($id_cat != null))}
                         {* si NO esta la sesion inciada, pero SI se viene de la vista por categoria, el link cambia al de vista
                         de detalles en categoria *}
-                        <td><a class="btn btn-secondary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
-                        <td><a class="btn btn-secondary btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td>
+                        {if $session}
+                            <td><a class="btn btn-secondary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
+                            <td><a class="btn btn-secondary btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td>
+                        {/if}
                         <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                     {/if}                   
                     {* si el usuario es nivel 1 (admin) se muestran los links para editar o elimar un item *}
