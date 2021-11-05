@@ -10,6 +10,10 @@ let apiResponse = new Vue({
     }
 });
 
+async function getCommentsOrd(){
+    
+}
+
 async function deleteComment(idComment, idVehicle) {
     let url = API_URL + "/" + idComment;
     try {

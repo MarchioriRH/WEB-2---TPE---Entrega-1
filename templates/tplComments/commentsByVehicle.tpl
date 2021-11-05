@@ -5,20 +5,7 @@
         <h1>{$titulo}</h1>
             <div class="mb-2">
                 <a class="btn btn-danger" onClick="history.go(-1)">Volver</a>
-            </div>
-             <div class="mb-2">
-                <select class="form-control" id="select_categoria">
-                    <option value="0">Ordenar por</option>
-                    <option value="0">Fecha</option>
-                    <option value="0">Puntaje</option>
-                </select>  
-            </div>
-             <div class="mb-2">    
-                <a class="btn btn-primary" href="verCatalogoVehiculos">Ordenar Ascendente</a>
-       
-                <a class="btn btn-success" href="verCatalogoVehiculos">Volver</a>
             </div> 
-        
         {include file="templates/vue/comments.tpl"}
     </div>    
     <script type="text/javascript" src="js/comments/comments.js"></script>

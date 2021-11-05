@@ -4,9 +4,9 @@
         <table v-if="comments != []" id="comments-table" class="default">
             <tr>
                 <th>Usuario</th>
-                <th>Fecha</th>
+                <th><a href="javascript:getCommentsOrd('date')">Fecha</a></th>
                 <th>Comentario</th>
-                <th>Puntuacion</th>
+                <th><a href="javascript:getCommentsOrd('score')">Puntuacion</a></th>
                 <th>Acciones</th>
             </tr>
             <tr v-for="comment in comments">
