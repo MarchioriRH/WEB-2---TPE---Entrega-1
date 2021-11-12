@@ -52,7 +52,7 @@ class ApiCommentsModel{
     }
 
     public function getCommentsByVehiculoID($id){
-        $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_vehiculo = ?");
+        $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_vehiculo = ? ORDER BY `comments`.`fecha` ASC");
         $sentencia->execute(array($id));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }

@@ -1,7 +1,7 @@
 'use strict'
 
 const API_URL = "api/comment";
-
+let sense = 0;
 
 let apiResponse = new Vue({
     el: '#apiResponse',
@@ -11,22 +11,26 @@ let apiResponse = new Vue({
     props: {
         id : {
             type: String,
-            default: document.querySelector('#id').value
+            default: document.querySelector('#id').value,
+        },
+        order : {
+            type: String,
+            default: 'DESC',
         }
     }
 });
 
 async function getCommentsOrd(column, id){
     let order = null;
-    let sense = 0;
+    //console.log(order);
     if (sense == 0) {
-        order = "ASC";
+        order = "DESC";
         sense = 1;
     } else {
-        order = "DESC";
+        order = "ASC";
         sense = 0;
     }
-    
+    console.log(order);
     let url = API_URL + "/byOrder/" + id + '?column=' + column + '&order=' + order;
     console.log(url);
     let comments = [];
