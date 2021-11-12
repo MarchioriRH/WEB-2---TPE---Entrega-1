@@ -81,6 +81,9 @@ async function getComments(id) {
     console.log(comments);
 }
 
+
+
+
 async function getAllComments() {
     let url = API_URL;
     console.log(url);
