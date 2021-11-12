@@ -71,13 +71,15 @@ class ApiCommentsController{
 
     public function addComment($params = null){
         if($this->loginHelper->sessionStarted()){
-            $added = 0;
-            $body = $this->getBody();
-            var_dump($body);
-            if($body){
-                $added = $this->model->addComment($body->id_usuario, $body->id_vehiculo, $body->fecha, $body->comment, $body->score);
-            }   
-            if ($added != 0){   
+            var_dump($_POST);
+            if (!empty($_POST['id_usuario']) && !empty($_POST['id_vehiculo']) && !empty($_POST['comment']) && 
+                !empty($_POST['fecha']) && !empty($_POST['score'])){        
+                $id_usuario = $_POST['id_usuario'];
+                $id_vehiculo = $_POST['id_vehiculo'];
+                $comment = $_POST['comment'];
+                $fecha = $_POST['fecha'];
+                $score = $_POST['score'];    
+                $this->model->addComment($id_usuario, $id_vehiculo, $fecha, $comment, $score);
                 $this->view->response("Comment added", 200);
             }
             else

@@ -44,7 +44,6 @@
                         {/if}
                         {* si la sesion esta iniciada se cambia el texto del boton de LOGIN a LOGOUT *}
                         {if $session}
-                            <li><a href="showAllComments">COMENTARIOS</a></li>
                             <li><a href="logout">LOGOUT</a></li>
                         {else}    
                             <li><a href="login">LOGIN</a></li>
