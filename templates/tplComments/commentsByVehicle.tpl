@@ -1,6 +1,6 @@
 {include file="templates/tplGeneral/header.tpl"}
     <span class="title" id=flag hidden="hidden">{$flag}</span>
-    <span class="title" id=id hidden="hidden">{$id}</span>
+    <input class="title" id=id type="hidden" value={$id}>
     <div class="container">       
         <h1>{$titulo}</h1>
             <div class="mb-2">

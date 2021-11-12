@@ -29,6 +29,12 @@ class ApiCommentsModel{
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
+    public function getCommentsByOrder($id, $column, $order){
+        $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_vehiculo = ? ORDER BY `comments`.$column $order");
+        $sentencia->execute(array($id));
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function addComment($id_usuario, $id_vehiculo, $fecha, $comment, $score){
         $sentencia = $this->db->prepare("INSERT INTO comments (id_usuario, id_vehiculo, fecha, comment, score) VALUES (?, ?, ?, ?, ?)");
         $sentencia->execute(array($id_usuario, $id_vehiculo, $fecha, $comment, $score));
@@ -46,7 +52,7 @@ class ApiCommentsModel{
     }
 
     public function getCommentsByVehiculoID($id){
-        $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_vehiculo = ?");
+        $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_vehiculo = ? ORDER BY `comments`.`fecha` ASC");
         $sentencia->execute(array($id));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }

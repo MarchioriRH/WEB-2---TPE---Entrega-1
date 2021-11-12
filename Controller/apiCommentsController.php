@@ -53,6 +53,21 @@ class ApiCommentsController{
             $this->view->response("No comments found for this vehicle.", 404);
     }
 
+    public function getCommentsByOrder($params = null){
+        
+        $id = $params[':ID'];
+        $order = $_GET['order'];
+        $column = $_GET['column'];
+        
+        
+        $comments = $this->model->getCommentsByOrder($id, $column, $order);
+        if ($comments){
+            $this->view->response($comments, 200);
+        }
+      
+    }
+
+
     public function deleteComment($params = null){
         if($this->loginHelper->sessionStarted() && ($_SESSION['ROL'] == 1)){
             $id = $params[':ID'];
