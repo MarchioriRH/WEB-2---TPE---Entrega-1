@@ -1,7 +1,6 @@
 'use strict'
 
 const API_URL = "api/comment";
-let sense = 0;
 
 let apiResponse = new Vue({
     el: '#apiResponse',
@@ -13,26 +12,76 @@ let apiResponse = new Vue({
             type: String,
             default: document.querySelector('#id').value,
         },
+        logged : {
+            type: String,
+            default: document.querySelector('#logged').value,
+        },
+        sort : {
+            type: String,
+            default: "bi bi-sort-down-alt",
+        },
+        sortNumeric : {
+            type: String,
+            default: "bi bi-sort-numeric-down",
+        },
         order : {
             type: String,
-            default: 'DESC',
-        }
+            default: "DESC",
+        },
     }
 });
 
-async function getCommentsOrd(column, id){
-    let order = null;
-    //console.log(order);
-    if (sense == 0) {
-        order = "DESC";
-        sense = 1;
-    } else {
-        order = "ASC";
-        sense = 0;
+async function filterByScore($id){
+    let score = 0;
+    if(document.querySelector('#inlineRadio1').checked){
+        score = 1;
+    } else if(document.querySelector('#inlineRadio2').checked){
+        score = 2;
+    } else if(document.querySelector('#inlineRadio3').checked){ 
+        score = 3;
+    } else if(document.querySelector('#inlineRadio4').checked){
+        score = 4;
+    } else if(document.querySelector('#inlineRadio5').checked){
+        score = 5;
+    } else if(document.querySelector('#inlineRadio6').checked){
+        getComments($id);
+        return;
     }
-    console.log(order);
+    let url = API_URL + "/byScore/" + $id + "?score=" + score;
+    let comments = [];
+    try {
+        let response = await fetch(url);
+        comments = await response.json();
+        if(response.ok){
+            apiResponse.comments = comments;
+        } else {
+            console.log("Error: " + response.status);
+        }
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+async function getCommentsOrd(column, id, order) {
+   
+    if (order == "ASC") {
+        apiResponse.order = "DESC";
+    } else {
+        apiResponse.order = "ASC";
+    }
+
+    if (order == "DESC" && column == "fecha") {
+        apiResponse.sort = "bi bi-sort-up-alt";
+    } else if (order == "ASC" && column == "fecha") {
+        apiResponse.sort = "bi bi-sort-down-alt";
+    } else if (order == "DESC" && column == "score") {
+        apiResponse.sortNumeric = "bi bi-sort-numeric-up";
+    } else if (order == "ASC" && column == "score") {
+        apiResponse.sortNumeric = "bi bi-sort-numeric-down";
+    }
+
     let url = API_URL + "/byOrder/" + id + '?column=' + column + '&order=' + order;
-    console.log(url);
+    
     let comments = [];
     try {
         let response = await fetch(url);
@@ -65,7 +114,7 @@ async function deleteComment(idComment, idVehicle) {
 }
 
 async function getComments(id) {
-    let url = API_URL + "/ByVehicle/" + id;
+    let url = API_URL + "/byVehicle/" + id;
     let comments = [];
     try {
         let response = await fetch(url);
@@ -79,27 +128,6 @@ async function getComments(id) {
         console.log(e);
     } 
     console.log(comments);
-}
-
-
-
-
-async function getAllComments() {
-    let url = API_URL;
-    console.log(url);
-    try {
-        let response = await fetch(url);
-        
-        if (response.ok) {
-            let comments = await response.json();
-            console.log(comments);
-            apiResponse.comments = comments;
-        } else {
-            apiResponse.comments = [];
-        }
-    } catch (e) {
-        console.log(e);
-    } 
 }
 
 function main(){

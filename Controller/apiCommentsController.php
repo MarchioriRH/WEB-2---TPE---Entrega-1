@@ -58,15 +58,25 @@ class ApiCommentsController{
         $id = $params[':ID'];
         $order = $_GET['order'];
         $column = $_GET['column'];
-        
-        
+                
         $comments = $this->model->getCommentsByOrder($id, $column, $order);
         if ($comments){
             $this->view->response($comments, 200);
         }
-      
+        else 
+            $this->view->response("No comments found for this vehicle.", 404);
     }
 
+    public function getCommentsByScore($params = null){
+        $id = $params[':ID'];
+        $score = $_GET['score'];
+        $comments = $this->model->getCommentsByScore($id, $score);
+        if ($comments){
+            $this->view->response($comments, 200);
+        }
+        else 
+            $this->view->response("No comments found for this id.", 404);
+    }
 
     public function deleteComment($params = null){
         if($this->loginHelper->sessionStarted() && ($_SESSION['ROL'] == 1)){
@@ -86,7 +96,6 @@ class ApiCommentsController{
 
     public function addComment($params = null){
         if($this->loginHelper->sessionStarted()){
-            var_dump($_POST);
             if (!empty($_POST['id_usuario']) && !empty($_POST['id_vehiculo']) && !empty($_POST['comment']) && 
                 !empty($_POST['fecha']) && !empty($_POST['score'])){        
                 $id_usuario = $_POST['id_usuario'];

@@ -56,4 +56,10 @@ class ApiCommentsModel{
         $sentencia->execute(array($id));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function getCommentsByScore($id, $score){
+        $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_vehiculo = ? AND score = ?");
+        $sentencia->execute(array($id, $score));
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
 }

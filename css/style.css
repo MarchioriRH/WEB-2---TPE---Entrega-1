@@ -30,6 +30,10 @@ p {
   margin-bottom: 1.6em; /*margen inferior funciona como enter entre parrafos*/
 }
 
+a {
+  color: #b8cff0;
+  text-decoration: none;
+}
 /* Aqui arranca la CABECERA */
 .header {
   background: rgb(26, 26, 26);
@@ -220,6 +224,31 @@ fieldset{
   width: auto;
   color:#e40a0a;
   font-weight:bolder;
+}
+
+.sort {
+  display: flex;
+  font-size: 1.5rem;
+  align-self: center;
+}
+
+.sortInnerScore{
+  display: flex;
+  font-size: 1.5rem;
+  align-self: center;
+}
+.sortScore p{
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 0;
+}
+
+.sortScore{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 /* TERMINA VEHICULOS DESTACADOS */
