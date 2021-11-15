@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", main);
+
 'use strict'
 
 const API_URL = "api/comment";
@@ -12,9 +14,9 @@ let apiResponse = new Vue({
             type: String,
             default: document.querySelector('#id').value,
         },
-        logged : {
+        rol : {
             type: String,
-            default: document.querySelector('#logged').value,
+            default: document.querySelector('#rol').value,
         },
         sort : {
             type: String,
@@ -31,7 +33,12 @@ let apiResponse = new Vue({
     }
 });
 
-async function filterByScore($id){
+function getComments(id) {
+    let url = API_URL + "s/byVehicle/" + id;
+    proccessResponse(url);
+}
+
+function filterByScore($id){
     let score = 0;
     if(document.querySelector('#inlineRadio1').checked){
         score = 1;
@@ -47,22 +54,11 @@ async function filterByScore($id){
         getComments($id);
         return;
     }
-    let url = API_URL + "/byScore/" + $id + "?score=" + score;
-    let comments = [];
-    try {
-        let response = await fetch(url);
-        comments = await response.json();
-        if(response.ok){
-            apiResponse.comments = comments;
-        } else {
-            console.log("Error: " + response.status);
-        }
-    } catch (e) {
-        console.log(e);
-    }
+    let url = API_URL + "s/byScore/" + $id + "?score=" + score;
+    proccessResponse(url);
 }
 
-async function getCommentsOrd(column, id, order) {
+function getCommentsOrd(column, id, order) {
    
     if (order == "ASC") {
         apiResponse.order = "DESC";
@@ -80,12 +76,14 @@ async function getCommentsOrd(column, id, order) {
         apiResponse.sortNumeric = "bi bi-sort-numeric-down";
     }
 
-    let url = API_URL + "/byOrder/" + id + '?column=' + column + '&order=' + order;
-    
+    let url = API_URL + "s/byOrder/" + id + '?column=' + column + '&order=' + order;
+    proccessResponse(url);
+}
+
+async function proccessResponse(url) {
     let comments = [];
     try {
         let response = await fetch(url);
-        console.log(response);
         if (response.ok) {
             comments = await response.json();
             apiResponse.comments = comments;
@@ -110,40 +108,13 @@ async function deleteComment(idComment, idVehicle) {
     } catch (e) {
         console.log(e);
     }
-    await getComments(idVehicle);
+    getComments(idVehicle);
 }
 
-async function getComments(id) {
-    let url = API_URL + "/byVehicle/" + id;
-    let comments = [];
-    try {
-        let response = await fetch(url);
-        if (response.ok) {
-            comments = await response.json();
-            apiResponse.comments = comments;
-        } else {
-            apiResponse.comments = [];
-        }
-    } catch (e) {
-        console.log(e);
-    } 
-    console.log(comments);
+function main() {
+    getComments(document.querySelector('#id').value);
 }
 
-function main(){
-    let id = document.querySelector("#id").value;
-    let flag = document.querySelector("#flag").innerHTML;
-    switch(flag){
-        case "ByVehicle":
-            getComments(id);
-            break;
-        case "All":   
-            getAllComments();
-            break; 
-    }
-}
-
-main();
 
 
 

@@ -226,29 +226,50 @@ fieldset{
   font-weight:bolder;
 }
 
-.sort {
-  display: flex;
-  font-size: 1.5rem;
-  align-self: center;
+.subFilterContainer {
+  display: grid;
+  grid-template-columns: 1fr 3fr 6fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  "btn-back . filter btn-filter";
 }
 
-.sortInnerScore{
-  display: flex;
-  font-size: 1.5rem;
-  align-self: center;
+.btnBack{
+  grid-area: btn-back;  /*GRID*/
+  
 }
-.sortScore p{
-  font-size: 1.5rem;
-  font-weight: bold;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+.labelFilter{
+  grid-area: filter;  /*GRID*/
+  display: flex;
+  align-items: center;
+  margin-right: 1.5rem;
+}
+
+.filterRadio{
+  grid-area: filter;  /*GRID*/
+  display: flex;
+  text-align: end;
+  justify-content: end;
+  background-color: darkgrey;
+  border-radius: 5px;
+}
+
+.filterInnerRadio{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-check{
   margin-bottom: 0;
 }
 
-.sortScore{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+.filterButton{
+  grid-area: btn-filter;  /*GRID*/
+  text-align: end;
+  
+  
 }
 
 /* TERMINA VEHICULOS DESTACADOS */

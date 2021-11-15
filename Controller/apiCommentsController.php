@@ -33,16 +33,6 @@ class ApiCommentsController{
      
     }
 
-    public function getAllComments(){
-        $comments = $this->model->getAllComments();
-        if ($comments){
-            $this->view->response($comments, 200);
-        }
-        else 
-            $this->view->response("No comments found", 404);
-     
-    }
-
     public function getCommentsByVehiculoID($params = null){
        $id = $params[':ID'];
         $comments = $this->model->getCommentsByVehiculoID($id);
@@ -54,7 +44,6 @@ class ApiCommentsController{
     }
 
     public function getCommentsByOrder($params = null){
-        
         $id = $params[':ID'];
         $order = $_GET['order'];
         $column = $_GET['column'];

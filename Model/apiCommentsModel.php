@@ -8,21 +8,7 @@ class ApiCommentsModel{
     public function __construct(){
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_vehiculos;charset=utf8', 'root', '');
     }
-
-    public function getAllComments(){
-        $sentencia = $this->db->prepare("SELECT * FROM comments");
-        $sentencia->execute();
-        $comments = $sentencia->fetchAll(PDO::FETCH_OBJ);
-        return $comments;
-    }
     
-    public function getCommentsByUserID($id){
-        $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_usuario = ?");
-        $sentencia->execute(array($id));
-        $comments = $sentencia->fetchAll(PDO::FETCH_OBJ);
-        return $comments;
-    }
-
     public function getComment($id){
         $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_comment = ?");
         $sentencia->execute(array($id));
@@ -30,8 +16,26 @@ class ApiCommentsModel{
     }
 
     public function getCommentsByOrder($id, $column, $order){
-        $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_vehiculo = ? ORDER BY `comments`.$column $order");
+        $sentencia = $this->db->prepare("SELECT usuarios.nombre, comments.comment as comment, comments.fecha as fecha, comments.score as score, 
+                                            comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
+                                            ON usuarios.id_usuario = comments.id_usuario WHERE comments.id_vehiculo = ? ORDER BY `comments`.$column $order");
         $sentencia->execute(array($id));
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getCommentsByVehiculoID($id){
+        $sentencia = $this->db->prepare("SELECT usuarios.nombre, comments.comment as comment, comments.fecha as fecha, comments.score as score, 
+                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
+                                        ON usuarios.id_usuario = comments.id_usuario WHERE comments.id_vehiculo = ? ORDER BY comments.fecha ASC");
+        $sentencia->execute(array($id));
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getCommentsByScore($id, $score){
+        $sentencia = $this->db->prepare("SELECT usuarios.nombre, comments.comment as comment, comments.fecha as fecha, comments.score as score, 
+                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
+                                        ON usuarios.id_usuario = comments.id_usuario WHERE id_vehiculo = ? AND score = ?");
+        $sentencia->execute(array($id, $score));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -45,21 +49,5 @@ class ApiCommentsModel{
         $sentencia = $this->db->prepare("DELETE FROM comments WHERE id_comment = ?");
         $sentencia->execute(array($id));
     }
-
-    public function updateComment($id, $fecha, $comment, $score){
-        $sentencia = $this->db->prepare("UPDATE comments SET fecha = ?, comment = ?, score = ? WHERE id_comment = ?");
-        $sentencia->execute(array($fecha, $comment, $score, $id));
-    }
-
-    public function getCommentsByVehiculoID($id){
-        $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_vehiculo = ? ORDER BY `comments`.`fecha` ASC");
-        $sentencia->execute(array($id));
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    public function getCommentsByScore($id, $score){
-        $sentencia = $this->db->prepare("SELECT * FROM comments WHERE id_vehiculo = ? AND score = ?");
-        $sentencia->execute(array($id, $score));
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
-    }
+        
 }

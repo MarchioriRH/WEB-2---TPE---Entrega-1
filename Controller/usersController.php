@@ -100,7 +100,8 @@ class UsersController {
                 $_SESSION['ROL'] = $user->rol;
                 $_SESSION['NOMBRE'] = $user->nombre;
                 $_SESSION['APELLIDO'] = $user->apellido;
-                $_SESSION['ID_USUARIO'] = $user->id_usuario;
+                $_SESSION['ID_USUARIO'] = $user->id_usuario;                
+                $_SESSION['LAST_ACTIVITY'] = time();  
                 $this->generalView->showMsje(RAMALOGOK,'Bienvenido '.$user->nombre.' '.$user->apellido.'.');
             } else {
                 // si los datos son incorrectos se muestra mensaje de error
@@ -136,14 +137,15 @@ class UsersController {
                     $rol = 0;
                 // se envian los datos al model para registrarlos en la BBDD
                 $this->userModel->registroNuevoUsuarioDB($_POST ['mail'], $userPassword, $_POST ['nombre'], $_POST ['apellido'], $rol);
-                // se muestra mensaje de exito en el registro
-                $this->generalView->showMsje(RAMAREGOK, 'Usuario '.$_POST['mail'].' registrado con exito.');
+                
                 if (!isset($_SESSION['EMAIL'])){ 
                     if(!isset($_SESSION)) 
                         session_start();
                     $_SESSION['EMAIL'] = $_POST['mail'];
-                    $_SESSION['ROL'] = $rol;   
+                    $_SESSION['ROL'] = $rol; 
                 }           
+                // se muestra mensaje de exito en el registro
+                $this->generalView->showMsje(RAMAREGOK, 'Usuario '.$_POST['mail'].' registrado con exito.');
             } else {
                 // si el mail se encuentra en la BBDD se muestra mensaje de usuario registrado
                 $this->generalView->showMsje(RAMAREG, 'ERROR: El mail '.$_POST['mail'].' ya se encuentra registrado.');

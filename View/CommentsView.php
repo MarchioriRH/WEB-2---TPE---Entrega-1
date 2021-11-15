@@ -21,24 +21,14 @@ class CommentsView{
         if ($this->session){
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
+        } else {
+            $this->smarty->assign('sessionRol', '-1');
         }
         $this->smarty->assign('id', $id);
         $this->smarty->assign('flag', "ByVehicle");
         $this->smarty->assign('session', $this->session);
         $this->smarty->assign('titulo', 'Comentarios');
         $this->smarty->display('templates/tplComments/commentsByVehicle.tpl');
-    }
-
-    public function showAllComments(){
-        if ($this->session){
-            $sessionRol = $_SESSION['ROL'];
-            $this->smarty->assign('sessionRol', $sessionRol);
-        }
-        $this->smarty->assign('session', $this->session);
-        $this->smarty->assign('id', ''); 
-        $this->smarty->assign('flag', "All");
-        $this->smarty->assign('titulo', 'Comentarios');
-        $this->smarty->display('templates/tplComments/allComments.tpl');
     }
 
     public function addComment($id){
