@@ -20,4 +20,5 @@
         </div>
     </div>
 </section>
+<script tyoe="text/javascript" src="./js/clave.js"></script>
 {include file='templates/tplGeneral/footer.tpl'}

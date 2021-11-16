@@ -18,6 +18,11 @@ class VehiculosModel {
         return $sentencia->fetchColumn();
     }
 
+    public function getCountItemsByCat($id_cat){
+        $sentencia = $this->db->prepare("SELECT COUNT(*) FROM vehiculos WHERE id_categoria = ?");
+        $sentencia->execute(array($id_cat));
+        return $sentencia->fetchColumn();
+    }
 
     // funcion encargada de buscar los vehiculos desde la BBDD, junto con la categoria de cada unos
     public function getVehiculosDB($limit, $offset){

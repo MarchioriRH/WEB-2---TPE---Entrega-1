@@ -12,9 +12,12 @@ class PaginationHelper {
         $this->vehiculosModel = new VehiculosModel();
     }
 
-    public function getPage(){
-        $limit = ITEMS_PAGE;    
-        $cantItems = $this->vehiculosModel->getCountItems();
+    public function getCantPags($id_cat = null){
+        $limit = ITEMS_PAGE; 
+        if ($id_cat == null)   
+            $cantItems = $this->vehiculosModel->getCountItems();
+        else
+            $cantItems = $this->vehiculosModel->getCountItemsByCat($id_cat);
         $cantPaginas = ceil($cantItems / $limit);
         return $cantPaginas;
     }       

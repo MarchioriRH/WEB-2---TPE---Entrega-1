@@ -81,5 +81,37 @@
                 </tr>
             {/foreach}
         </table>
+        <div class="pagination">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {if $pagina == 1}
+                        <li class="page-item disabled">
+                    {else}
+                        <li class="page-item">
+                    {/if}
+                        <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$pagina - 1}" {else}
+                            href="verCatalogoCategoria/?pagina={$pagina - 1}" {/if} aria-label="Previous" >
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    {for $i = 1 to $cantPags}
+                        <li class="page-item"><a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$i}" {else}
+                            href="verCatalogoCategoria/?pagina={$i}" {/if}>{$i}</a></li>
+                    {/for}
+                     {if $pagina == $cantPags}
+                        <li class="page-item disabled">
+                    {else}
+                        <li class="page-item">
+                    {/if}
+                        <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$pagina + 1}" {else}
+                            href="verCatalogoCategoria/?pagina={$pagina + 1}" {/if} aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 {include file="templates/tplGeneral/footer.tpl"}

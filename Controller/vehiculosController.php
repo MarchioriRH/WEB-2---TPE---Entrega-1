@@ -34,29 +34,39 @@ class VehiculosController{
     }
    
     // funcion encargada de mostar el listado de items disponibles
-    public function showVehiculos(){
+    public function showVehiculos($vehiculosporcat = null, $id_cat = null){
+        
         $limit = ITEMS_PAGINA;
         $offset = $this->paginationHelper->getOffset();
-        $this->vehiculos = $this->vehiculosModel->getVehiculosDB($limit, $offset);
-        $this->vehiculosView->showVehiculos($this->vehiculos);
+        $cantPags = $this->paginationHelper->getCantPags($id_cat);
+        if (isset($_GET['pagina']))
+            $pagina = $_GET['pagina'];
+        else
+            $pagina = 1;
+        if ($vehiculosporcat == null)
+            $vehiculos = $this->vehiculos = $this->vehiculosModel->getVehiculosDB($limit, $offset);
+        else    
+            $vehiculos = $vehiculosporcat;
+        $this->vehiculosView->showVehiculos($vehiculos, $cantPags, $pagina, $id_cat);
     }
 
     // dada una categoria esta funcion envia a renderizar el listado de los items
     // que cumplen con esa condicion
     public function showVehiculosPorCategoria($id_cat){
         $vehiculosporcat = $this->vehiculosModel->getVehiculosPorCatDB($id_cat);
-        $this->vehiculosView->showVehiculos($vehiculosporcat, $id_cat);
+        $this->showVehiculos($vehiculosporcat, $id_cat);
     }
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal
     public function showDetallesVehiculo($id_vehiculo){
-        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
+        $this->showVehiculos();
+        
         // se obtiene el item seleccionado del listado de vehiculos de la BBDD
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
         // se renderiza el modal de detalles
         $this->vehiculosView->showDetallesVehiculo($detalles);
         // se carga como fondo el listado de vehiculos
-        $this->vehiculosView->showVehiculos($this->vehiculos);
+        
     }
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal
@@ -114,15 +124,13 @@ class VehiculosController{
 
     // funcion para editar un item
     public function editVehiculo($id_vehiculo){
-        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
+        $this->showVehiculos();
         $this->categorias = $this->categoriasModel->getCategoriasDB();
         // se selecciona de la BBDD el item a editar
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
         // se renderizan los datos en un modal para su edicion
         $this->vehiculosView->editVehiculo($vehiculo, $this->categorias);
-        // se carga como fondo el listado de vehiculos
-        $this->vehiculosView->showVehiculos($this->vehiculos);
     }
 
     // funcion para editar un item desde la vista por Categoria
@@ -152,18 +160,19 @@ class VehiculosController{
 
     // funcion encargadad de la carga de un nuevo item
     public function addNewVehiculo(){
-        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
+        //$this->vehiculos = $this->vehiculosModel->getVehiculosDB();
         $this->categorias = $this->categoriasModel->getCategoriasDB();
         // se muestra el listado de items de fondo
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
-            $this->vehiculosView->showVehiculos($this->vehiculos);
+            //$this->vehiculosView->showVehiculos($this->vehiculos);
+            $this->showVehiculos();
         // se llama renderiza el modal que contiene el formulario de carga de un nuevo item
         $this->vehiculosView->addNewVehiculo($this->vehiculos,$this->categorias);
     }
 
     // funcion encargada de insertar un nuevo item en la BBDD
     public function insertNewVehiculoDB(){
-        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
+        //$this->vehiculos = $this->vehiculosModel->getVehiculosDB();
         // si el formulario NO esta vacio envia los datos al Model para cargarlos en la BBDD
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
             if (!empty($_POST['tipo']) && !empty($_POST['marca']) && !empty($_POST['modelo']) && !empty($_POST['anio']) && !empty($_POST['kms']) && !empty($_POST['precio'])){
@@ -173,7 +182,7 @@ class VehiculosController{
                 // si el formulario esta vacio o incompleto muestra un mensaje de error y vuelve al
                 // listado de items
                 $this->generalView->showMsje(RAMAVE, "ERROR: algun campo no fue completado.");
-                $this->vehiculosView->showVehiculos($this->vehiculos);
+                $this->showVehiculos();
             } 
         } else {
             header('Location: '.BASE_URL.'verCatalogoVehiculos');

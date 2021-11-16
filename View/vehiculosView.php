@@ -18,7 +18,7 @@ class VehiculosView{
     }
 
     // funcion encargada de renderizar el listado de vehiculos
-    public function showVehiculos($vehiculos, $id_cat = null){
+    public function showVehiculos($vehiculos, $cantPags, $pagina, $id_cat = null){
         if ($this->session){
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
@@ -29,6 +29,8 @@ class VehiculosView{
         foreach ($vehiculos as $vehiculo) {
             array_push($catalogo, $vehiculo);
         }
+        $this->smarty->assign('pagina', $pagina);
+        $this->smarty->assign('cantPags', $cantPags);
         // se asigna el nombre titulo a la variable que se mostrara como titulo
         $this->smarty->assign('titulo','Vehiculos disponibles');
         // se asigna el nombre vehiculos al arreglo que contendra los datos a mostrar
