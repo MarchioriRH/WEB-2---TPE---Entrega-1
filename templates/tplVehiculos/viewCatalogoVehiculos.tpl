@@ -13,7 +13,7 @@
         {* si se viene desde la vista por categoria, el boton volver muestra el listado por categoria *}
         {if $id_cat != null}
             <div class="mb-2">
-                <a class="btn btn-danger btn-sm" href="verCatalogoCategoria">Volver</a>
+                <a class="btn btn-danger btn-sm" href="verCatalogoCategoria/?pagina={$pagina}">Volver</a>
             </div> 
         {/if}
         <table class="default">
@@ -68,13 +68,13 @@
                             <td><a class="btn btn-success btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td>
                             <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                             <td><a class="btn btn-success btn-sm" role="button" href="editarVehiculoEnCategoria/{$catalogo->id_vehiculo}">Editar</a></td>
-                            <td><a class="btn btn-danger btn-sm" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo} sera eliminado de la base de datos." href="eliminarVehiculoDesdeCategoria/{$catalogo->id_vehiculo}">Eliminar</a></td>
+                            <td><a class="btn btn-danger btn-sm" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo} sera eliminado de la base de datos." href="eliminarVehiculoDesdeCategoria/{$catalogo->id_vehiculo}/?pagina={$pagina}">Eliminar</a></td>
                         {else}
                             <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
                             <td><a class="btn btn-success btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td>
                             <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculo/{$catalogo->id_vehiculo}">Mas detalles</a></td>
                             <td><a class="btn btn-success btn-sm" role="button" href="editarVehiculo/{$catalogo->id_vehiculo}">Editar</a></td>
-                            <td><a class="btn btn-danger btn-sm" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo}  sera eliminado de la base de datos." href="eliminarVehiculo/{$catalogo->id_vehiculo}">Eliminar</a></td>
+                            <td><a class="btn btn-danger btn-sm" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo}  sera eliminado de la base de datos." href="eliminarVehiculo/{$catalogo->id_vehiculo}/?pagina={$pagina}">Eliminar</a></td>
                         {/if}
                        
                     {/if}

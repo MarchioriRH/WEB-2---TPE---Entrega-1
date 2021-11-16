@@ -86,10 +86,11 @@ class VehiculosController{
         $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_Vehiculo);
         $marca = $vehiculo->marca;
         $modelo = $vehiculo->modelo;
-        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
+        $pagina = $_GET['pagina'];
+        $id_cat = null;
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
-            $this->generalView->showMsje(RAMADELVE, "El vehiculo $marca, $modelo, sera eliminado de la base de datos.\r\n ¿Esta seguro?", $id_Vehiculo);
-        $this->vehiculosView->showVehiculos($this->vehiculos);   
+            $this->generalView->showMsje(RAMADELVE, "El vehiculo $marca, $modelo, sera eliminado de la base de datos.\r\n ¿Esta seguro?", $id_Vehiculo, $id_cat , $pagina);
+        $this->showVehiculos();   
     }
 
     // funcion encargada de hacer el llamado para eliminar un item de la BBDD
