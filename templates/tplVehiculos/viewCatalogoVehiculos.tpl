@@ -81,7 +81,7 @@
                 </tr>
             {/foreach}
         </table>
-        <div class="pagination">
+        <div class="pagination justify-content-center">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     {if $pagina == 1}
@@ -96,8 +96,17 @@
                         </a>
                     </li>
                     {for $i = 1 to $cantPags}
-                        <li class="page-item"><a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$i}" {else}
-                            href="verCatalogoCategoria/?pagina={$i}" {/if}>{$i}</a></li>
+                        {if $pagina == $i}
+                            <li class="page-item active">
+                                <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$i}" {else}
+                                href="verCatalogoCategoria/?pagina={$i}" {/if}>{$i}<span class="sr-only">(current)</span></a>
+                            </li>
+                        {else}
+                            <li class="page-item">
+                                <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$i}" {else}
+                                href="verCatalogoCategoria/?pagina={$i}" {/if}>{$i}</a>
+                            </li>
+                        {/if}
                     {/for}
                      {if $pagina == $cantPags}
                         <li class="page-item disabled">
