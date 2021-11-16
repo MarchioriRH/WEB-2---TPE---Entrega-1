@@ -3,9 +3,11 @@
 include_once "./View/VehiculosView.php";
 include_once "./Model/VehiculosModel.php";
 include_once "GeneralController.php";
+include_once "Helpers/paginationHelper.php";
 const RAMAVE = "vehiculos";
 const RAMADELVE = "eliminarVehiculo";
 const RAMADELVECAT = "eliminarVehiculoCat";
+const ITEMS_PAGINA = 6;
 
 class VehiculosController{
     
@@ -17,6 +19,8 @@ class VehiculosController{
     private $generalView;
     private $categoriasModel;
     private $loginHelper;
+    private $paginationHelper;
+    
     
 
     // se instancian las clases a utilizar y se cargan los arreglos de vehiculos y categorias
@@ -26,11 +30,14 @@ class VehiculosController{
         $this->generalView = new GeneralView();
         $this->categoriasModel = new CategoriasModel();
         $this->loginHelper = new LoginHelpers();
+        $this->paginationHelper = new PaginationHelper();
     }
    
     // funcion encargada de mostar el listado de items disponibles
     public function showVehiculos(){
-        $this->vehiculos = $this->vehiculosModel->getVehiculosDB();
+        $limit = ITEMS_PAGINA;
+        $offset = $this->paginationHelper->getOffset();
+        $this->vehiculos = $this->vehiculosModel->getVehiculosDB($limit, $offset);
         $this->vehiculosView->showVehiculos($this->vehiculos);
     }
 

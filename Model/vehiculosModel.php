@@ -12,11 +12,19 @@ class VehiculosModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_vehiculos;charset=utf8', 'root', '');
     }
 
+    public function getCountItems(){
+        $sentencia = $this->db->prepare("SELECT COUNT(*) FROM vehiculos");
+        $sentencia->execute();
+        return $sentencia->fetchColumn();
+    }
+
+
     // funcion encargada de buscar los vehiculos desde la BBDD, junto con la categoria de cada unos
-    public function getVehiculosDB(){
+    public function getVehiculosDB($limit, $offset){
         // select que realiza el JOIN de los datos de la BBDD de vehiculos y los relaciona con al de
         // categorias
-        $sentencia = $this->db->prepare("SELECT vehiculos.*, categorias.tipo as Tipo FROM categorias RIGHT JOIN vehiculos ON vehiculos.id_categoria = categorias.id_categoria ORDER BY vehiculos.id_categoria");
+        $sentencia = $this->db->prepare("SELECT vehiculos.*, categorias.tipo as Tipo FROM categorias RIGHT JOIN vehiculos 
+                                         ON vehiculos.id_categoria = categorias.id_categoria  ORDER BY vehiculos.id_categoria LIMIT $limit OFFSET $offset");
         $sentencia->execute();
         $vehiculos = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $vehiculos;

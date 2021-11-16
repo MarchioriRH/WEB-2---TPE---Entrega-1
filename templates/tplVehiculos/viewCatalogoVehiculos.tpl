@@ -40,7 +40,7 @@
                     <td>{$catalogo->marca}</td>
                     <td>{$catalogo->modelo}</td>
                     {if (!$session)}
-                        <td><a class="btn btn-info btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
+                        <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
                     {/if}
                     {* si NO esta la sesion iniciada y NO se viene de la vista por categoria, se muestra el enlace
                     por defecto para ver los detalles *}
