@@ -80,6 +80,8 @@ class UsersController {
                 $this->loginHelper->logOut();
                 $this->userModel->eliminarUsuarioDB($idUsuario);
             }
+            else
+                $this->userModel->eliminarUsuarioDB($idUsuario);
         }
         $usuarios = $this->userModel->getUsuariosDB();
         $this->usersView->showUsuarios($usuarios, $this->loginHelper->sessionStarted());

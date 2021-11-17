@@ -26,7 +26,7 @@ class UsersModel {
 
     // funcion para obtener los datos de un determinado usuario de la BBDD
     public function getUsuarioByMail($mail) {
-        $sentencia = $this->db->prepare("SELECT * FROM usuarios WHERE mail=?");
+        $sentencia = $this->db->prepare("SELECT * FROM usuarios WHERE mail = ?");
         $sentencia->execute(array($mail));
         $usuario = $sentencia->fetch(PDO::FETCH_OBJ);
         return $usuario;
@@ -40,19 +40,21 @@ class UsersModel {
     }
 
     public function getUsuario($idUsuario){
-        $sentencia = $this->db->prepare("SELECT * FROM usuarios WHERE id_usuario=?");
-        $sentencia->execute(array($idUsuario));
+        $sentencia = $this->db->prepare("SELECT * FROM usuarios WHERE id_usuario = ?");
+        $sentencia->bindParam(1, $idUsuario, PDO::PARAM_INT);
+        $sentencia->execute();
         $usuario = $sentencia->fetch(PDO::FETCH_OBJ);
         return $usuario;
     }
 
     public function editRolUsuarioDB($idUsuario, $rol){
-        $sentencia2 = $this->db->prepare("UPDATE usuarios SET rol = '$rol' WHERE id_usuario=?");
-        $sentencia2->execute(array($idUsuario));
+        $sentencia2 = $this->db->prepare("UPDATE usuarios SET rol = ? WHERE id_usuario = ?");
+        $sentencia2->execute(array($rol, $idUsuario));
     }
 
     public function eliminarUsuarioDB($idUsuario){
-        $sentencia = $this->db->prepare("DELETE FROM usuarios WHERE id_usuario = $idUsuario");
+        $sentencia = $this->db->prepare("DELETE FROM usuarios WHERE id_usuario = ?");
+        $sentencia->bindParam(1, $idUsuario);
         $sentencia->execute();
     }
 }   

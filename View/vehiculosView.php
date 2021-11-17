@@ -29,6 +29,8 @@ class VehiculosView{
         foreach ($vehiculos as $vehiculo) {
             array_push($catalogo, $vehiculo);
         }
+        if ($catalogo == [])
+            $pagina = 0;
         $this->smarty->assign('pagina', $pagina);
         $this->smarty->assign('cantPags', $cantPags);
         // se asigna el nombre titulo a la variable que se mostrara como titulo

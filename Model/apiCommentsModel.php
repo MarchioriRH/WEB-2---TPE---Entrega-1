@@ -15,11 +15,14 @@ class ApiCommentsModel{
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
-    public function getCommentsByOrder($id, $column, $order){
+    public function getCommentsByOrder($id, $column){
         $sentencia = $this->db->prepare("SELECT usuarios.nombre, comments.comment as comment, comments.fecha as fecha, comments.score as score, 
-                                            comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
-                                            ON usuarios.id_usuario = comments.id_usuario WHERE comments.id_vehiculo = ? ORDER BY `comments`.`?` ?");
-        $sentencia->execute(array($id, $column, $order));
+                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
+                                        ON usuarios.id_usuario = comments.id_usuario WHERE comments.id_vehiculo = ? ORDER BY =?");
+        /*$sentencia->bindParam(1, $id, PDO::PARAM_STR);
+        $sentencia->bindParam(2, $column, PDO::PARAM_STR);*/
+        $sentencia->execute(array($id, $column));
+       // var_dump($sentencia);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 

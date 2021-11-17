@@ -34,8 +34,23 @@ class VehiculosController{
     }
    
     // funcion encargada de mostar el listado de items disponibles
-    public function showVehiculos($vehiculosporcat = null, $id_cat = null){
-        
+    public function showVehiculos(){
+        $limit = ITEMS_PAGINA;
+        $offset = $this->paginationHelper->getOffset();
+        $cantPags = $this->paginationHelper->getCantPags();
+        if (isset($_GET['pagina']))
+            $pagina = $_GET['pagina'];
+        else
+            $pagina = 1;
+        $vehiculos = $this->vehiculos = $this->vehiculosModel->getVehiculosDB($limit, $offset);
+        $this->vehiculosView->showVehiculos($vehiculos, $cantPags, $pagina);
+    }
+
+    // dada una categoria esta funcion envia a renderizar el listado de los items
+    // que cumplen con esa condicion
+    public function showVehiculosPorCategoria($id_cat){
+        $vehiculosporcat = [];
+        $vehiculosporcat = $this->vehiculosModel->getVehiculosPorCatDB($id_cat);
         $limit = ITEMS_PAGINA;
         $offset = $this->paginationHelper->getOffset();
         $cantPags = $this->paginationHelper->getCantPags($id_cat);
@@ -43,30 +58,17 @@ class VehiculosController{
             $pagina = $_GET['pagina'];
         else
             $pagina = 1;
-        if ($vehiculosporcat == null)
-            $vehiculos = $this->vehiculos = $this->vehiculosModel->getVehiculosDB($limit, $offset);
-        else    
-            $vehiculos = $vehiculosporcat;
-        $this->vehiculosView->showVehiculos($vehiculos, $cantPags, $pagina, $id_cat);
-    }
-
-    // dada una categoria esta funcion envia a renderizar el listado de los items
-    // que cumplen con esa condicion
-    public function showVehiculosPorCategoria($id_cat){
-        $vehiculosporcat = $this->vehiculosModel->getVehiculosPorCatDB($id_cat);
-        $this->showVehiculos($vehiculosporcat, $id_cat);
+        $this->vehiculosView->showVehiculos($vehiculosporcat, $cantPags, $pagina, $id_cat);
     }
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal
     public function showDetallesVehiculo($id_vehiculo){
         $this->showVehiculos();
-        
         // se obtiene el item seleccionado del listado de vehiculos de la BBDD
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
         // se renderiza el modal de detalles
         $this->vehiculosView->showDetallesVehiculo($detalles);
-        // se carga como fondo el listado de vehiculos
-        
+       
     }
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal
@@ -95,9 +97,13 @@ class VehiculosController{
 
     // funcion encargada de hacer el llamado para eliminar un item de la BBDD
     public function deleteVehiculoDB($id_vehiculo){
+        if(isset($_GET['pagina']))
+            $pagina = $_GET['pagina'];
+        else
+            $pagina = 1;
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->vehiculosModel->deleteVehiculoDB($id_vehiculo);
-        header('Location: '.BASE_URL.'verCatalogoVehiculos');
+        header('Location: '.BASE_URL.'verCatalogoVehiculos/?pagina='.$pagina);
     }
 
     // funcion encargada de hacer el llamado a la vista para mostrar la confirmacion de la eliminacion
@@ -151,12 +157,16 @@ class VehiculosController{
     // funcion encargada de enviar los datos cargados en el modal de edicion
     // al model para cargar en la BBDD
     public function editVehiculoDB($id){
+        if(isset($_GET['pagina']))
+            $pagina = $_GET['pagina'];
+        else
+            $pagina = 1;
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->vehiculosModel->editVehiculoDB($id, $_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
         if (($_POST['id_categoria']) != null)
             $this->showVehiculosPorCategoria($_POST['id_categoria']);
         else
-            header('Location: '.BASE_URL.'verCatalogoVehiculos');
+            header('Location: '.BASE_URL.'verCatalogoVehiculos/?pagina='.$pagina);
     }
 
     // funcion encargadad de la carga de un nuevo item
@@ -173,6 +183,10 @@ class VehiculosController{
 
     // funcion encargada de insertar un nuevo item en la BBDD
     public function insertNewVehiculoDB(){
+        if(isset($_GET['pagina']))
+            $pagina = $_GET['pagina'];
+        else
+            $pagina = 1;
         //$this->vehiculos = $this->vehiculosModel->getVehiculosDB();
         // si el formulario NO esta vacio envia los datos al Model para cargarlos en la BBDD
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
@@ -186,7 +200,7 @@ class VehiculosController{
                 $this->showVehiculos();
             } 
         } else {
-            header('Location: '.BASE_URL.'verCatalogoVehiculos');
+            header('Location: '.BASE_URL.'verCatalogoVehiculos/?pagina='.$pagina);
         }
     }
 
