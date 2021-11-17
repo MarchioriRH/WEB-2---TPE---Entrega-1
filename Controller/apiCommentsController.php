@@ -46,11 +46,18 @@ class ApiCommentsController{
     public function getCommentsByOrder($params = null){
         $id = $params[':ID'];
         $order = $_GET['order'];
-        $column = 'comments.'.$_GET['column'].' '.$order;
-        var_dump($order);
-        var_dump($column);
-        var_dump($id);        
-        $comments = $this->model->getCommentsByOrder($id, $column);
+        $column = $_GET['column'];
+
+        if($column == 'fecha' && $order == 'DESC')
+            $comments = $this->model->getCommentsByDateDESC($id);
+        else if($column == 'fecha' && $order == 'ASC')
+            $comments = $this->model->getCommentsByDateASC($id);
+        else if($column == 'score' && $order == 'DESC')
+            $comments = $this->model->getCommentsByScoreDESC($id);
+        else if($column == 'score' && $order == 'ASC')
+            $comments = $this->model->getCommentsByscoreASC($id);
+        
+        //$comments = $this->model->getCommentsByOrder($id, $column, $order);
         if ($comments){
             $this->view->response($comments, 200);
         }
