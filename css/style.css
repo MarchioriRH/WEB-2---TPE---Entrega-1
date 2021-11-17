@@ -420,7 +420,7 @@ table {
   background: rgb(26, 26, 26);
   color: rgb(201, 25, 25);
   text-align: center;
-  position: fixed;
+  /*position: fixed;*/
   bottom: 0;
   width: 100%;
 }
