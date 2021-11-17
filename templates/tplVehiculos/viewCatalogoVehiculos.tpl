@@ -49,7 +49,7 @@
                             <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
                             <td><a class="btn btn-success btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td>
                         {/if}
-                        <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculo/{$catalogo->id_vehiculo}">Mas detalles</a></td>
+                        <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculo/{$catalogo->id_vehiculo}/?pagina={$pagina}">Mas detalles</a></td>
                     {elseif (($rol == 0) && ($id_cat != null))}
                         {* si NO esta la sesion inciada, pero SI se viene de la vista por categoria, el link cambia al de vista
                         de detalles en categoria *}
@@ -57,7 +57,7 @@
                             <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
                             <td><a class="btn btn-success btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td>
                         {/if}
-                        <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>
+                        <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}/?pagina={$pagina}">Mas detalles</a></td>
                     {/if}                   
                     {* si el usuario es nivel 1 (admin) se muestran los links para editar o elimar un item *}
                     {if ($session && ($rol == 1))}
@@ -66,14 +66,14 @@
                         {if ($id_cat != null)}
                             <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
                             <td><a class="btn btn-success btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td>
-                            <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}">Mas detalles</a></td>
-                            <td><a class="btn btn-success btn-sm" role="button" href="editarVehiculoEnCategoria/{$catalogo->id_vehiculo}">Editar</a></td>
+                            <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}/?pagina={$pagina}">Mas detalles</a></td>
+                            <td><a class="btn btn-success btn-sm" role="button" href="editarVehiculoEnCategoria/{$catalogo->id_vehiculo}/?pagina={$pagina}">Editar</a></td>
                             <td><a class="btn btn-danger btn-sm" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo} sera eliminado de la base de datos." href="eliminarVehiculoDesdeCategoria/{$catalogo->id_vehiculo}/?pagina={$pagina}">Eliminar</a></td>
                         {else}
                             <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
                             <td><a class="btn btn-success btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td>
-                            <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculo/{$catalogo->id_vehiculo}">Mas detalles</a></td>
-                            <td><a class="btn btn-success btn-sm" role="button" href="editarVehiculo/{$catalogo->id_vehiculo}">Editar</a></td>
+                            <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculo/{$catalogo->id_vehiculo}/?pagina={$pagina}">Mas detalles</a></td>
+                            <td><a class="btn btn-success btn-sm" role="button" href="editarVehiculo/{$catalogo->id_vehiculo}/?pagina={$pagina}">Editar</a></td>
                             <td><a class="btn btn-danger btn-sm" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo}  sera eliminado de la base de datos." href="eliminarVehiculo/{$catalogo->id_vehiculo}/?pagina={$pagina}">Eliminar</a></td>
                         {/if}
                        
@@ -81,46 +81,48 @@
                 </tr>
             {/foreach}
         </table>
-        <div class="pagination justify-content-center">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    {if $pagina == 1}
-                        <li class="page-item disabled">
-                    {else}
-                        <li class="page-item">
-                    {/if}
-                        <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$pagina - 1}" {else}
-                            href="verCatalogoCategoria/?pagina={$pagina - 1}" {/if} aria-label="Previous" >
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    {for $i = 1 to $cantPags}
-                        {if $pagina == $i}
-                            <li class="page-item active">
-                                <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$i}" {else}
-                                href="verCatalogoCategoria/?pagina={$i}" {/if}>{$i}<span class="sr-only">(current)</span></a>
-                            </li>
+        {if $pagina > 0}
+            <div class="pagination justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {if $pagina == 1}
+                            <li class="page-item disabled">
                         {else}
                             <li class="page-item">
-                                <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$i}" {else}
-                                href="verCatalogoCategoria/?pagina={$i}" {/if}>{$i}</a>
-                            </li>
                         {/if}
-                    {/for}
-                     {if $pagina == $cantPags}
-                        <li class="page-item disabled">
-                    {else}
-                        <li class="page-item">
-                    {/if}
-                        <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$pagina + 1}" {else}
-                            href="verCatalogoCategoria/?pagina={$pagina + 1}" {/if} aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+                            <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$pagina - 1}" {else}
+                                href="verCatalogoCategoria/?pagina={$pagina - 1}" {/if} aria-label="Previous" >
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        {for $i = 1 to $cantPags}
+                            {if $pagina == $i}
+                                <li class="page-item active">
+                                    <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$i}" {else}
+                                    href="verCatalogoCategoria/?pagina={$i}" {/if}>{$i}<span class="sr-only">(current)</span></a>
+                                </li>
+                            {else}
+                                <li class="page-item">
+                                    <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$i}" {else}
+                                    href="verCatalogoCategoria/?pagina={$i}" {/if}>{$i}</a>
+                                </li>
+                            {/if}
+                        {/for}
+                        {if $pagina == $cantPags}
+                            <li class="page-item disabled">
+                        {else}
+                            <li class="page-item">
+                        {/if}
+                            <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$pagina + 1}" {else}
+                                href="verCatalogoCategoria/?pagina={$pagina + 1}" {/if} aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        {/if}
     </div>
 {include file="templates/tplGeneral/footer.tpl"}

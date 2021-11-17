@@ -43,12 +43,8 @@ class CategoriasView{
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
         }
-        $categorias = [];
-        foreach ($categoria as $car) {
-            array_push($categorias, $car);
-        }
+        $this->smarty->assign('categoria',$categoria);
         $this->smarty->assign('tituloEdit','Editar Categoria');
-        $this->smarty->assign('categorias',$categorias);
         $this->smarty->display('templates/tplCategorias/editCategoria.tpl');
     }
 

@@ -29,7 +29,7 @@
                  </div>
                  <div class="btn-detalle">
                     <button type="submit" class="btn btn-danger">Guardar</button>
-                    <a class="btn btn-danger" href="verCatalogoVehiculos">Cancelar</a>
+                    <a class="btn btn-danger" href="verCatalogoVehiculos/?pagina={$pagina}">Cancelar</a>
                 </div>  
             </form>
         </div>

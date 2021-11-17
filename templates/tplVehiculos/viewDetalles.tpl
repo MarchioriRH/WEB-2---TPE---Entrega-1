@@ -20,7 +20,7 @@
             {if ($id_cat != null)}
                 <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_cat}">Volver</a>
             {else}
-                <a class="btn btn-danger" href="verCatalogoVehiculos">Volver</a>
+                <a class="btn btn-danger" href="verCatalogoVehiculos/?pagina={$pagina}">Volver</a>
             {/if}
         </div>  
     </div>

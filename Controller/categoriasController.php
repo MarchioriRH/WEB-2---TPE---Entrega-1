@@ -35,7 +35,7 @@ class CategoriasController{
     public function deleteCategoria($idCategoria){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
             $categoria = $this->model->getDetallesCategoriaDB($idCategoria);
-            $tipo = $categoria[0]->tipo;
+            $tipo = $categoria->tipo;
             $this->categorias = $this->model->getCategoriasDB();
             $this->generalView->showMsje(RAMADELCAT, "La categoria $tipo, y todos los items asociados, seran eliminados de la base de datos.\n ¿Esta Seguro?", $idCategoria);
         }
@@ -86,7 +86,7 @@ class CategoriasController{
                 $this->view->showCategorias($this->categorias);
             } 
         } else {
-            $this->view->showCategorias($this->categorias);
+            header('Location: '.BASE_URL.'verCatalogoCategoria');
         }
     }
 }

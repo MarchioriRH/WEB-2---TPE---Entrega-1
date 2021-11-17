@@ -3,7 +3,7 @@
     <div class="modalMsge">
         <h1>{$tituloEdit}</h1>
         <div class="form">
-            <form action="editVehiculoDB/{$vehiculo->id_vehiculo}" method="post">
+            <form action="editVehiculoDB/{$vehiculo->id_vehiculo}/?pagina={$pagina}" method="post">
                 <div class="mb-2">  
                     <select class="form-select" aria-label="Default select example" name="tipo">
                         <option selected="true" value={$vehiculo->id_categoria} required>{$vehiculo->Tipo}</option>
@@ -39,9 +39,9 @@
                     {* si se viene de la vista de categoria se muestra el catalogo con la seleccion por categoria aplicada,
                     si no es asi, se muestra el catalogo general de vehiculos *}
                     {if ($id_categoria != null)}
-                        <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_categoria}">Cancelar</a>
+                        <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_categoria}/?pagina={$pagina}">Cancelar</a>
                     {else}
-                        <a class="btn btn-danger" href="verCatalogoVehiculos">Cancelar</a>
+                        <a class="btn btn-danger" href="verCatalogoVehiculos/?pagina={$pagina}">Cancelar</a>
                     {/if}
                 </div>  
             </form>

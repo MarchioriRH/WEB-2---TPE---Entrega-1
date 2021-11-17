@@ -21,30 +21,36 @@ class CategoriasModel {
 
     // funcion encargada de eliminar una categoria de la BBDD mediante el id
     public function deleteCategoriaDB($id_categoria){
-        $sentencia1 = $this->db->prepare("DELETE FROM vehiculos WHERE id_categoria = $id_categoria");
+        $sentencia1 = $this->db->prepare("DELETE FROM vehiculos WHERE id_categoria = ?");
+        $sentencia1->bindParam(1, $id_categoria, PDO::PARAM_INT);
         $sentencia1->execute();
-        $sentencia2 = $this->db->prepare("DELETE FROM categorias WHERE id_categoria = $id_categoria");
+        $sentencia2 = $this->db->prepare("DELETE FROM categorias WHERE id_categoria = ?");
+        $sentencia2->bindParam(1, $id_categoria, PDO::PARAM_INT);
         $sentencia2->execute();
-        header('Location: '.BASE_URL.'verCatalogoCategoria');
+        //header('Location: '.BASE_URL.'verCatalogoCategoria');
     }
     
     // funcion encargada de agregar una nueva categoria en la BBDD
     public function addNewCategoriaDB($tipo){
         $sentencia = $this->db->prepare("INSERT INTO categorias(tipo) VALUES(?)");
-        $sentencia->execute(array($tipo));
+        $sentencia->bindParam(1, $tipo, PDO::PARAM_STR);
+        $sentencia->execute();
     }
 
     // funcion encargada de editar una categoria en la base de datos
     public function editCategoriaDB($id, $tipo){
-        $sentencia2 = $this->db->prepare("UPDATE categorias SET tipo = '$tipo' WHERE id_categoria=?");
-        $sentencia2->execute(array($id));
+        $sentencia = $this->db->prepare("UPDATE categorias SET tipo = ? WHERE id_categoria = ?");
+        $sentencia->bindParam(2, $id, PDO::PARAM_INT);
+        $sentencia->bindParam(1, $tipo, PDO::PARAM_STR);
+        $sentencia->execute();
     }
     
     // funcion que trae todos los datos de una categoria de la BBDD
     public function getDetallesCategoriaDB($id_categoria){
-        $sentencia = $this->db->prepare("SELECT * FROM categorias WHERE id_categoria = $id_categoria");
+        $sentencia = $this->db->prepare("SELECT * FROM categorias WHERE id_categoria = ?");
+        $sentencia->bindParam(1, $id_categoria, PDO::PARAM_INT);
         $sentencia->execute();
-        $detalles = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        $detalles = $sentencia->fetch(PDO::FETCH_OBJ);
         return $detalles;
     }
 }
