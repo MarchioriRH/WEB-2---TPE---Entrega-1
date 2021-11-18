@@ -13,7 +13,8 @@ class CategoriasModel {
     // funcion encargada de buscar las categorias desde la BBDD
     public function getCategoriasDB(){
         // select que realiza el JOIN de los datos de la BBDD de categorias y los relaciona al de vehiculos
-        $sentencia = $this->db->prepare("SELECT categorias.*, categorias.id_categoria as idTipo FROM vehiculos RIGHT JOIN categorias ON categorias.id_categoria = vehiculos.id_categoria GROUP BY categorias.id_categoria");
+        $sentencia = $this->db->prepare("SELECT categorias.*, categorias.id_categoria as idTipo FROM vehiculos RIGHT JOIN categorias 
+                                        ON categorias.id_categoria = vehiculos.id_categoria GROUP BY categorias.id_categoria");
         $sentencia->execute();        
         $categorias = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $categorias;
@@ -27,7 +28,6 @@ class CategoriasModel {
         $sentencia2 = $this->db->prepare("DELETE FROM categorias WHERE id_categoria = ?");
         $sentencia2->bindParam(1, $id_categoria, PDO::PARAM_INT);
         $sentencia2->execute();
-        //header('Location: '.BASE_URL.'verCatalogoCategoria');
     }
     
     // funcion encargada de agregar una nueva categoria en la BBDD

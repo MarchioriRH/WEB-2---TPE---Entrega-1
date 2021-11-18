@@ -55,9 +55,8 @@ class ApiCommentsController{
         else if($column == 'score' && $order == 'DESC')
             $comments = $this->model->getCommentsByScoreDESC($id);
         else if($column == 'score' && $order == 'ASC')
-            $comments = $this->model->getCommentsByscoreASC($id);
-        
-        //$comments = $this->model->getCommentsByOrder($id, $column, $order);
+            $comments = $this->model->getCommentsByScoreASC($id);
+       
         if ($comments){
             $this->view->response($comments, 200);
         }
