@@ -29,50 +29,51 @@
             </div>
             <div class="menu">
                 <ul class="navigation">
-                        <li><a href="homeCatalogo">HOME</a></li>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                CATALOGO
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                                <a class="dropdown-item" href="verCatalogoVehiculos">Ver todos los vehiculos</a>
-                                <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
-                            </ul>
-                        </div>
-                        {if $session && ($sessionRol == 1)} 
-                            <li><a href="adminUsers">USUARIOS</a></li>
-                        {/if}
-                        {* si la sesion esta iniciada se cambia el texto del boton de LOGIN a LOGOUT *}
-                        {if $session}
-                            <li><a href="logout">LOGOUT</a></li>
-                        {else}    
-                            <li><a href="login">LOGIN</a></li>
-                            <li><a href="registroNuevoUsuario">REGISTRO</a></li>
-                        {/if}
-                       
-                    </ul>
+                    <li><a href="homeCatalogo">HOME</a></li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            CATALOGO
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                            <a class="dropdown-item" href="verCatalogoVehiculos">Ver todos los vehiculos</a>
+                            <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
+                        </ul>
+                    </div>
+                    {if $session && ($sessionRol == 1)} 
+                        <li><a href="adminUsers">USUARIOS</a></li>
+                    {/if}
+                    {* si la sesion esta iniciada se cambia el texto del boton de LOGIN a LOGOUT *}
+                    {if $session}
+                        <li><a href="logout">LOGOUT</a></li>
+                    {else}    
+                        <li><a href="login">LOGIN</a></li>
+                        <li><a href="registroNuevoUsuario">REGISTRO</a></li>
+                    {/if}
+                </ul>
             </div>
             {* menu de vista responsive *}
             <div class="btn_menu"> 
-                    <div class="menu">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                MENU
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                                <a class="dropdown-item" href="homeCatalogo">HOME</a>
-                                <div class="dropdown-divider"></div>
-                                <h6 class="dropdown-header">CATALOGO</h6>
-                                <a class="dropdown-item" href="verCatalogoVehiculos">Ver todos los vehiculos</a>
-                                <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
-                                <div class="dropdown-divider"></div>
-                                <h6 class="dropdown-header"></h6>
-                                <a class="dropdown-item" href="login">LOGIN</a>
-                                <a class="dropdown-item" href="registroNuevoUsuario">REGISTRO</a>
-                            </ul>
-                        </div>
+                <div class="menu">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            MENU
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                            <a class="dropdown-item" href="homeCatalogo">HOME</a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">CATALOGO</h6>
+                            <a class="dropdown-item" href="verCatalogoVehiculos">Ver todos los vehiculos</a>
+                            <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header"></h6>
+                            <a class="dropdown-item" href="login">LOGIN</a>
+                            <a class="dropdown-item" href="registroNuevoUsuario">REGISTRO</a>
+                        </ul>
                     </div>
                 </div>
             </div>
+            {if $user != null}
+                <div class="userLogged"><span>{$user}</span></div>
+            {/if}
         </div>
     </header>

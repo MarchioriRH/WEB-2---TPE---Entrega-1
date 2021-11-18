@@ -14,6 +14,10 @@ class CategoriasView{
         $this->smarty = new Smarty();
         $this->sessionInitiated = new LoginHelpers();
         $this->session = $this->sessionInitiated->sessionStarted();
+        if (isset($_SESSION['NOMBRE']) && isset($_SESSION['NOMBRE']))
+            $this->user = $_SESSION['NOMBRE'] . ' ' . $_SESSION['APELLIDO'];
+        else
+            $this->user = null;
 
     }
 
@@ -27,6 +31,7 @@ class CategoriasView{
         foreach ($categorias as $categoria) {
             array_push($catalogocat, $categoria);
         }
+        $this->smarty->assign('user', $this->user);
         $this->smarty->assign('titulo','Categorias disponibles');
         $this->smarty->assign('categorias',$catalogocat);
         $this->smarty->assign('session', $this->session);
@@ -43,6 +48,7 @@ class CategoriasView{
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
         }
+        $this->smarty->assign('user', $this->user);
         $this->smarty->assign('categoria',$categoria);
         $this->smarty->assign('tituloEdit','Editar Categoria');
         $this->smarty->display('templates/tplCategorias/editCategoria.tpl');
@@ -54,6 +60,7 @@ class CategoriasView{
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
         }
+        $this->smarty->assign('user', $this->user);
         $this->smarty->assign('texto1','Agregar nueva categoria.');
         $this->smarty->assign('categorias',$categorias);
         $this->smarty->display('templates/tplCategorias/addNewCategoria.tpl');
