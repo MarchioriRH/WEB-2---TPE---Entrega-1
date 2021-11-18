@@ -237,7 +237,6 @@ fieldset{
 
 .btnBack{
   grid-area: btn-back;  /*GRID*/
-  
 }
 
 .labelFilter{
@@ -269,9 +268,18 @@ fieldset{
 .filterButton{
   grid-area: btn-filter;  /*GRID*/
   text-align: end;
-  
-  
 }
+
+.userLogged{
+  text-align: end;
+  font-size: 80%;
+  color: rgb(217 216 216);
+  margin-right: 3vmin;
+  background-color: gray;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 
 /* TERMINA VEHICULOS DESTACADOS */
 
@@ -424,6 +432,7 @@ table {
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 5999;
 }
 
 #car2, .pie-de-pagina {
@@ -466,7 +475,7 @@ table {
       align-items: center;
       grid-template-columns: 3fr 1fr;
       grid-template-areas: 
-      "cabecera-izq menu";
+      "cabecera-izq menu .";
     }
 
     /* cambiamos la direccion del flex */
@@ -505,6 +514,8 @@ table {
       margin-top: 12%;
       margin-bottom: 4%;
     }
+
+
 
         
     /*Ventana modal*/

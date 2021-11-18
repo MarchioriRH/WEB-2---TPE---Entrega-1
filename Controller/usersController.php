@@ -139,12 +139,15 @@ class UsersController {
                     $rol = 0;
                 // se envian los datos al model para registrarlos en la BBDD
                 $this->userModel->registroNuevoUsuarioDB($_POST ['mail'], $userPassword, $_POST ['nombre'], $_POST ['apellido'], $rol);
-                
+                $user = $this->userModel->getUsuarioByMail($_POST ['mail']);
                 if (!isset($_SESSION['EMAIL'])){ 
                     if(!isset($_SESSION)) 
                         session_start();
                     $_SESSION['EMAIL'] = $_POST['mail'];
-                    $_SESSION['ROL'] = $rol; 
+                    $_SESSION['ROL'] = $rol;
+                    $_SESSION['NOMBRE'] = $user->nombre;
+                    $_SESSION['APELLIDO'] = $user->apellido;
+                    $_SESSION['ID_USUARIO'] = $user->id_usuario;   
                 }           
                 // se muestra mensaje de exito en el registro
                 $this->generalView->showMsje(RAMAREGOK, 'Usuario '.$_POST['mail'].' registrado con exito.');

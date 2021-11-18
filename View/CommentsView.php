@@ -14,6 +14,10 @@ class CommentsView{
         $this->smarty = new Smarty();
         $this->sessionInitiated = new LoginHelpers();
         $this->session = $this->sessionInitiated->sessionStarted();
+        if (isset($_SESSION['NOMBRE']) && isset($_SESSION['NOMBRE']))
+            $this->user = $_SESSION['NOMBRE'] . ' ' . $_SESSION['APELLIDO'];
+        else
+            $this->user = null;
     }
 
    
@@ -24,6 +28,7 @@ class CommentsView{
         } else {
             $this->smarty->assign('sessionRol', '-1');
         }
+        $this->smarty->assign('user', $this->user);
         $this->smarty->assign('id', $id);
         $this->smarty->assign('flag', "ByVehicle");
         $this->smarty->assign('session', $this->session);
@@ -36,6 +41,7 @@ class CommentsView{
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
         }
+        $this->smarty->assign('user', $this->user);
         $this->smarty->assign('id', $id);
         $this->smarty->assign('flag', "Add");
         $this->smarty->assign('idUsuario', $_SESSION['ID_USUARIO']);

@@ -9,12 +9,17 @@ class VehiculosView{
     private $smarty;
     private $sessionInitiated;
     private $session;
+    private $user;
 
     // se instancian las clases incluidas
     public function __construct(){
         $this->smarty = new Smarty();
         $this->sessionInitiated = new LoginHelpers();
         $this->session = $this->sessionInitiated->sessionStarted();
+        if (isset($_SESSION['NOMBRE']) && isset($_SESSION['NOMBRE']))
+            $this->user = $_SESSION['NOMBRE'] . ' ' . $_SESSION['APELLIDO'];
+        else
+            $this->user = null;
     }
 
     // funcion encargada de renderizar el listado de vehiculos
@@ -31,6 +36,7 @@ class VehiculosView{
         }
         if ($catalogo == [])
             $pagina = 0;
+        $this->smarty->assign('user', $this->user);
         $this->smarty->assign('pagina', $pagina);
         $this->smarty->assign('cantPags', $cantPags);
         // se asigna el nombre titulo a la variable que se mostrara como titulo
@@ -59,6 +65,7 @@ class VehiculosView{
         } else {
             $this->smarty->assign('sessionRol', -1);
         }
+        $this->smarty->assign('user', $this->user);
         // se asigna el nombre tituloDetalle al titulo para mostar
         $this->smarty->assign('tituloDetalle','Detalles');
         // se asigna al nombre detalles al array que contine los datos del item
@@ -74,6 +81,7 @@ class VehiculosView{
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
         }
+        $this->smarty->assign('user', $this->user);
         $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('tituloEdit','Editar item');
         $this->smarty->assign('vehiculo', $vehiculo);
@@ -87,6 +95,7 @@ class VehiculosView{
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
         }
+        $this->smarty->assign('user', $this->user);
         $this->smarty->assign('texto1','Agregar nuevo vehiculo.');
         $this->smarty->assign('categorias',$categorias);
         $this->smarty->display('templates/tplVehiculos/addNewVehiculo.tpl');
