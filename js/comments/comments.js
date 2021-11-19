@@ -28,8 +28,12 @@ let apiResponse = new Vue({
         },
         order : {
             type: String,
-            default: "DESC",
+            default: "ASC",
         },
+        session : {
+            type: String,
+            default: document.querySelector('#logged').value,
+        }
     }
 });
 

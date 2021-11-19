@@ -11,7 +11,11 @@
                 <th>Eliminar</th>
             </tr>
             {foreach from=$usuarios item=$usuario}
-                <tr>
+                {if $usuario->mail == $userMail}
+                    <tr class="ocultar">
+                {else}
+                    <tr>
+                {/if}
                     <td>{$usuario->nombre}</td>
                     <td>{$usuario->apellido}</td>
                     <td>{$usuario->mail}</td>
@@ -20,16 +24,10 @@
                     {else}
                         <td>User</td>
                     {/if}
-                    {if $usuario->mail == $userMail}
-                        <td><a class="btn btn-success btn-sm disabled" role="button" href="editarRolUsuario/{$usuario->id_usuario}">Cambiar rol</a></td>                    
-                        <td><a class="btn btn-danger btn-sm disabled" role="button" href="eliminarUsuario/{$usuario->id_usuario}">Eliminar</a></td>
-                    {else}
-                        <td><a class="btn btn-success btn-sm" role="button" href="editarRolUsuario/{$usuario->id_usuario}">Cambiar rol</a></td>                    
-                        <td><a class="btn btn-danger btn-sm" role="button" href="eliminarUsuario/{$usuario->id_usuario}">Eliminar</a></td>
-                    {/if}
+                    <td><a class="btn btn-success btn-sm" role="button" href="editarRolUsuario/{$usuario->id_usuario}">Cambiar rol</a></td>                    
+                    <td><a class="btn btn-danger btn-sm" role="button" href="eliminarUsuario/{$usuario->id_usuario}">Eliminar</a></td>
                 </tr>
             {/foreach}
         </table>
     </div>
-    <script type="text/javascript" src="./js/clave.js"></script>
-{include file="templates/tplGeneral/footer.tpl"}
+    {include file="templates/tplGeneral/footer.tpl"}

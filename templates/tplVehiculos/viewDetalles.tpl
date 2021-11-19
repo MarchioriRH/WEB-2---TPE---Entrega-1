@@ -5,7 +5,7 @@
         <table class="default">
             <tr>
                 <th>Año</th>
-                <th>Kilometros</th>
+                <th>Kilometros/Hs</th>
                 <th>Precio</th>                        
             </tr>
             <tr>

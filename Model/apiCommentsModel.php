@@ -29,7 +29,7 @@ class ApiCommentsModel{
 
     public function getCommentsByDateDESC($id){
         $sentencia = $this->db->prepare("SELECT usuarios.nombre, comments.comment as comment, comments.fecha as fecha, comments.score as score, 
-                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
+                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario, comments.id_comment as id_comment  FROM usuarios RIGHT JOIN comments 
                                         ON usuarios.id_usuario = comments.id_usuario WHERE comments.id_vehiculo = :id ORDER BY comments.fecha DESC");
         $sentencia->bindParam(':id', $id, PDO::PARAM_INT);
         $sentencia->execute();
@@ -38,7 +38,7 @@ class ApiCommentsModel{
 
     public function getCommentsByDateASC($id){
         $sentencia = $this->db->prepare("SELECT usuarios.nombre, comments.comment as comment, comments.fecha as fecha, comments.score as score, 
-                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
+                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario, comments.id_comment as id_comment  FROM usuarios RIGHT JOIN comments 
                                         ON usuarios.id_usuario = comments.id_usuario WHERE comments.id_vehiculo = :id ORDER BY comments.fecha ASC");
         $sentencia->bindParam(':id', $id, PDO::PARAM_INT);
         $sentencia->execute();
@@ -47,7 +47,7 @@ class ApiCommentsModel{
 
     public function getCommentsByScoreDESC($id){
         $sentencia = $this->db->prepare("SELECT usuarios.nombre, comments.comment as comment, comments.fecha as fecha, comments.score as score, 
-                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
+                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario, comments.id_comment as id_comment  FROM usuarios RIGHT JOIN comments 
                                         ON usuarios.id_usuario = comments.id_usuario WHERE comments.id_vehiculo = :id ORDER BY comments.score DESC");
         $sentencia->bindParam(':id', $id, PDO::PARAM_INT);
         $sentencia->execute();
@@ -56,7 +56,7 @@ class ApiCommentsModel{
 
     public function getCommentsByScoreASC($id){
         $sentencia = $this->db->prepare("SELECT usuarios.nombre, comments.comment as comment, comments.fecha as fecha, comments.score as score, 
-                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
+                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario, comments.id_comment as id_comment FROM usuarios RIGHT JOIN comments 
                                         ON usuarios.id_usuario = comments.id_usuario WHERE comments.id_vehiculo = :id ORDER BY comments.score ASC");
         $sentencia->bindParam(':id', $id, PDO::PARAM_INT);
         $sentencia->execute();
@@ -65,7 +65,7 @@ class ApiCommentsModel{
 
     public function getCommentsByVehiculoID($id){
         $sentencia = $this->db->prepare("SELECT usuarios.nombre, comments.comment as comment, comments.fecha as fecha, comments.score as score, 
-                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
+                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario, comments.id_comment as id_comment  FROM usuarios RIGHT JOIN comments 
                                         ON usuarios.id_usuario = comments.id_usuario WHERE comments.id_vehiculo = ? ORDER BY comments.fecha ASC");
         $sentencia->execute(array($id));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
@@ -73,7 +73,7 @@ class ApiCommentsModel{
 
     public function getCommentsByScore($id, $score){
         $sentencia = $this->db->prepare("SELECT usuarios.nombre, comments.comment as comment, comments.fecha as fecha, comments.score as score, 
-                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario FROM usuarios RIGHT JOIN comments 
+                                        comments.id_vehiculo as id_vehiculo, comments.id_usuario as id_usuario, comments.id_comment as id_comment  FROM usuarios RIGHT JOIN comments 
                                         ON usuarios.id_usuario = comments.id_usuario WHERE id_vehiculo = ? AND score = ?");
         $sentencia->execute(array($id, $score));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);

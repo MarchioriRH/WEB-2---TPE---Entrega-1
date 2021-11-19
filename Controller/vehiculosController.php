@@ -7,6 +7,7 @@ include_once "Helpers/paginationHelper.php";
 const RAMAVE = "vehiculos";
 const RAMADELVE = "eliminarVehiculo";
 const RAMADELVECAT = "eliminarVehiculoCat";
+const RAMAFORBIDDEN = "forbidden";
 const ITEMS_PAGINA = 6;
 
 class VehiculosController{
@@ -20,6 +21,7 @@ class VehiculosController{
     private $categoriasModel;
     private $loginHelper;
     private $paginationHelper;
+    private $pagina;
     
     
 
@@ -31,19 +33,19 @@ class VehiculosController{
         $this->categoriasModel = new CategoriasModel();
         $this->loginHelper = new LoginHelpers();
         $this->paginationHelper = new PaginationHelper();
+        if (isset($_GET['pagina']))
+            $this->pagina = $_GET['pagina'];
+        else
+            $this->pagina = 1;
     }
    
     // funcion encargada de mostar el listado de items disponibles
     public function showVehiculos(){
         $limit = ITEMS_PAGINA;
         $offset = $this->paginationHelper->getOffset();
-        $cantPags = $this->paginationHelper->getCantPags();
-        if (isset($_GET['pagina']))
-            $pagina = $_GET['pagina'];
-        else
-            $pagina = 1;
+        $cantPags = $this->paginationHelper->getCantPags();       
         $vehiculos = $this->vehiculos = $this->vehiculosModel->getVehiculosDB($limit, $offset);
-        $this->vehiculosView->showVehiculos($vehiculos, $cantPags, $pagina);
+        $this->vehiculosView->showVehiculos($vehiculos, $cantPags, $this->pagina);
     }
 
     // dada una categoria esta funcion envia a renderizar el listado de los items
@@ -51,14 +53,8 @@ class VehiculosController{
     public function showVehiculosPorCategoria($id_cat){
         $vehiculosporcat = [];
         $vehiculosporcat = $this->vehiculosModel->getVehiculosPorCatDB($id_cat);
-        $limit = ITEMS_PAGINA;
-        $offset = $this->paginationHelper->getOffset();
-        $cantPags = $this->paginationHelper->getCantPags($id_cat);
-        if (isset($_GET['pagina']))
-            $pagina = $_GET['pagina'];
-        else
-            $pagina = 1;
-        $this->vehiculosView->showVehiculos($vehiculosporcat, $cantPags, $pagina, $id_cat);
+        $cantPags = $this->paginationHelper->getCantPags($id_cat);        
+        $this->vehiculosView->showVehiculos($vehiculosporcat, $cantPags, $this->pagina, $id_cat);
     }
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal
@@ -67,8 +63,7 @@ class VehiculosController{
         // se obtiene el item seleccionado del listado de vehiculos de la BBDD
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
         // se renderiza el modal de detalles
-        $this->vehiculosView->showDetallesVehiculo($detalles);
-       
+        $this->vehiculosView->showDetallesVehiculo($detalles);       
     }
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal
@@ -88,22 +83,21 @@ class VehiculosController{
         $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_Vehiculo);
         $marca = $vehiculo->marca;
         $modelo = $vehiculo->modelo;
-        $pagina = $_GET['pagina'];
         $id_cat = null;
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
-            $this->generalView->showMsje(RAMADELVE, "El vehiculo $marca, $modelo, sera eliminado de la base de datos.\r\n ¿Esta seguro?", $id_Vehiculo, $id_cat , $pagina);
+            $this->generalView->showMsje(RAMADELVE, "El vehiculo $marca, $modelo, sera eliminado de la base de datos.\r\n ¿Esta seguro?", $id_Vehiculo, $id_cat , $this->pagina);
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         $this->showVehiculos();   
     }
 
     // funcion encargada de hacer el llamado para eliminar un item de la BBDD
     public function deleteVehiculoDB($id_vehiculo){
-        if(isset($_GET['pagina']))
-            $pagina = $_GET['pagina'];
-        else
-            $pagina = 1;
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->vehiculosModel->deleteVehiculoDB($id_vehiculo);
-        header('Location: '.BASE_URL.'verCatalogoVehiculos/?pagina='.$pagina);
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
+        $this->showVehiculos();
     }
 
     // funcion encargada de hacer el llamado a la vista para mostrar la confirmacion de la eliminacion
@@ -115,6 +109,8 @@ class VehiculosController{
         $id_categoria = $vehiculo->id_categoria;
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->generalView->showMsje(RAMADELVECAT, "El vehiculo $marca, $modelo, sera eliminado de la base de datos. \n ¿Esta seguro?", $id_vehiculo, $id_categoria);
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         $id_categoria = $vehiculo->id_categoria;
         $this->showVehiculosPorCategoria($id_categoria);
     }
@@ -125,6 +121,8 @@ class VehiculosController{
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->vehiculosModel->deleteVehiculoDB($id_vehiculo);
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         $id_categoria = $detalles[0]->id_categoria;
         $this->showVehiculosPorCategoria($id_categoria);
     }
@@ -136,8 +134,10 @@ class VehiculosController{
         // se selecciona de la BBDD el item a editar
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         // se renderizan los datos en un modal para su edicion
-        $this->vehiculosView->editVehiculo($vehiculo, $this->categorias);
+        $this->vehiculosView->editVehiculo($vehiculo, $this->categorias, $this->pagina);
     }
 
     // funcion para editar un item desde la vista por Categoria
@@ -146,10 +146,12 @@ class VehiculosController{
         // se selecciona de la BBDD el item a editar
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $vehiculo = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         // se obtiene el valor de la categoria a la que pertenece el item
         $id_categoria = $vehiculo->id_categoria;
         // se renderizan los datos en un modal para su edicion
-        $this->vehiculosView->editVehiculo($vehiculo, $this->categorias, $id_categoria);
+        $this->vehiculosView->editVehiculo($vehiculo, $this->categorias, $this->pagina, $id_categoria);
         // se carga como fondo el listado de vehiculos filtrados por categoria
         $this->showVehiculosPorCategoria($id_categoria);
     }
@@ -157,16 +159,14 @@ class VehiculosController{
     // funcion encargada de enviar los datos cargados en el modal de edicion
     // al model para cargar en la BBDD
     public function editVehiculoDB($id){
-        if(isset($_GET['pagina']))
-            $pagina = $_GET['pagina'];
-        else
-            $pagina = 1;
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->vehiculosModel->editVehiculoDB($id, $_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         if (($_POST['id_categoria']) != null)
             $this->showVehiculosPorCategoria($_POST['id_categoria']);
         else
-            header('Location: '.BASE_URL.'verCatalogoVehiculos/?pagina='.$pagina);
+            header('Location: '.BASE_URL.'verCatalogoVehiculos/?pagina='.$this->pagina);
     }
 
     // funcion encargadad de la carga de un nuevo item
@@ -175,24 +175,21 @@ class VehiculosController{
         $this->categorias = $this->categoriasModel->getCategoriasDB();
         // se muestra el listado de items de fondo
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
-            //$this->vehiculosView->showVehiculos($this->vehiculos);
             $this->showVehiculos();
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         // se llama renderiza el modal que contiene el formulario de carga de un nuevo item
         $this->vehiculosView->addNewVehiculo($this->vehiculos,$this->categorias);
     }
 
     // funcion encargada de insertar un nuevo item en la BBDD
     public function insertNewVehiculoDB(){
-        if(isset($_GET['pagina']))
-            $pagina = $_GET['pagina'];
-        else
-            $pagina = 1;
         //$this->vehiculos = $this->vehiculosModel->getVehiculosDB();
         // si el formulario NO esta vacio envia los datos al Model para cargarlos en la BBDD
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
             if (!empty($_POST['tipo']) && !empty($_POST['marca']) && !empty($_POST['modelo']) && !empty($_POST['anio']) && !empty($_POST['kms']) && !empty($_POST['precio'])){
                 $this->vehiculosModel->addNewVehiculoDB($_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
-                header('Location: '.BASE_URL.'verCatalogoVehiculos');
+                header('Location: '.BASE_URL.'verCatalogoVehiculos/?pagina='.$this->pagina);
             } else {
                 // si el formulario esta vacio o incompleto muestra un mensaje de error y vuelve al
                 // listado de items
@@ -200,9 +197,8 @@ class VehiculosController{
                 $this->showVehiculos();
             } 
         } else {
-            header('Location: '.BASE_URL.'verCatalogoVehiculos/?pagina='.$pagina);
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         }
     }
-
     
 }

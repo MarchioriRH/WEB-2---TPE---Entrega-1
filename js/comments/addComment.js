@@ -8,6 +8,7 @@ function addComment(e){
     let url = API_URL;
     console.log(url);
     var f = new Date();
+    let id = document.querySelector("#id").innerHTML;
     let fecha = (f.getFullYear() + "/" + (f.getMonth() +1) + "/" + f.getDate());
     const formData = new URLSearchParams(new FormData(this));
     formData.append('fecha', fecha);
@@ -20,7 +21,7 @@ function addComment(e){
             console.log(data);
             if (data.status == "\"OK\""){
                 console.log("Comentario agregado con exito");
-                window.location.href = "verCatalogoVehiculos";
+                window.location.href = 'showComments/' + id;
             }
             else{
                 console.log("Error al agregar el comentario");
@@ -28,11 +29,9 @@ function addComment(e){
         })
         .catch(error => console.log(error));
     
-    window.location.href = "verCatalogoVehiculos";
+    window.location.href = 'showComments/' + id;
 }  
 
-function main(){
-    let id = document.querySelector("#id").innerHTML;
-    let flag = document.querySelector("#flag").innerHTML;
+function main(){    
     document.querySelector("#form-comment").addEventListener('submit', addComment);
 }

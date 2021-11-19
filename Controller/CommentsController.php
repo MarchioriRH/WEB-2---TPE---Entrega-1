@@ -12,7 +12,10 @@ class CommentsController {
     }
 
     public function showComments($id){
-        $this->view->showComments($id);
+        if(isset($_GET['fromCat']))
+            $this->view->showComments($id, $_GET['fromCat']);
+        else
+            $this->view->showComments($id);
     }
 
     public function addComment($id){

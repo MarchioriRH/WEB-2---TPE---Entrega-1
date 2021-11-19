@@ -9,8 +9,17 @@
             
             <div class="subFilterContainer">
                 <div class="btnBack">
-                     <a class="btn btn-danger" onClick="history.go(-1)">Volver</a>
+                    {if $fromCat != null}
+                        <a class="btn btn-danger btn-back" href="verCatalogoPorCategorias/{$fromCat}">Volver</a>
+                    {else}
+                        <a class="btn btn-danger btn-back" href="verCatalogoVehiculos">Volver</a>
+                    {/if}
                 </div>
+                {if $session == 1}
+                    <div class="btn-AddComment">
+                        <a class="btn btn-success btn-comment btn-sm" role="button" href="addComment/{$id}">Dejenos su comentario</a>
+                    </div>
+                {/if}
                 <div class="filterRadio">
                     <label class="labelFilter">Filtro por puntuación</label>
                     <div class="filterInnerRadio">

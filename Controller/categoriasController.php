@@ -15,6 +15,7 @@ class CategoriasController{
     private $categorias;
     private $generalView;
     private $loginHelper;
+    private $pagina;
     
     // se istancian las distintas clases
     public function __construct(){
@@ -22,7 +23,12 @@ class CategoriasController{
         $this->generalView = new GeneralView();
         $this->model = new CategoriasModel();
         $this->loginHelper = new LoginHelpers();
-    }
+        if (isset($_GET['pagina'])){
+            $this->pagina = $_GET['pagina'];
+        }else{
+            $this->pagina = 1;
+        }
+     }
 
 
      // funcion encargada de solicitar al view la funcion showCategorias
@@ -38,7 +44,8 @@ class CategoriasController{
             $tipo = $categoria->tipo;
             $this->categorias = $this->model->getCategoriasDB();
             $this->generalView->showMsje(RAMADELCAT, "La categoria $tipo, y todos los items asociados, seran eliminados de la base de datos.\n ¿Esta Seguro?", $idCategoria);
-        }
+        } else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         $this->view->showCategorias($this->categorias);
     }
 
@@ -46,6 +53,8 @@ class CategoriasController{
     public function deleteCategoriaDB($id_categoria){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->model->deleteCategoriaDB($id_categoria);
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         header('Location: '.BASE_URL.'verCatalogoCategoria');
     }
 
@@ -55,7 +64,8 @@ class CategoriasController{
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
             $categoria = $this->model->getDetallesCategoriaDB($id_categoria);
             $this->view->editCategoria($categoria);
-        }
+        } else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         $this->view->showCategorias($this->categorias);
     }
 
@@ -63,6 +73,8 @@ class CategoriasController{
     public function editCategoriaDB($id){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->model->editCategoriaDB($id, $_POST['tipo']);
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         header('Location: '.BASE_URL.'verCatalogoCategoria');
     }
 
@@ -71,6 +83,8 @@ class CategoriasController{
         $this->categorias = $this->model->getCategoriasDB();
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             $this->view->showCategorias($this->categorias);
+        else
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         $this->view->addNewCategoria($this->categorias);
     }
 
@@ -86,7 +100,7 @@ class CategoriasController{
                 $this->view->showCategorias($this->categorias);
             } 
         } else {
-            header('Location: '.BASE_URL.'verCatalogoCategoria');
+            $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         }
     }
 }

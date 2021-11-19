@@ -10,8 +10,8 @@
                 <a class="btn btn-danger" href="addNewVehiculo">Aceptar</a>
             {elseif $rama == "categorias"}
                 <a class="btn btn-danger" href="verCatalogoCategoria/?pagina={$pagina}">Aceptar</a>                
-            {elseif $rama == "404" || $rama == "loginOk" || $rama == "registroOk"}
-                <a class="btn btn-danger" href="homeCatalogo">Aceptar</a> 
+            {elseif $rama == "404" || $rama == "loginOk" || $rama == "registroOk" || $rama == "forbidden"}
+                <a class="btn btn-danger" href= "homeCatalogo">Aceptar</a> 
             {elseif $rama == "registro"}
                 <a class="btn btn-danger" href="registroNuevoUsuario">Aceptar</a> 
             {elseif $rama == "login"}
@@ -27,7 +27,7 @@
                 <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_cat}">Cancelar</a> 
             {elseif $rama == "delUser"}
                 <a class="btn btn-danger" href="eliminarUsuarioDB/{$id}">Aceptar</a>
-                <a class="btn btn-danger" href="adminUsers">Cancelar</a>         
+                <a class="btn btn-danger" href="adminUsers">Cancelar</a>
             {/if}
         </div>
     </div>

@@ -21,13 +21,14 @@ class CommentsView{
     }
 
    
-    function showComments($id){
+    function showComments($id, $fromCat = null){
         if ($this->session){
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
         } else {
             $this->smarty->assign('sessionRol', '-1');
         }
+        $this->smarty->assign('fromCat', $fromCat);
         $this->smarty->assign('user', $this->user);
         $this->smarty->assign('id', $id);
         $this->smarty->assign('flag', "ByVehicle");

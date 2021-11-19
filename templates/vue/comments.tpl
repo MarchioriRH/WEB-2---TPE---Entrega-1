@@ -6,7 +6,7 @@
                 <th><i :class="`${sort}`"></i><a :href="`javascript:getCommentsOrd('fecha', ${id}, '${order}')`">Fecha</a></th>
                 <th>Comentario</th>
                 <th><i :class="`${sortNumeric}`"></i><a :href="`javascript:getCommentsOrd('score', ${id}, '${order}')`">Puntuacion</a></th>
-                <th v-if="rol == '1'">Acciones</th>
+                <th colspan="2" v-if="rol == '1'">Acciones</th>
             </tr>
             <tr v-for="comment in comments">
                 <td>{{comment.nombre}}</td>

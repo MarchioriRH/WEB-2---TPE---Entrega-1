@@ -76,11 +76,12 @@ class VehiculosView{
     }
 
     // funcion que renderiza la ventana modal de edicion de un item
-    public function editVehiculo($vehiculo, $categorias, $id_categoria = null){
+    public function editVehiculo($vehiculo, $categorias, $pagina, $id_categoria = null){
         if ($this->session){
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
         }
+        $this->smarty->assign('pagina', $pagina);
         $this->smarty->assign('user', $this->user);
         $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('tituloEdit','Editar item');

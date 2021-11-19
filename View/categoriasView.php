@@ -47,7 +47,7 @@ class CategoriasView{
         if ($this->session){
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
-        }
+        }        
         $this->smarty->assign('user', $this->user);
         $this->smarty->assign('categoria',$categoria);
         $this->smarty->assign('tituloEdit','Editar Categoria');
