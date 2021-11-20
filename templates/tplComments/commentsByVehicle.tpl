@@ -12,12 +12,12 @@
                     {if $fromCat != null}
                         <a class="btn btn-danger btn-back" href="verCatalogoPorCategorias/{$fromCat}">Volver</a>
                     {else}
-                        <a class="btn btn-danger btn-back" href="verCatalogoVehiculos">Volver</a>
+                        <a class="btn btn-danger btn-back" href="verCatalogoVehiculos/?pagina={$pagina}">Volver</a>
                     {/if}
                 </div>
                 {if $session == 1}
                     <div class="btn-AddComment">
-                        <a class="btn btn-success btn-comment btn-sm" role="button" href="addComment/{$id}">Dejenos su comentario</a>
+                        <a class="btn btn-success btn-comment btn-sm" role="button" href="addComment/{$id}/?pagina={$pagina}">Dejenos su comentario</a>
                     </div>
                 {/if}
                 <div class="filterRadio">
@@ -50,7 +50,7 @@
                         </div>
                     </div>                     
                     <div class="filterButton">
-                                <button type="sumbit" class="btn btn-success" onClick="filterByScore({$id})">Filtrar</button>
+                        <button type="sumbit" class="btn btn-success" onClick="filterByScore({$id})">Filtrar</button>
                     </div>
                 </div>
                 

@@ -4,32 +4,37 @@ document.addEventListener('DOMContentLoaded', main);
 const API_URL = "api/comment";
 
 function addComment(e){
-    e.preventDefault();
-    let url = API_URL;
-    console.log(url);
-    var f = new Date();
+    e.preventDefault();    
     let id = document.querySelector("#id").innerHTML;
+
+    let url = API_URL + "/" + id;
+    console.log(url);
+    let f = new Date();
     let fecha = (f.getFullYear() + "/" + (f.getMonth() +1) + "/" + f.getDate());
-    const formData = new URLSearchParams(new FormData(this));
-    formData.append('fecha', fecha);
+    let formData = new URLSearchParams(new FormData(this));    
+    formData.append('fecha', fecha);    
+    data = JSON.stringify(Object.fromEntries(formData));
+    console.log(data);
     fetch (url, { 
         method : "POST",
-        body : formData,
+        body : data,
         })
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            if (data.status == "\"OK\""){
+            console.log(data.status);
+            if (data.status == 'OK'){
                 console.log("Comentario agregado con exito");
-                window.location.href = 'showComments/' + id;
+               // getComments(id);
             }
             else{
                 console.log("Error al agregar el comentario");
+                
             }
         })
         .catch(error => console.log(error));
     
-    window.location.href = 'showComments/' + id;
+    getComments(id);
 }  
 
 function main(){    

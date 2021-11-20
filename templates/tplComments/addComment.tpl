@@ -5,9 +5,10 @@
     <div class="modalMsge">
         <span class="title" id=flag hidden="hidden">{$flag}</span>
         <span class="title" id=id hidden="hidden">{$id}</span>
+        <span class="title" id=pagina hidden="hidden">{$pagina}</span>
         <h1>Dejenos su comentario</h1>
         <div class="form">
-            <form action="" enctype="multipart/form-data" id="form-comment" method="POST"> 
+            <form action="" id="form-comment" method="POST"> 
                 <div class="mb-2">
                     <input type="hidden" name="id_vehiculo" value="{$id}">
                 </div>
@@ -30,4 +31,6 @@
     </div>
 </section>
 <script type="text/javascript" src="js/comments/addComment.js"></script>
+<script type="text/javascript" src="js/comments/comments.js"></script>
+
 {include file="templates/tplGeneral/footer.tpl"}

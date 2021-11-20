@@ -40,16 +40,15 @@
                     <td>{$catalogo->marca}</td>
                     <td>{$catalogo->modelo}</td>
                     {if (!$session) && ($id_cat == null)}
-                        <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
+                        <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}/?pagina={$pagina}">Ver</a></td>
                     {elseif (!$session) && ($id_cat != null)}
-                        <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}/?fromCat={$id_cat}">Ver</a></td>
+                        <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}/?fromCat={$id_cat}&pagina={$pagina}">Ver</a></td>
                     {/if}
                     {* si NO esta la sesion iniciada y NO se viene de la vista por categoria, se muestra el enlace
                     por defecto para ver los detalles *}
                     {if (($rol == 0) && ($id_cat == null))}
                         {if $session}
                             <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
-                            <!--td><a class="btn btn-success btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td-->
                         {/if}
                         <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculo/{$catalogo->id_vehiculo}/?pagina={$pagina}">Mas detalles</a></td>
                     {elseif (($rol == 0) && ($id_cat != null))}
@@ -57,7 +56,6 @@
                         de detalles en categoria *}
                         {if $session}
                             <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}/?fromCat={$id_cat}">Ver</a></td>
-                            <!--td><a class="btn btn-success btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td-->
                         {/if}
                         <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}/?pagina={$pagina}">Mas detalles</a></td>
                     {/if}                   
@@ -66,14 +64,12 @@
                         {* si se viene de la vista por categoria, se muestran los links para editar desde esa vista, sino se muestran los de 
                         la vista general *}
                         {if ($id_cat != null)}
-                            <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}/?fromCat={$id_cat}">Ver</a></td>
-                            <!--td><a class="btn btn-success btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td-->
+                            <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}/?fromCat={$id_cat}&pagina={$pagina}">Ver</a></td>
                             <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculoEnCategoria/{$catalogo->id_vehiculo}/?pagina={$pagina}">Mas detalles</a></td>
                             <td><a class="btn btn-success btn-sm" role="button" href="editarVehiculoEnCategoria/{$catalogo->id_vehiculo}/?pagina={$pagina}">Editar</a></td>
                             <td><a class="btn btn-danger btn-sm" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo} sera eliminado de la base de datos." href="eliminarVehiculoDesdeCategoria/{$catalogo->id_vehiculo}/?pagina={$pagina}">Eliminar</a></td>
                         {else}
-                            <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}">Ver</a></td>
-                            <!--td><a class="btn btn-success btn-sm" role="button" href="addComment/{$catalogo->id_vehiculo}">Comentar</a></td-->
+                            <td><a class="btn btn-primary btn-sm" role="button" href="showComments/{$catalogo->id_vehiculo}/?pagina={$pagina}">Ver</a></td>
                             <td><a class="btn btn-secondary btn-sm" role="button" href="detallesVehiculo/{$catalogo->id_vehiculo}/?pagina={$pagina}">Mas detalles</a></td>
                             <td><a class="btn btn-success btn-sm" role="button" href="editarVehiculo/{$catalogo->id_vehiculo}/?pagina={$pagina}">Editar</a></td>
                             <td><a class="btn btn-danger btn-sm" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>¡ATENCION!</b><br>El vehiculo marca {$catalogo->marca}, modelo {$catalogo->modelo}  sera eliminado de la base de datos." href="eliminarVehiculo/{$catalogo->id_vehiculo}/?pagina={$pagina}">Eliminar</a></td>

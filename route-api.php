@@ -11,7 +11,7 @@ $router = new Router();
 $router->addRoute('comment/:ID', 'GET', 'ApiCommentsController', 'getComment');
 $router->addRoute('comments/byVehicle/:ID', 'GET', 'ApiCommentsController', 'getCommentsByVehiculoID');
 $router->addRoute('comment/:ID', 'DELETE', 'ApiCommentsController', 'deleteComment');
-$router->addRoute('comment', 'POST', 'ApiCommentsController', 'addComment');
+$router->addRoute('comment/:ID', 'POST', 'ApiCommentsController', 'addComment');
 $router->addRoute('comments/byOrder/:ID', 'GET', 'ApiCommentsController', 'getCommentsByOrder');
 $router->addRoute('comments/byScore/:ID', 'GET', 'ApiCommentsController', 'getCommentsByScore');
 $router->addRoute('comments/countByCriteria/:ID', 'GET', 'ApiCommentsController', 'getCountByCriteria');
