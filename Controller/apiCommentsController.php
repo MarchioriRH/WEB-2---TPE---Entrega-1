@@ -30,12 +30,11 @@ class ApiCommentsController{
             $this->view->response($comments, 200);
         }
         else 
-            $this->view->response("No comments found for the id = $id", 404);
-     
+            $this->view->response("No comments found for the id = $id", 404);     
     }
 
     public function getCommentsByVehiculoID($params = null){
-       $id = $params[':ID'];
+        $id = $params[':ID'];
         $comments = $this->model->getCommentsByVehiculoID($id);
         if ($comments){
             $this->view->response($comments, 200);
@@ -77,12 +76,8 @@ class ApiCommentsController{
     public function deleteComment($params = null){
         if($this->loginHelper->sessionStarted() && ($_SESSION['ROL'] == 1)){
             $id = $params[':ID'];
-            $comments = $this->model->deleteComment($id);
-            if ($comments){
-                $this->view->response("Comment deleted", 200);
-            }
-            else 
-                $this->view->response("No comments found with this ID", 404);
+            $this->model->deleteComment($id);           
+            $this->view->response("Comment deleted", 200);           
         }
         else {
             $this->view->response("You must be administrator to delete a comment", 401);

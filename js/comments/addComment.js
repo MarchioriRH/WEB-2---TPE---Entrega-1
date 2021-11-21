@@ -21,20 +21,21 @@ function addComment(e){
         })
         .then(response => response.json())
         .then(data => {
+            //console.log(response);
             console.log(data);
             console.log(data.status);
-            if (data.status == 'OK'){
+            if (data == 'Comment added'){
                 console.log("Comentario agregado con exito");
-               // getComments(id);
+                window.location.href ='showComments/' + id;
             }
             else{
                 console.log("Error al agregar el comentario");
-                
+                window.location.href = 'showComments/' + id;
             }
         })
         .catch(error => console.log(error));
     
-    getComments(id);
+    //getComments(id);
 }  
 
 function main(){    
