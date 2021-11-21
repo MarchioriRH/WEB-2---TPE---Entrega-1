@@ -20,7 +20,7 @@ class CommentsView{
             $this->user = null;
     }
 
-   
+    // Funcion encargada de mostrar la vista de los comentarios
     function showComments($id, $fromCat = null, $pagina = null){
         if ($this->session){
             $sessionRol = $_SESSION['ROL'];
@@ -38,6 +38,7 @@ class CommentsView{
         $this->smarty->display('templates/tplComments/commentsByVehicle.tpl');
     }
 
+    // Funcion encargada de mostrar la vista para agregar un comentario.
     public function addComment($id, $pagina){
         if ($this->session){
             $sessionRol = $_SESSION['ROL'];

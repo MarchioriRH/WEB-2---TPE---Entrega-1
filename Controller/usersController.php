@@ -37,6 +37,7 @@ class UsersController {
         $this->loginHelper->logOut();
     }
 
+    // Funcion encargada de llamar a la del view que renderiza el listado de usuarios.
     public function showUsuarios(){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
             $usuarios = $this->userModel->getUsuariosDB();
@@ -44,6 +45,7 @@ class UsersController {
         }    
     }
 
+    // Funcion que muestra el modal para editar el rol de un usuario.
     public function editarRolUsuario($idUsuario){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
             $usuarios = $this->userModel->getUsuariosDB();
@@ -54,6 +56,7 @@ class UsersController {
         }
     }
 
+    // Funcion que edita el rol de un usuario en la base de datos.
     public function editRolUsuarioDB($idUsuario){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
             $rol = $_POST['rol'];
@@ -63,6 +66,7 @@ class UsersController {
         }
     }
 
+    // Funcion que muestra el modal de advertencia al intentar eliminar un usuario.
     public function eliminarUsuario($idUsuario){
         $usuarios = $this->userModel->getUsuariosDB();        
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
@@ -72,6 +76,7 @@ class UsersController {
         $this->usersView->showUsuarios($usuarios, $this->loginHelper->sessionStarted());
     }
 
+    // Funcion para quitar un determinado usuario de la base de datos.
     public function eliminarUsuarioDB($idUsuario){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
             $usuario = $this->userModel->getUsuario($idUsuario);

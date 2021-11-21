@@ -1,4 +1,5 @@
 {include file="templates/tplGeneral/header.tpl"}
+{* Template para la renderizacion del listado de usuarios *}
     <div class="container">
         <h1>{$titulo}</h1>
         <table class="default">
@@ -11,6 +12,7 @@
                 <th>Eliminar</th>
             </tr>
             {foreach from=$usuarios item=$usuario}
+                {* Si el usuario esta actualmente logueado no se muestra en el listado de usuarios. *}
                 {if $usuario->mail == $userMail}
                     <tr class="ocultar">
                 {else}

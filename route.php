@@ -20,7 +20,7 @@ if (!empty($_GET['action'])) {
 // realiza el explode de la accion 
 $params = explode('/', $action);
 
-// se instancian las distintas categorias.
+// se instancian los distintos controladores.
 $categorias = new CategoriasController();
 $vehiculos = new VehiculosController();
 $users = new UsersController();
@@ -29,9 +29,11 @@ $comments = new CommentsController();
 
 // determina que camino seguir según la acción
 switch ($params[0]) {
+    // General
     case 'homeCatalogo': 
         $general->showHome(); 
         break;
+    // Usuarios
     case 'login': 
         $users->login(); 
         break;
@@ -63,6 +65,7 @@ switch ($params[0]) {
     case 'registroDB': 
         $users->registroNuevoUsuarioDB(); 
         break;
+    // Vehiculos
     case 'verCatalogoVehiculos': 
         $vehiculos->showVehiculos(); 
         break;
@@ -99,12 +102,14 @@ switch ($params[0]) {
     case 'insertNewVehiculoDB': 
         $vehiculos->insertNewVehiculoDB(); 
         break;
+    // Comentarios
     case 'showComments': 
         $comments->showComments($params[1]); 
         break;   
     case 'addComment': 
         $comments->addComment($params[1]); 
         break;
+    // Categorias
     case 'verCatalogoCategoria': 
         $categorias->showCategorias(); 
         break;
@@ -129,6 +134,7 @@ switch ($params[0]) {
     case 'verCatalogoPorCategorias': 
         $vehiculos->showVehiculosPorCategoria($params[1]); 
         break;
+    // Default    
     default: 
         $general->errorMsje404(); 
         break;

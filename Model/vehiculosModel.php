@@ -12,12 +12,14 @@ class VehiculosModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_vehiculos;charset=utf8', 'root', '');
     }
 
+    // Funcion que devuelve la cantidad de items en la BBDD para la paginacion.
     public function getCountItems(){
         $sentencia = $this->db->prepare("SELECT COUNT(*) FROM vehiculos");
         $sentencia->execute();
         return $sentencia->fetchColumn();
     }
 
+    // Funcion que devuelve la cantidad de items por categorias en la BBDD para la paginacion.
     public function getCountItemsByCat($id_cat){
         $sentencia = $this->db->prepare("SELECT COUNT(*) FROM vehiculos WHERE id_categoria = ?");
         $sentencia->execute(array($id_cat));
@@ -37,6 +39,7 @@ class VehiculosModel {
         return $vehiculos;
     }
 
+    // Funcion que devuelve los vehiculos de la BBDD de acuerdo a la categoria seleccionada.
     public function getVehiculosPorCatDB($id_cat){
         $sentencia = $this->db->prepare("SELECT vehiculos.*, categorias.tipo as Tipo FROM categorias RIGHT JOIN vehiculos ON vehiculos.id_categoria = categorias.id_categoria WHERE vehiculos.id_categoria = ?");
         //$sentencia->bindParam(1, $id_cat);

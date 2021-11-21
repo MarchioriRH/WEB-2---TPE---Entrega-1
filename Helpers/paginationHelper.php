@@ -6,12 +6,13 @@ const ITEMS_PAGE = 6;
 class PaginationHelper {
 
     private $vehiculosModel;
-    private $cantPaginas;
 
     function __construct(){
         $this->vehiculosModel = new VehiculosModel();
     }
 
+    // Funcion que devuelve la cantidad de paginas que hay en la base de datos de acuerdo
+    // a los cantidad maxima de filas que se pueden mostrar en una pagina.
     public function getCantPags($id_cat = null){
         $limit = ITEMS_PAGE; 
         if ($id_cat == null)   
@@ -22,6 +23,8 @@ class PaginationHelper {
         return $cantPaginas;
     }       
 
+    // Funcion encargada de calcular el offset de la consulta para saber donde empezar la
+    // siguiente consulta.
     public function getOffset(){
         $pagina = 1;
         if(isset($_GET['pagina'])){

@@ -4,11 +4,13 @@ document.addEventListener("DOMContentLoaded", main);
 
 const API_URL = "api/comment";
 
+// Estructura de la respuesta de la API via VUE.
 let apiResponse = new Vue({
     el: '#apiResponse',
     data: {
         comments: [],
     },
+    // Se declaran las variables que se usaran en la vista.
     props: {
         id : {
             type: String,
@@ -37,11 +39,13 @@ let apiResponse = new Vue({
     }
 });
 
+// Funcion encargada de obtener los comentarios de un vehiculo.
 function getComments(id) {
     let url = API_URL + "s/byVehicle/" + id;
     proccessResponse(url);
 }
 
+// Funcion encargada de filtrar los comentarios por puntaje.
 function filterByScore($id){
     let score = 0;
     if(document.querySelector('#inlineRadio1').checked){
@@ -62,6 +66,7 @@ function filterByScore($id){
     proccessResponse(url);
 }
 
+// Funcion para obtener los comentarios ordenados por fecha o puntaje y de forma ascendente o descendente.
 function getCommentsOrd(column, id, order) {
    
     if (order == "ASC") {
@@ -84,6 +89,7 @@ function getCommentsOrd(column, id, order) {
     proccessResponse(url);
 }
 
+// Funcion encargada de obtener la respuesta de la API y procesarla.
 async function proccessResponse(url) {
     let comments = [];
     try {
@@ -99,6 +105,7 @@ async function proccessResponse(url) {
     } 
 }
 
+// Funcion encargada de eliminar un comentario.
 async function deleteComment(idComment, idVehicle) {
     let url = API_URL + "/" + idComment;
     try {
@@ -115,6 +122,7 @@ async function deleteComment(idComment, idVehicle) {
     getComments(idVehicle);
 }
 
+// Funcion principal.
 function main() {
     getComments(document.querySelector('#id').value);
 }

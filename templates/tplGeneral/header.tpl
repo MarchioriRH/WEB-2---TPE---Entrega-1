@@ -39,6 +39,7 @@
                             <a class="dropdown-item" href="verCatalogoCategoria">Ver todas las categorias</a>
                         </ul>
                     </div>
+                    {* Si el usuario es administrador, se muestra el boton para consultar el listado de usuarios registrados. *}
                     {if $session && ($sessionRol == 1)} 
                         <li><a href="adminUsers">USUARIOS</a></li>
                     {/if}
@@ -51,6 +52,10 @@
                     {/if}
                 </ul>
             </div>
+            {* Se meuestra el nombre del ususario logueado. *}
+            {if $user != null}
+                <div class="userLogged"><span>{$user}</span></div>
+            {/if}
             {* menu de vista responsive *}
             <div class="btn_menu"> 
                 <div class="menu">
@@ -71,9 +76,6 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            {if $user != null}
-                <div class="userLogged"><span>{$user}</span></div>
-            {/if}
+            </div>            
         </div>
     </header>

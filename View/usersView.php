@@ -33,6 +33,7 @@ class UsersView {
         $this->smarty->display('templates/tplUsers/registro.tpl');
     }
 
+    // Funcion para mostrar la vista de los usuarios
     public function showUsuarios($usuarios, $session){
         if ($session){
             $sessionRol = $_SESSION['ROL'];
@@ -46,6 +47,7 @@ class UsersView {
         $this->smarty->display('templates/tplUsers/usuarios.tpl');
     }
 
+    // Funcion para mostrar la vista de cambio de rol de un usuario.
     public function editarRolUsuario($idUsuario, $roles, $user){
         if ($this->session){
             $sessionRol = $_SESSION['ROL'];

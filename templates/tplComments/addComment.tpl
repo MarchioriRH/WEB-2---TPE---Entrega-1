@@ -1,6 +1,5 @@
 {* Modal para carga de nuevo comentario *}
 {include file="templates/tplGeneral/header.tpl"}
-
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
     <div class="modalMsge">
         <span class="title" id=flag hidden="hidden">{$flag}</span>
@@ -31,6 +30,4 @@
     </div>
 </section>
 <script type="text/javascript" src="js/comments/addComment.js"></script>
-<script type="text/javascript" src="js/comments/comments.js"></script>
-
 {include file="templates/tplGeneral/footer.tpl"}

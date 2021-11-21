@@ -79,10 +79,12 @@
                 </tr>
             {/foreach}
         </table>
+        {* Paginado *}
         {if $pagina > 0}
             <div class="pagination justify-content-center">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
+                        {* Si pag = 1, se muestra el boton retroceso desactivado. *}
                         {if $pagina == 1}
                             <li class="page-item disabled">
                         {else}
@@ -94,6 +96,7 @@
                                 <span class="sr-only">Previous</span>
                             </a>
                         </li>
+                        {* Se muestra la cantidad de paginas *}
                         {for $i = 1 to $cantPags}
                             {if $pagina == $i}
                                 <li class="page-item active">
@@ -107,6 +110,7 @@
                                 </li>
                             {/if}
                         {/for}
+                        {* Si pag = cantPags, se muestra el boton avance desactivado. *}
                         {if $pagina == $cantPags}
                             <li class="page-item disabled">
                         {else}

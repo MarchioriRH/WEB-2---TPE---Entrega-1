@@ -32,6 +32,7 @@ class UsersModel {
         return $usuario;
     }
 
+    // Funcion que devuelve los roles de usuarios creados.
     public function getRolesUsuario(){
         $sentencia = $this->db->prepare("SELECT rol as rolUsuario FROM usuarios GROUP BY rol");
         $sentencia->execute();        
@@ -39,6 +40,7 @@ class UsersModel {
         return $roles;
     }
 
+    // Funcion que devuelve un usuario determinado.
     public function getUsuario($idUsuario){
         $sentencia = $this->db->prepare("SELECT * FROM usuarios WHERE id_usuario = ?");
         $sentencia->bindParam(1, $idUsuario, PDO::PARAM_INT);
@@ -47,11 +49,13 @@ class UsersModel {
         return $usuario;
     }
 
+    // Funcion encargada de actualizar el rol de un usuario.
     public function editRolUsuarioDB($idUsuario, $rol){
         $sentencia2 = $this->db->prepare("UPDATE usuarios SET rol = ? WHERE id_usuario = ?");
         $sentencia2->execute(array($rol, $idUsuario));
     }
 
+    // Funcion encargada de eliminar un determinado usuario.
     public function eliminarUsuarioDB($idUsuario){
         $sentencia = $this->db->prepare("DELETE FROM usuarios WHERE id_usuario = ?");
         $sentencia->bindParam(1, $idUsuario);

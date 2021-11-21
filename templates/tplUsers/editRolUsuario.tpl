@@ -1,4 +1,5 @@
 <section id="modalContainerMensaje" class="modalContainerMensaje mostrar">
+    {* Template para renderizar el modal de cambio de rol de usuario *}
     <div class="modalMsge">
         <h1>{$tituloEdit} {$user->nombre} {$user->apellido}</h1>
         <div class="form">           
