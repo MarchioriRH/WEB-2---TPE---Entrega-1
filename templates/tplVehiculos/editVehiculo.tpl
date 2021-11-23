@@ -3,7 +3,7 @@
     <div class="modalMsge">
         <h1>{$tituloEdit}</h1>
         <div class="form">
-            <form action="editVehiculoDB/{$vehiculo->id_vehiculo}/?pagina={$pagina}" method="post">
+            <form action="editVehiculoDB/{$vehiculo->id_vehiculo}/?pagina={$pagina}" method="post" enctype="multipart/form-data">
                 <div class="mb-2">  
                     <select class="form-select" aria-label="Default select example" name="tipo">
                         <option selected="true" value={$vehiculo->id_categoria} required>{$vehiculo->Tipo}</option>
@@ -34,6 +34,9 @@
                 {if ($id_categoria != null)}
                     <input type="hidden" class="form-control"  name="id_categoria" value="{$id_categoria}">
                 {/if}
+                <div class="mb-2">               
+                    <input type="file" name="input_name" id="imageToUpload" required>
+                </div>
                 <div class="btn-detalle">
                     <button type="submit" class="btn btn-danger">Guardar</button>
                     {* si se viene de la vista de categoria se muestra el catalogo con la seleccion por categoria aplicada,

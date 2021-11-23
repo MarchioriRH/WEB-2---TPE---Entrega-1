@@ -10,11 +10,13 @@ class VehiculosView{
     private $sessionInitiated;
     private $session;
     private $user;
+    private $url_base;
 
     // se instancian las clases incluidas
     public function __construct(){
         $this->smarty = new Smarty();
         $this->sessionInitiated = new LoginHelpers();
+        $this->url_base = BASE_URL;
         $this->session = $this->sessionInitiated->sessionStarted();
         if (isset($_SESSION['NOMBRE']) && isset($_SESSION['NOMBRE']))
             $this->user = $_SESSION['NOMBRE'] . ' ' . $_SESSION['APELLIDO'];
@@ -58,17 +60,20 @@ class VehiculosView{
     }
 
     // funcion encargada de renderizar los detalles de un item especifico
-    public function showDetallesVehiculo($detalles, $id_cat = null){
+    public function showDetallesVehiculo($detalles, $id_cat = null, $imagen = null, $pagina){
         if ($this->session){
             $sessionRol = $_SESSION['ROL'];
             $this->smarty->assign('sessionRol', $sessionRol);
         } else {
             $this->smarty->assign('sessionRol', -1);
         }
+        $this->smarty->assign('BASE_URL', $this->url_base);
         $this->smarty->assign('user', $this->user);
         // se asigna el nombre tituloDetalle al titulo para mostar
         $this->smarty->assign('tituloDetalle','Detalles');
+        $this->smarty->assign('imagen', $imagen);
         // se asigna al nombre detalles al array que contine los datos del item
+        $this->smarty->assign('pagina',$pagina);
         $this->smarty->assign('detalles',$detalles);
         $this->smarty->assign('id_cat', $id_cat);
         // se renderiza la ventana modal donde se muestran los detalles de un item

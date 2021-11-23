@@ -39,6 +39,15 @@ class VehiculosModel {
         return $vehiculos;
     }
 
+    public function getVehiculosSinLimDB(){
+        // select que realiza el JOIN de los datos de la BBDD de vehiculos y los relaciona con al de
+        // categorias
+        $sentencia = $this->db->prepare("SELECT vehiculos.*, categorias.tipo as Tipo FROM categorias RIGHT JOIN vehiculos ON vehiculos.id_categoria = categorias.id_categoria ORDER BY vehiculos.id_categoria");
+        $sentencia->execute();
+        $vehiculos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $vehiculos;
+    }
+
     // Funcion que devuelve los vehiculos de la BBDD de acuerdo a la categoria seleccionada.
     public function getVehiculosPorCatDB($id_cat){
         $sentencia = $this->db->prepare("SELECT vehiculos.*, categorias.tipo as Tipo FROM categorias RIGHT JOIN vehiculos ON vehiculos.id_categoria = categorias.id_categoria WHERE vehiculos.id_categoria = ?");
@@ -57,6 +66,13 @@ class VehiculosModel {
         return $detalles;
     }
 
+    public function getImagenVehiculoDB($id_vehiculo){
+        $sentencia = $this->db->prepare("SELECT pathh FROM imagenes WHERE fk_id_vehiculo = ?");
+        $sentencia->execute(array($id_vehiculo));
+        $imagen = $sentencia->fetchColumn();
+        return $imagen;
+    }
+
     // funcion para eliminar un item de la BBDD
     public function deleteVehiculoDB($id_vehiculo){
         $sentencia = $this->db->prepare("DELETE FROM vehiculos WHERE id_vehiculo = ?");
@@ -72,8 +88,30 @@ class VehiculosModel {
     }
 
     // se guardan en la BBDD los datos editados
-    public function editVehiculoDB($id, $tipo, $marca, $modelo, $anio, $kilometros, $precio){   
+    public function editVehiculoDB($id, $tipo, $marca, $modelo, $anio, $kilometros, $precio, $imagen = null){   
+        if($imagen!=null){ 
+            $sentencia1 = $this->db->prepare("INSERT INTO imagenes (fk_id_vehiculo, pathh) VALUES(?, ?)");
+            $sentencia1->execute(array($id, $imagen));
+        } 
         $sentencia = $this->db->prepare("UPDATE vehiculos SET marca = ?, modelo = ?, anio = ?, kilometros = ?, precio = ?, id_categoria = ? WHERE id_vehiculo = ?");
         $sentencia->execute(array($marca, $modelo, $anio, $kilometros, $precio, $tipo, $id));
+    }
+
+    public function uploadImagen($imagen){
+        $carpeta = 'img/vehiculos/' . uniqid() . '.jpg';
+        move_uploaded_file($imagen, $carpeta);
+        return $carpeta;
+    }
+
+    public function selectImagenABorrar($id){//OK
+        $sentencia = $this->db->prepare("SELECT pathh FROM imagenes WHERE fk_id_vehiculo = ?");
+        $sentencia->execute(array($id));
+        $imagen = $sentencia->fetch(PDO::FETCH_OBJ);
+        return $imagen;
+    }
+
+    public function deleteImagenpathh($id){//OK
+        $sentencia = $this->db->prepare("DELETE FROM imagenes WHERE fk_id_vehiculo=?");
+        $sentencia->execute(array($id));
     }
 }

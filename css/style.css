@@ -136,6 +136,22 @@ ul.navigation {
 }
 /* todos los "ul" que esten dentro de "menu" */
 
+img{
+  height: auto;
+  width: auto;
+  max-width: 25vw;
+  max-height: 25vh;
+}
+
+.imagenes-detalle{
+  margin-top: 3vh;
+  position: relative;
+  height: 30vh;
+  width: 20vw;
+  justify-content: center;
+  align-items: center;
+}
+
 /* si tiene tambien la clase show */
 ul.navigation.show {
   display: flex;

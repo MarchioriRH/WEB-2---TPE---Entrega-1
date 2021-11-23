@@ -59,11 +59,21 @@ class VehiculosController{
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal
     public function showDetallesVehiculo($id_vehiculo){
-        $this->showVehiculos();
+        //$this->showVehiculos();
+        // se obtiene el item seleccionado del listado de vehiculos de la BBDD
+        //$detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
+        // se renderiza el modal de detalles
+        //$this->vehiculosView->showDetallesVehiculo($detalles);  
+        
+        $this->vehiculos = $this->vehiculosModel->getVehiculosSinLimDB();
         // se obtiene el item seleccionado del listado de vehiculos de la BBDD
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
+        $imagen = $this->vehiculosModel->getImagenVehiculoDB($id_vehiculo);
         // se renderiza el modal de detalles
-        $this->vehiculosView->showDetallesVehiculo($detalles);       
+        $this->vehiculosView->showDetallesVehiculo($detalles, null, $imagen,$this->pagina);
+        $cantPags = $this->paginationHelper->getCantPags();
+        // se carga como fondo el listado de vehiculos
+        $this->vehiculosView->showVehiculos($this->vehiculos, $cantPags, $this->pagina);
     }
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal
@@ -160,9 +170,25 @@ class VehiculosController{
     // al model para cargar en la BBDD
     public function editVehiculoDB($id){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
-            $this->vehiculosModel->editVehiculoDB($id, $_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
-        else
+            if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" || $_FILES['input_name']['type'] == "image/png"){
+                $imagen = $_FILES["input_name"]["tmp_name"];
+                $linkImagen = $this->vehiculosModel->selectImagenABorrar($id);
+                if($linkImagen != null){
+                    $link = $linkImagen->pathh;
+                    unlink($link);
+                    $this->vehiculosModel->deleteImagenpathh($id);
+                    
+                }
+                $carpeta = $this->vehiculosModel->uploadImagen($imagen);
+                $this->vehiculosModel->editVehiculoDB($id, $_POST['tipo'], $_POST['marca'],$_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio'], $carpeta);
+            }
+            else{
+                $this->vehiculosModel->editVehiculoDB($id, $_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
+            }
+        else{
             $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
+        }
+            
         if (($_POST['id_categoria']) != null)
             $this->showVehiculosPorCategoria($_POST['id_categoria']);
         else
