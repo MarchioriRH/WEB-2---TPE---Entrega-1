@@ -14,11 +14,11 @@
                 <td>{$detalles->precio}</td>
             </tr>
         </table>
-        <div class="imagenes-detalle">
-            
-            <img class="imagen-detalle" src="{$BASE_URL}{$imagen}"/>
-            
-        </div>
+        <figure>
+            <!--div class="imagenes-detalle"-->
+                <img class="imagen-detalle" src="{$BASE_URL}{$imagen}"/>
+            <!--/div-->
+        </figure>
         <div class="btn-detalle">
             {* si se viene desde la vista por categorias, el boton volver muestra nuevamente el catalo por categorias, 
                caso contrario, se muestra el catalogo general por vehiculos *}

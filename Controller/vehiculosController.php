@@ -177,7 +177,6 @@ class VehiculosController{
                     $link = $linkImagen->pathh;
                     unlink($link);
                     $this->vehiculosModel->deleteImagenpathh($id);
-                    
                 }
                 $carpeta = $this->vehiculosModel->uploadImagen($imagen);
                 $this->vehiculosModel->editVehiculoDB($id, $_POST['tipo'], $_POST['marca'],$_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio'], $carpeta);
