@@ -187,14 +187,18 @@ class VehiculosController{
     // al model para cargar en la BBDD
     public function editVehiculoDB($id_vehiculo){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
+            // se verifica que haya una imagen cargada
             if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" || $_FILES['input_name']['type'] == "image/png"){
                 $imagen = $_FILES["input_name"]["tmp_name"];
+                // se verifica si el item tiene una imagen asociada.
                 $linkImagen = $this->vehiculosModel->getImagenVehiculoDB($id_vehiculo);
+                // si hay una imagen asociada, se elimina el link y la imagen.
                 if($linkImagen != null){
                     $link = $linkImagen->pathh;
                     unlink($link);
                     $this->vehiculosModel->deleteImagenpathh($id_vehiculo);
                 }
+                // se carga la imagen.
                 $carpeta = $this->vehiculosModel->uploadImagen($imagen);
                 $this->vehiculosModel->editVehiculoDB($id_vehiculo, $_POST['tipo'], $_POST['marca'],$_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio'], $carpeta);
             }
@@ -241,6 +245,5 @@ class VehiculosController{
         } else {
             $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         }
-    }
-    
+    }    
 }
