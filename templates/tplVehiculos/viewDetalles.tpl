@@ -16,7 +16,7 @@
         </table>
         {if $imagen}
             <figure>
-                <img class="imagen-detalle" src="{$BASE_URL}{$imagen}"/>               
+                <img class="img-fluid" src="{$BASE_URL}{$imagen}"/>               
             </figure>
         {/if}
         <div class="btn-detalle">

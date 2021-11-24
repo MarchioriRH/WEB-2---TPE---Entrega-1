@@ -141,15 +141,6 @@ img{
   width: auto;
 }
 
-.imagen-detalle{
-  margin-top: 3vh;
-  position: relative;
-  height: 45vh;
-  width: 36vw;
-  justify-content: center;
-  align-items: center;
-}
-
 /* si tiene tambien la clase show */
 ul.navigation.show {
   display: flex;
