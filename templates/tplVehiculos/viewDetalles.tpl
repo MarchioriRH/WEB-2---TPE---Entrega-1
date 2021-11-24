@@ -14,16 +14,16 @@
                 <td>{$detalles->precio}</td>
             </tr>
         </table>
-        <figure>
-            <!--div class="imagenes-detalle"-->
-                <img class="imagen-detalle" src="{$BASE_URL}{$imagen}"/>
-            <!--/div-->
-        </figure>
+        {if $imagen}
+            <figure>
+                <img class="imagen-detalle" src="{$BASE_URL}{$imagen}"/>               
+            </figure>
+        {/if}
         <div class="btn-detalle">
             {* si se viene desde la vista por categorias, el boton volver muestra nuevamente el catalo por categorias, 
                caso contrario, se muestra el catalogo general por vehiculos *}
             {if ($id_cat != null)}
-                <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_cat}">Volver</a>
+                <a class="btn btn-danger" href="verCatalogoPorCategorias/{$id_cat}/?pagina={$pagina}">Volver</a>
             {else}
                 <a class="btn btn-danger" href="verCatalogoVehiculos/?pagina={$pagina}">Volver</a>
             {/if}

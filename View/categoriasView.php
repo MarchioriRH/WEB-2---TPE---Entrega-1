@@ -18,7 +18,6 @@ class CategoriasView{
             $this->user = $_SESSION['NOMBRE'] . ' ' . $_SESSION['APELLIDO'];
         else
             $this->user = null;
-
     }
 
     // funcion encargada de renderizar el listado de categorias

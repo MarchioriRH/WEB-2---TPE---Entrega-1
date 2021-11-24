@@ -1,9 +1,10 @@
 <?php
-
 class CategoriasModel {
     // clase Model de Categorias, encargada del trafico de datos desde la BBDD de vehiculos
     // se declara variable
     private $db;
+    private $vehiculosModel;
+    private $apiCommentsModel;
 
     // se realiza la coneccion mediante PDO con la BBDD
     public function __construct(){
@@ -21,10 +22,7 @@ class CategoriasModel {
     }
 
     // funcion encargada de eliminar una categoria de la BBDD mediante el id
-    public function deleteCategoriaDB($id_categoria){
-        $sentencia1 = $this->db->prepare("DELETE FROM vehiculos WHERE id_categoria = ?");
-        $sentencia1->bindParam(1, $id_categoria, PDO::PARAM_INT);
-        $sentencia1->execute();
+    public function deleteCategoriaDB($id_categoria){        
         $sentencia2 = $this->db->prepare("DELETE FROM categorias WHERE id_categoria = ?");
         $sentencia2->bindParam(1, $id_categoria, PDO::PARAM_INT);
         $sentencia2->execute();

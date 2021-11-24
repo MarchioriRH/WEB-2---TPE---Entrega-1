@@ -91,7 +91,7 @@
                             <li class="page-item">
                         {/if}
                             <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$pagina - 1}" {else}
-                                href="verCatalogoCategoria/?pagina={$pagina - 1}" {/if} aria-label="Previous" >
+                                href="verCatalogoPorCategorias/{$id_cat}/?pagina={$pagina - 1}" {/if} aria-label="Previous" >
                                 <span aria-hidden="true">&laquo;</span>
                                 <span class="sr-only">Previous</span>
                             </a>
@@ -101,12 +101,12 @@
                             {if $pagina == $i}
                                 <li class="page-item active">
                                     <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$i}" {else}
-                                    href="verCatalogoCategoria/?pagina={$i}" {/if}>{$i}<span class="sr-only">(current)</span></a>
+                                    href="verCatalogoPorCategorias/{$id_cat}/?pagina={$i}" {/if}>{$i}<span class="sr-only">(current)</span></a>
                                 </li>
                             {else}
                                 <li class="page-item">
                                     <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$i}" {else}
-                                    href="verCatalogoCategoria/?pagina={$i}" {/if}>{$i}</a>
+                                    href="verCatalogoPorCategorias/{$id_cat}/?pagina={$i}" {/if}>{$i}</a>
                                 </li>
                             {/if}
                         {/for}
@@ -117,7 +117,7 @@
                             <li class="page-item">
                         {/if}
                             <a class="page-link" {if $id_cat == null} href="verCatalogoVehiculos/?pagina={$pagina + 1}" {else}
-                                href="verCatalogoCategoria/?pagina={$pagina + 1}" {/if} aria-label="Next">
+                                href="verCatalogoPorCategorias/{$id_cat}/?pagina={$pagina + 1}" {/if} aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="sr-only">Next</span>
                             </a>

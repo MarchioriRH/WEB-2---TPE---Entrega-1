@@ -59,5 +59,11 @@ class ApiCommentsModel{
         $sentencia = $this->db->prepare("DELETE FROM comments WHERE id_comment = ?");
         $sentencia->execute(array($id));
     }
+
+    // Funcion encargada de eliminar todos los comentarios de un vehiculo.
+    public function deleteAllComments($id){
+        $sentencia = $this->db->prepare("DELETE FROM comments WHERE id_vehiculo = ?");
+        $sentencia->execute(array($id));
+    }
         
 }

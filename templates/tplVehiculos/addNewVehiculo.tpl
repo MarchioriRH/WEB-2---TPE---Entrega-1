@@ -27,6 +27,9 @@
                 <div class="mb-2">       
                     <input type=number class="form-control" placeholder="Precio" name="precio" required>
                  </div>
+                 <div class="mb-2">       
+                    <p>*Para agregar una imagen, ve al menu "Editar Item"</p>
+                 </div>
                  <div class="btn-detalle">
                     <button type="submit" class="btn btn-danger">Guardar</button>
                     <a class="btn btn-danger" href="verCatalogoVehiculos/?pagina={$pagina}">Cancelar</a>

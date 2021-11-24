@@ -4,6 +4,7 @@ include_once "./View/VehiculosView.php";
 include_once "./Model/VehiculosModel.php";
 include_once "GeneralController.php";
 include_once "Helpers/paginationHelper.php";
+include_once "Model/apiCommentsModel.php";
 const RAMAVE = "vehiculos";
 const RAMADELVE = "eliminarVehiculo";
 const RAMADELVECAT = "eliminarVehiculoCat";
@@ -22,17 +23,21 @@ class VehiculosController{
     private $loginHelper;
     private $paginationHelper;
     private $pagina;
+    private $commentsModel;
+    private $limit;
     
     
 
     // se instancian las clases a utilizar y se cargan los arreglos de vehiculos y categorias
     public function __construct(){
+        $this->commentsModel = new ApiCommentsModel();
         $this->vehiculosView = new VehiculosView();
         $this->vehiculosModel = new VehiculosModel();
         $this->generalView = new GeneralView();
         $this->categoriasModel = new CategoriasModel();
         $this->loginHelper = new LoginHelpers();
         $this->paginationHelper = new PaginationHelper();
+        $this->limit = ITEMS_PAGINA;
         if (isset($_GET['pagina']))
             $this->pagina = $_GET['pagina'];
         else
@@ -41,10 +46,9 @@ class VehiculosController{
    
     // funcion encargada de mostar el listado de items disponibles
     public function showVehiculos(){
-        $limit = ITEMS_PAGINA;
         $offset = $this->paginationHelper->getOffset();
         $cantPags = $this->paginationHelper->getCantPags();       
-        $vehiculos = $this->vehiculos = $this->vehiculosModel->getVehiculosDB($limit, $offset);
+        $vehiculos = $this->vehiculos = $this->vehiculosModel->getVehiculosDB($this->limit, $offset);
         $this->vehiculosView->showVehiculos($vehiculos, $cantPags, $this->pagina);
     }
 
@@ -52,28 +56,20 @@ class VehiculosController{
     // que cumplen con esa condicion
     public function showVehiculosPorCategoria($id_cat){
         $vehiculosporcat = [];
-        $vehiculosporcat = $this->vehiculosModel->getVehiculosPorCatDB($id_cat);
+        $vehiculosporcat = $this->vehiculosModel->getVehiculosPorCatDB($id_cat, $this->limit, $this->paginationHelper->getOffset());
         $cantPags = $this->paginationHelper->getCantPags($id_cat);        
         $this->vehiculosView->showVehiculos($vehiculosporcat, $cantPags, $this->pagina, $id_cat);
     }
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal
     public function showDetallesVehiculo($id_vehiculo){
-        //$this->showVehiculos();
-        // se obtiene el item seleccionado del listado de vehiculos de la BBDD
-        //$detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
-        // se renderiza el modal de detalles
-        //$this->vehiculosView->showDetallesVehiculo($detalles);  
-        
-        $this->vehiculos = $this->vehiculosModel->getVehiculosSinLimDB();
+        $this->showVehiculos();
         // se obtiene el item seleccionado del listado de vehiculos de la BBDD
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
+        // se obtiene la imagen del item seleccionado
         $imagen = $this->vehiculosModel->getImagenVehiculoDB($id_vehiculo);
         // se renderiza el modal de detalles
-        $this->vehiculosView->showDetallesVehiculo($detalles, null, $imagen,$this->pagina);
-        $cantPags = $this->paginationHelper->getCantPags();
-        // se carga como fondo el listado de vehiculos
-        $this->vehiculosView->showVehiculos($this->vehiculos, $cantPags, $this->pagina);
+        $this->vehiculosView->showDetallesVehiculo($detalles, null, $imagen->pathh, $this->pagina);        
     }
 
     // funcion para renderizar los detalles de un item especifico, se despliega en un modal
@@ -81,8 +77,12 @@ class VehiculosController{
         // se obtiene el item seleccionado del listado de vehiculos de la BBDD
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
         $id_categoria = $detalles->id_categoria;
-        // se renderiza el modal de detalles
-        $this->vehiculosView->showDetallesVehiculo($detalles, $id_categoria);
+        $linkImagen = $this->vehiculosModel->getImagenVehiculoDB($id_vehiculo);
+        if($linkImagen)
+            // se renderiza el modal de detalles
+            $this->vehiculosView->showDetallesVehiculo($detalles, $id_categoria, $linkImagen->pathh, $this->pagina);
+        else
+            $this->vehiculosView->showDetallesVehiculo($detalles, $id_categoria, null, $this->pagina);
         // se carga como fondo el listado de vehiculos
         $this->showVehiculosPorCategoria($id_categoria);
     }
@@ -103,8 +103,16 @@ class VehiculosController{
 
     // funcion encargada de hacer el llamado para eliminar un item de la BBDD
     public function deleteVehiculoDB($id_vehiculo){
-        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
+            $linkImagen = $this->vehiculosModel->getImagenVehiculoDB($id_vehiculo);
+            if($linkImagen != null){
+                $link = $linkImagen->pathh;
+                unlink($link);
+                $this->vehiculosModel->deleteImagenpathh($id_vehiculo);
+            }
+            $this->commentsModel->deleteAllComments($id_vehiculo);
             $this->vehiculosModel->deleteVehiculoDB($id_vehiculo);
+        }
         else
             $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         $this->showVehiculos();
@@ -117,8 +125,9 @@ class VehiculosController{
         $marca = $vehiculo->marca;
         $modelo = $vehiculo->modelo;
         $id_categoria = $vehiculo->id_categoria;
-        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){            
             $this->generalView->showMsje(RAMADELVECAT, "El vehiculo $marca, $modelo, sera eliminado de la base de datos. \n ¿Esta seguro?", $id_vehiculo, $id_categoria);
+        }
         else
             $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         $id_categoria = $vehiculo->id_categoria;
@@ -129,8 +138,16 @@ class VehiculosController{
     // desde la vista por categoria
     public function deleteVehiculoDesdeCategoriaDB($id_vehiculo){
         $detalles = $this->vehiculosModel->getDetallesVehiculoDB($id_vehiculo);
-        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
+        if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1){
+            $linkImagen = $this->vehiculosModel->getImagenVehiculoDB($id_vehiculo);
+            if($linkImagen != null){
+                $link = $linkImagen->pathh;
+                unlink($link);
+                $this->vehiculosModel->deleteImagenpathh($id_vehiculo);
+            }
+            $this->commentsModel->deleteAllComments($id_vehiculo);
             $this->vehiculosModel->deleteVehiculoDB($id_vehiculo);
+        }
         else
             $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         $id_categoria = $detalles[0]->id_categoria;
@@ -168,21 +185,21 @@ class VehiculosController{
 
     // funcion encargada de enviar los datos cargados en el modal de edicion
     // al model para cargar en la BBDD
-    public function editVehiculoDB($id){
+    public function editVehiculoDB($id_vehiculo){
         if ($this->loginHelper->sessionStarted() && $_SESSION['ROL'] == 1)
             if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" || $_FILES['input_name']['type'] == "image/png"){
                 $imagen = $_FILES["input_name"]["tmp_name"];
-                $linkImagen = $this->vehiculosModel->selectImagenABorrar($id);
+                $linkImagen = $this->vehiculosModel->getImagenVehiculoDB($id_vehiculo);
                 if($linkImagen != null){
                     $link = $linkImagen->pathh;
                     unlink($link);
-                    $this->vehiculosModel->deleteImagenpathh($id);
+                    $this->vehiculosModel->deleteImagenpathh($id_vehiculo);
                 }
                 $carpeta = $this->vehiculosModel->uploadImagen($imagen);
-                $this->vehiculosModel->editVehiculoDB($id, $_POST['tipo'], $_POST['marca'],$_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio'], $carpeta);
+                $this->vehiculosModel->editVehiculoDB($id_vehiculo, $_POST['tipo'], $_POST['marca'],$_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio'], $carpeta);
             }
             else{
-                $this->vehiculosModel->editVehiculoDB($id, $_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
+                $this->vehiculosModel->editVehiculoDB($id_vehiculo, $_POST['tipo'], $_POST['marca'], $_POST['modelo'], $_POST['anio'], $_POST['kms'], $_POST['precio']);
             }
         else{
             $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);

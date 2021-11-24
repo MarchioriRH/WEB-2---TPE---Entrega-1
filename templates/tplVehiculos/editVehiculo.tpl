@@ -34,8 +34,10 @@
                 {if ($id_categoria != null)}
                     <input type="hidden" class="form-control"  name="id_categoria" value="{$id_categoria}">
                 {/if}
-                <div class="mb-2">               
-                    <input type="file" name="input_name" id="imageToUpload" required>
+                <div class="mb-2">   
+                    <label for="formFile" class="form-label">Si lo desea, cargue una imagen  para el vehiculo</label>
+                    <input class="form-control" type="file" name="input_name" id="imageToUpload">            
+                    <!--input type="file" name="input_name" id="imageToUpload" required-->
                 </div>
                 <div class="btn-detalle">
                     <button type="submit" class="btn btn-danger">Guardar</button>
