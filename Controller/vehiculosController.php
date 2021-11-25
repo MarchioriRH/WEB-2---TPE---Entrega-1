@@ -177,6 +177,11 @@ class VehiculosController{
             $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         // se obtiene el valor de la categoria a la que pertenece el item
         $id_categoria = $vehiculo->id_categoria;
+        // si no esta creada la carpeta donde se almacenan las imagenes asociadas a los items, se crea.
+        $micarpeta = BASE_URL.'img/vehiculos';
+        if (!file_exists($micarpeta)) {
+            mkdir($micarpeta, 0777, true);
+        }
         // se renderizan los datos en un modal para su edicion
         $this->vehiculosView->editVehiculo($vehiculo, $this->categorias, $this->pagina, $id_categoria);
         // se carga como fondo el listado de vehiculos filtrados por categoria
