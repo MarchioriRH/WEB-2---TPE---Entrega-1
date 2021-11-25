@@ -178,9 +178,9 @@ class VehiculosController{
         // se obtiene el valor de la categoria a la que pertenece el item
         $id_categoria = $vehiculo->id_categoria;
         // si no esta creada la carpeta donde se almacenan las imagenes asociadas a los items, se crea.
-        $micarpeta = BASE_URL.'img/vehiculos';
-        if (!file_exists($micarpeta)) {
-            mkdir($micarpeta, 0777, true);
+        $carpetaImagenes = BASE_URL.'img/vehiculos';
+        if (!file_exists($carpetaImagenes)) {
+            mkdir($carpetaImagenes, 0777, true);
         }
         // se renderizan los datos en un modal para su edicion
         $this->vehiculosView->editVehiculo($vehiculo, $this->categorias, $this->pagina, $id_categoria);
