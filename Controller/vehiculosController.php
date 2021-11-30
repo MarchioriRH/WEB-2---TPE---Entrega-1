@@ -9,6 +9,7 @@ const RAMAVE = "vehiculos";
 const RAMADELVE = "eliminarVehiculo";
 const RAMADELVECAT = "eliminarVehiculoCat";
 const RAMAFORBIDDEN = "forbidden";
+const RAMAFINDCONTENT = "inputNull";
 const ITEMS_PAGINA = 6;
 
 class VehiculosController{
@@ -250,5 +251,17 @@ class VehiculosController{
         } else {
             $this->generalView->showMsje(RAMAFORBIDDEN, "403 - Forbidden", null, null, $this->pagina);
         }
-    }    
+    }  
+    
+    public function findContent(){
+        
+        if ((!empty($_POST['text']) || !isset($_POST['inputCampor']))){
+            $vehiculos = $this->vehiculosModel->findContent($_POST['text'], $_POST['inputCampo']); 
+            $this->vehiculosView->showVehiculos($vehiculos, null, $this->pagina);
+        }
+        else {
+            $this->showVehiculos();
+            $this->generalView->showMsje(RAMAFINDCONTENT, "El campo de busqueda no puede estar vacio.", null, null, $this->pagina);
+        }
+    }
 }

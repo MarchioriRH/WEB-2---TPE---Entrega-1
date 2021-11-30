@@ -28,6 +28,8 @@
             {elseif $rama == "delUser"}
                 <a class="btn btn-danger" href="eliminarUsuarioDB/{$id}">Aceptar</a>
                 <a class="btn btn-danger" href="adminUsers">Cancelar</a>
+            {elseif $rama == "inputNull"}
+                <a class="btn btn-danger" href="verCatalogoVehiculos/?pagina={$pagina}">Aceptar</a> 
             {/if}
         </div>
     </div>

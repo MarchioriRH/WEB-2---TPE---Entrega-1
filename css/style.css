@@ -167,7 +167,8 @@ ul.navigation li:hover {
 
 .btn {
   line-height: 2.6;
-  border:none;
+  /*border:none;*/
+  border-color: black;
   font-size: 1rem;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
 }

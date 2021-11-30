@@ -3,6 +3,7 @@
 include_once './Model/UsersModel.php';
 include_once './View/UsersView.php';
 include_once 'GeneralController.php';
+include_once 'Model/apiCommentsModel.php';
 const KEYWORD = 'yourcar';
 const RAMALOG = 'login';
 const RAMALOGOK = 'loginOk';
@@ -17,6 +18,7 @@ class UsersController {
     private $generalView;
     private $userModel;
     private $loginHelper;
+    private $commentsModel;
     
    
     // se istancian las distintas clases
@@ -25,6 +27,7 @@ class UsersController {
         $this->generalView = new GeneralView();
         $this->userModel = new UsersModel;
         $this->loginHelper = new LoginHelpers();
+        $this->commentsModel = new ApiCommentsModel();
     }
 
     // funcion encargada de llamar a la del view que renderiza el modal de login
@@ -83,6 +86,7 @@ class UsersController {
             if ($usuario->mail == $_SESSION['EMAIL']){
                 // TODO: hay que eliminar antes los comentarios asociados al usuario
                 $this->loginHelper->logOut();
+                $this->commentsModel->deleteCommentsByUser($idUsuario);
                 $this->userModel->eliminarUsuarioDB($idUsuario);
             }
             else

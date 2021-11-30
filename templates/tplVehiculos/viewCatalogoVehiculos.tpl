@@ -16,6 +16,28 @@
                 <a class="btn btn-danger btn-sm" href="verCatalogoCategoria/?pagina={$pagina}">Volver</a>
             </div> 
         {/if}
+        <form action="buscarContenido/?pagina={$pagina}" method="POST">
+            <!--div class="input-group mb-3">
+                <input type="text" class="form-control" name="text" placeholder="" aria-label="" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary" id="findItems">Buscar</a>
+                </div>
+            </div-->
+            <div class="input-group mb-3">
+                <select class="custom-select" name="inputCampo">
+                    <option selected>Seleccione...</option>
+                    <option value="marca">Marca</option>
+                    <option value="modelo">Modelo</option>
+                    <option value="anio">Año</option>
+                    <option value="precio">Precio</option>
+                    <option value="kilometros">Kilometros</option>
+                </select>
+                <input type="text" class="form-control" name="text" placeholder="" aria-label="" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary" id="findItems">Buscar</a>
+                </div>
+            </div>
+        </form>
         <table class="default">
             <tr>
                 <th>Categoria</th>

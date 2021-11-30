@@ -65,5 +65,10 @@ class ApiCommentsModel{
         $sentencia = $this->db->prepare("DELETE FROM comments WHERE id_vehiculo = ?");
         $sentencia->execute(array($id));
     }
+
+    public function deleteCommentsByUser($id){
+        $sentencia = $this->db->prepare("DELETE FROM comments WHERE id_usuario = ?");
+        $sentencia->execute(array($id));
+    }
         
 }

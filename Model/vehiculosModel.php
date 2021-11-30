@@ -120,4 +120,15 @@ class VehiculosModel {
         $sentencia = $this->db->prepare("DELETE FROM imagenes WHERE fk_id_vehiculo=?");
         $sentencia->execute(array($id));
     }
+
+    public function findContent($text, $campo){
+        $sentencia = $this->db->prepare("SELECT * FROM vehiculos WHERE :campo LIKE :texto ORDER BY precio");
+        $sentencia->bindValue(":campo", $campo, PDO::PARAM_STR);
+        $parametro = "%$text%";
+        $sentencia->bindValue(":texto", $parametro ? PDO::PARAM_STR : PDO::PARAM_INT);
+        $sentencia->execute();
+        $vehiculos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        var_dump($vehiculos);
+        return $vehiculos;
+    }
 }

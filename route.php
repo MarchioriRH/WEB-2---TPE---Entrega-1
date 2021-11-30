@@ -102,6 +102,9 @@ switch ($params[0]) {
     case 'insertNewVehiculoDB': 
         $vehiculos->insertNewVehiculoDB(); 
         break;
+    case 'buscarContenido': 
+        $vehiculos->findContent(); 
+        break;
     // Comentarios
     case 'showComments': 
         $comments->showComments($params[1]); 
